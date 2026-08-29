@@ -20,8 +20,8 @@ Do not identify original people in reference images.
 
 ## Pipeline order
 
-virtual-couple → character-registry → scene-analyzer → **scene-customizer (AskQuestion, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
+virtual-couple → character-registry → scene-analyzer → **scene-customizer (text options in chat, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
 
 ## Style differentiation
 
-Before GenerateImage: ask user about accessories, clothing colors, patterns. User may differ from scene; pose/composition must not change.
+Before GenerateImage: post numbered text options for accessories/clothing/patterns. On mobile/cloud, AskQuestion may not work — text inquiry is mandatory. Pose/composition must not change.

@@ -20,20 +20,27 @@ User provides (any combination):
 
 **Always read this skill first**, then load sub-skills only as needed.
 
-## Mobile / Cursor remote usage
+## Mobile / Cursor Cloud usage
 
-Works on Cursor mobile: user uploads scene image in chat, then sends:
+Works on Cursor mobile and cloud. User uploads scene image in chat, then sends:
 
 ```text
 @virtual-couple @Tom @James
 情侣日常，保持场景构图
 ```
 
-Or single character:
+**Important:** On mobile/cloud, Agent will post **numbered text options** for accessories/clothing — user must **reply in the next message** before image generation. AskQuestion UI may not appear on phone; text reply always works.
+
+Or include choices in one message to skip the gate:
 
 ```text
-@virtual-couple @Tom
-单人日常，参考这张场景
+@virtual-couple @James
+全部保持原场景
+```
+
+```text
+@virtual-couple @James
+角色默认，上衣藏青，下装灰
 ```
 
 Execute the full pipeline in one session, **but pause after Step 4** until the user confirms style customization (see scene-customizer). Do not call GenerateImage before confirmation.
@@ -46,7 +53,7 @@ Copy and track:
 - [ ] 1. Parse user intent (characters, content type, scene path)
 - [ ] 2. Load character bibles → read character-registry skill
 - [ ] 3. Analyze scene → read scene-analyzer skill, write scene_blueprint.json
-- [ ] 4. **Style gate** → read scene-customizer skill, AskQuestion, wait for user
+- [ ] 4. **Style gate** → read scene-customizer skill, **post text options in chat**, wait for user reply (do NOT use AskQuestion alone on mobile/cloud)
 - [ ] 5. Compose binding → read character-composer skill
 - [ ] 6. Build prompt → read prompt-builder skill (include customization_manifest)
 - [ ] 7. Generate image → CallDynamicTool cursor/GenerateImage
@@ -60,11 +67,11 @@ Before swap-face / GenerateImage:
 
 1. Read [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md)
 2. Extract `customizable_elements` from scene (accessories, clothing colors, patterns)
-3. Use **AskQuestion** to let user choose per item (include「保持原场景」and alternatives)
-4. Write `outputs/drafts/customization_<task_id>.json`
-5. **Stop and wait** for user answers — do NOT generate until `user_confirmed: true`
+3. **Post numbered text options in chat** (required on mobile/cloud; AskQuestion is optional desktop extra)
+4. Write `outputs/drafts/customization_<task_id>.json` only **after** user replies
+5. **Stop this turn** — do NOT call GenerateImage until user confirms
 
-Skip AskQuestion only if user already specified all choices in the same message (e.g.「全部保持原场景」).
+Skip gate only if user already specified all choices (e.g.「全部保持原场景」「角色默认，上衣藏青」).
 
 ## Step 1 — Parse input
 
@@ -104,7 +111,7 @@ Read in order (paths relative to project root):
 
 1. [.cursor/skills/character-registry/SKILL.md](.cursor/skills/character-registry/SKILL.md)
 2. [.cursor/skills/scene-analyzer/SKILL.md](.cursor/skills/scene-analyzer/SKILL.md)
-3. [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md) — **pause for user**
+3. [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md) — **post text options, wait for user reply**
 4. [.cursor/skills/character-composer/SKILL.md](.cursor/skills/character-composer/SKILL.md)
 5. [.cursor/skills/prompt-builder/SKILL.md](.cursor/skills/prompt-builder/SKILL.md)
 

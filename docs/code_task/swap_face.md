@@ -1208,7 +1208,7 @@ Scene Reference
       ↓
 Scene Analysis（提取构图 + customizable_elements）
       ↓
-★ Scene Customizer — AskQuestion 询问用户 ★
+★ Scene Customizer — 聊天文字询问用户（手机/Cloud 必用；AskQuestion 仅桌面可选）★
       ↓（用户确认后）
 Character Binding
       ↓
@@ -1237,6 +1237,22 @@ Visual QC
 - Skill: `.cursor/skills/scene-customizer/SKILL.md`
 - Manifest 模板: `templates/customization_manifest.example.json`
 - 主编排: `virtual-couple` Step 4 强制暂停
+
+## 手机 / Cloud 限制
+
+`AskQuestion` 弹窗在 Cursor 手机版与 Cloud 上**通常不可用**。  
+**必须用聊天文字发编号选项**，用户在下一条消息回复，Agent 才能继续 GenerateImage。
+
+示例 Agent 回复：
+
+```text
+✅ 场景已分析。换脸前请确认：
+James 装饰物：1保持原场景 2角色默认 3墨镜 4耳机
+James 上衣：1保持(浅蓝) 2藏青 3白 4黑
+回复数字或「全部保持原场景」→ 我再生成
+```
+
+用户可一条消息跳过询问：`@virtual-couple @James 全部保持原场景`
 
 ## 设计原则
 

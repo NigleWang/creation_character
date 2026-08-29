@@ -17,33 +17,34 @@
 
 ---
 
-## Cursor 手机版用法
+## Cursor 手机版 / Cloud 用法
 
-1. 在 Cursor 手机版打开本项目（需同步/远程访问 `creation_character` 仓库）
+1. 在 Cursor 手机版或 Cloud 打开本项目
 2. 新建对话，**上传场景参考图**
 3. 发送：
 
 ```text
 @virtual-couple @Tom @James
-情侣日常，保持场景构图，小红书竖图
+情侣日常，保持场景构图
 ```
 
-单人：
+4. **Agent 会在聊天里发出编号选项**（装饰/衣服/图案）— 你在**下一条消息**回复数字或文字
+5. 确认后 Agent 才生图
+
+> ⚠️ 手机/Cloud **没有 AskQuestion 弹窗**，必须用**文字回复**选项。  
+> 想跳过询问，一条消息写全选项：
 
 ```text
-@virtual-couple @Tom
-[场景图]
-单人日常
+@virtual-couple @James
+角色默认，上衣藏青，下装灰
 ```
 
-壁纸（9:16）：
+或：
 
 ```text
-@virtual-couple @Tom @James
-手机壁纸
+@virtual-couple @James
+全部保持原场景
 ```
-
-Agent 会自动执行完整 Pipeline 并用 **Cursor 内置 GenerateImage** 生图。
 
 ---
 
@@ -58,7 +59,7 @@ Agent 会自动执行完整 Pipeline 并用 **Cursor 内置 GenerateImage** 生�
         ↓
   scene-analyzer → 提取构图/动作/光影（不识别原图人物）
         ↓
-  scene-customizer → ★ 询问装饰/衣服/图案选项，等你确认 ★
+  scene-customizer → ★ 聊天里发编号选项，等你文字回复 ★
         ↓
   character-composer → 左=Tom(受) 右=James(攻)
         ↓

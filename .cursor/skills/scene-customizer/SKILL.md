@@ -66,14 +66,49 @@ Also note **character identity defaults** that should appear as recommended opti
 
 ## Step 2 — Ask user (required)
 
-Use **AskQuestion** with one question per category per character (or grouped when scene is simple).
+**Customization gate is mandatory on ALL platforms** (desktop, mobile, cloud).  
+**Do NOT call GenerateImage in the same turn** — stop and wait for the user's next message.
 
-Present each question with:
-- **「保持原场景」** — match scene reference exactly for this item
-- **2–4 alternative options** — concrete colors/items/patterns
-- Mark recommended option when it matches character bible
+### Platform behavior (important)
 
-### Question templates
+| Platform | How to ask |
+|----------|------------|
+| **Mobile / Cloud** | **Text inquiry only** — post numbered options in chat (see template below). AskQuestion often does NOT render; never rely on it alone. |
+| **Desktop** | Try AskQuestion if available; **always also post the same text options** as fallback so user can reply with numbers. |
+
+If unsure which platform → use **text inquiry** (works everywhere).
+
+### Text inquiry template (mobile/cloud — primary method)
+
+After scene analysis, reply with a compact numbered menu. User replies with numbers or short text.
+
+```text
+✅ 场景构图/动作/环境已分析（将保持不变）
+
+换脸前请确认装饰与服装（可与原场景不同）。直接回复数字或文字即可：
+
+【James】
+1️⃣ 装饰物：1保持原场景(___) 2角色默认(无眼镜) 3墨镜 4耳机 5无装饰
+2️⃣ 上衣颜色：1保持(___) 2白 3藏青 4浅蓝 5黑
+3️⃣ 上衣图案：1保持 2纯色 3条纹 4格子
+4️⃣ 下装颜色：1保持(___) 2黑 3灰 4藏青
+
+快捷：回复「全部保持原场景」或「角色默认+藏青上衣+灰裤」
+
+⚠️ 确认后我再生成图片。
+```
+
+For couple scenes, add Tom block with same format. For single character, only list that character.
+
+**Rules for text inquiry:**
+- Fill in `___` with values detected from scene
+- Keep it scannable on a phone screen (short lines, emoji numbers ok)
+- End with explicit「确认后我再生成」so user knows to reply
+- **STOP — do not generate until user replies**
+
+### AskQuestion (desktop optional enhancement)
+
+May use AskQuestion in addition to text, never instead of text on mobile/cloud.
 
 **Accessories (per character):**
 - 保持原场景（{scene_value}）
@@ -120,7 +155,7 @@ If user message already contains explicit choices, skip AskQuestion and parse di
 | Tom 戴耳机，衣服换成 navy | Parse per-character overrides |
 | 不要墨镜，Tom 用眼镜 | Apply to customization_manifest |
 
-If ambiguous, still use AskQuestion.
+If ambiguous, use **text inquiry** (not AskQuestion alone). On mobile/cloud, text inquiry is mandatory.
 
 ## Step 4 — Write customization_manifest
 
@@ -152,8 +187,12 @@ Pass `customization_manifest` to **prompt-builder**. Only then proceed to Genera
 
 ## Reply before asking
 
-Briefly tell the user what was detected from the scene, then present AskQuestion:
+Post **text inquiry** in chat (required on mobile/cloud). Optionally also try AskQuestion on desktop.
 
 ```text
-已分析场景构图与动作（将保持不变）。以下装饰/服装项可与原场景不同，请选择：
+✅ 场景构图与动作已分析（将保持不变）。换脸前请确认以下选项：
+[numbered menu per character]
+确认后我再生成图片。
 ```
+
+Do NOT generate in this turn.
