@@ -9,6 +9,8 @@ description: >-
 
 # Virtual Couple Studio
 
+**Route out:** Existing `outputs/approved/` still + 系列/换姿态/其他 pose → use `pose-series`, not this skill.
+
 ## ⚠️ TWO-TURN PROTOCOL (read first)
 
 | Turn | When | Do | Forbidden |

@@ -29,6 +29,8 @@ description: >-
 - Left/right positions correct?
 - Pose and interaction preserved?
 
+**pose-series mode:** Do not require source pose. Require same identity, outfit, and environment; pose must match the **chosen** catalog pose.
+
 ### 3. Couple consistency
 
 - Correct number of people?

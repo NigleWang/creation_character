@@ -5,7 +5,9 @@ alwaysApply: true
 
 # Style Gate — Mandatory Two-Turn Protocol
 
-Applies to **all agents** (desktop, mobile, cloud) when user uploads a scene for Tom/James/virtual-couple/换脸/小红书.
+Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new scene** for Tom/James/virtual-couple/换脸/小红书.
+
+**Exception — pose-series:** If the input is an already-approved character still and the user wants 系列/换姿态, do **not** use the clothing template below. Follow `.cursor/skills/pose-series/SKILL.md`: post numbered **pose** options and STOP.
 
 ## Turn 1: ASK ONLY — never generate
 

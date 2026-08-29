@@ -21,7 +21,10 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 5. Use Cursor `GenerateImage` with scene + character reference paths
 6. Default output: 3:4 vertical for 小红书
 7. **TWO-TURN PROTOCOL:** Turn 1 = analyze + post numbered style options + STOP. Turn 2 = generate after user replies. See `AGENTS.md` and `style-gate.mdc`.
+8. **POSE SERIES:** Existing approved still + 系列/换姿态 → `pose-series` skill. Lock identity + outfit + environment; only pose changes. Turn 1 = numbered pose options + STOP.
 
 ## User triggers
 
 When user uploads scene + @Tom/@James/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
+
+When user points at `outputs/approved/` (or similar) and asks for 系列/换姿态 → **pose-series Turn 1**. Do NOT generate until user picks poses.

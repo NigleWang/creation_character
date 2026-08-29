@@ -28,6 +28,8 @@ After QC pass, generate for user:
 #情侣日常 #虚拟情侣 #BL #氛围感 #恋爱日常 #{scene_tag}
 ```
 
+**pose-series:** One caption for the set. Title may include `办公室日常` / `1/n`. Same hashtags; add scene tag like `#办公室`.
+
 ## Scene tag examples
 
 `#咖啡馆` `#雨天` `#居家` `#旅行` `#海边` `#圣诞`

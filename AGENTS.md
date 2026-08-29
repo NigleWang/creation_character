@@ -54,8 +54,18 @@ User's **first message** already includes explicit style choices, e.g.:
 
 ## Skills location
 
-`.cursor/skills/virtual-couple/SKILL.md` — main orchestrator  
-`.cursor/skills/scene-customizer/SKILL.md` — customization details
+`.cursor/skills/virtual-couple/SKILL.md` — 换脸：场景图定姿态，角色圣经定身份  
+`.cursor/skills/scene-customizer/SKILL.md` — customization details  
+`.cursor/skills/pose-series/SKILL.md` — 换姿态做系列：已有成图锁定形象/服装/场景，只换 pose
+
+## Pose series (existing approved still)
+
+When user has `outputs/approved/...` and asks for 系列 / 换姿态 / 其他 pose:
+
+1. Turn 1: lock look + post numbered **pose** options + STOP
+2. Turn 2: GenerateImage per selected pose (`aspect_ratio` 3:4, refs = [approved still, face ref])
+
+Do **not** run virtual-couple 换脸流程 for this case.
 
 ## GenerateImage
 

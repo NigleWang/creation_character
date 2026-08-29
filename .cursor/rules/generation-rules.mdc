@@ -22,6 +22,8 @@ Do not identify original people in reference images.
 
 virtual-couple → character-registry → scene-analyzer → **scene-customizer (text options in chat, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
 
+pose-series (approved still + 换姿态) → character-registry → look-lock JSON → **pose options in chat, wait** → GenerateImage per pose → quality-control (environment lock, new pose) → xiaohongshu-post
+
 ## Style differentiation
 
 Before GenerateImage: post numbered text options for accessories/clothing/patterns. On mobile/cloud, AskQuestion may not work — text inquiry is mandatory. Pose/composition must not change.
