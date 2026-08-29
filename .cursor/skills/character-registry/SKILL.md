@@ -48,6 +48,7 @@ character_bundle:
       Tom: East Asian man ~28, oval face, almond eyes, browline glasses
       (black top/silver bottom frame), buzz cut black hair, short stubble,
       warm tan skin, slim athletic build. Calm gentle reserved expression.
+      Independent interior designer (small studio, material samples).
 
   james:
     role: gong
@@ -57,6 +58,7 @@ character_bundle:
       James: East Asian man ~38, square jaw, warm smile with smile lines,
       short spiky black hair, groomed stubble, golden tan skin, muscular
       broad build. Confident protective mature expression.
+      Product director at a health-tech company (office, dual monitors).
 ```
 
 ## Consistency rules

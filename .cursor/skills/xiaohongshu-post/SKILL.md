@@ -49,4 +49,4 @@ Reply structure:
 1. **成品图** — generated image
 2. **QC 评分** — brief scores
 3. **建议标题 + 正文 + 标签** — copy-paste ready
-4. **文件路径** — `outputs/approved/xiaohongshu_<task_id>.png`
+4. **文件路径** — 单图 `outputs/approved/xiaohongshu_<task_id>.png`；组图 `outputs/approved/series/<task_id>/`

@@ -56,7 +56,18 @@ User's **first message** already includes explicit style choices, e.g.:
 
 `.cursor/skills/virtual-couple/SKILL.md` — 换脸：场景图定姿态，角色圣经定身份  
 `.cursor/skills/scene-customizer/SKILL.md` — customization details  
-`.cursor/skills/pose-series/SKILL.md` — 换姿态做系列：已有成图锁定形象/服装/场景，只换 pose
+`.cursor/skills/pose-series/SKILL.md` — 换姿态做系列：已有成图锁定形象/服装/场景，只换 pose  
+`.cursor/skills/text-scene/SKILL.md` — 文字场景：按人设补全场景卡，确认后生成一张  
+`.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）
+
+## Text scene (no photo)
+
+When user describes a scene in **words** (文字场景 / 场景需求 / 按人设出图 / 没有参考图):
+
+1. Turn 1: load bibles → fill gaps → post completed scene card → STOP
+2. Turn 2: after `生成` / edits → one GenerateImage, save `outputs/approved/xiaohongshu_<task_id>.png`
+
+Do **not** run virtual-couple 换脸 or pose-series for this case.
 
 ## Pose series (existing approved still)
 
@@ -64,6 +75,9 @@ When user has `outputs/approved/...` and asks for 系列 / 换姿态 / 其他 po
 
 1. Turn 1: lock look + post numbered **pose** options + STOP
 2. Turn 2: GenerateImage per selected pose (`aspect_ratio` 3:4, refs = [approved still, face ref])
+3. Save the set to `outputs/approved/series/<task_id>/` as `01_<pose_id>.png`, `02_...` — never as loose files in `outputs/approved/`
+
+Single stills stay at `outputs/approved/xiaohongshu_<task_id>.png`.
 
 Do **not** run virtual-couple 换脸流程 for this case.
 
@@ -72,3 +86,11 @@ Do **not** run virtual-couple 换脸流程 for this case.
 - Tool: `cursor` / `GenerateImage`
 - aspect_ratio: `3:4`
 - reference_image_paths: [scene, character face refs]
+
+## Image-to-video prompt (Gemini)
+
+When user has a still (usually `outputs/approved/`) and asks 图生视频 / Gemini视频 / 10秒视频:
+
+1. Follow `.cursor/skills/gemini-video/SKILL.md`
+2. **Do not** call GenerateImage
+3. Deliver one copy-paste English prompt; spoken lines in Japanese kana only

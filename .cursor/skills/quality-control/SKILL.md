@@ -63,7 +63,7 @@ description: >-
 
 | decision | Action |
 |----------|--------|
-| accept | Save to `outputs/approved/`, deliver to user |
+| accept | Single: `outputs/approved/xiaohongshu_<task_id>.png`. pose-series: `outputs/approved/series/<task_id>/01_<pose_id>.png` |
 | regenerate | Tighten prompt for failed checks, retry GenerateImage (max 1 retry) |
 | reject | Save to `outputs/rejected/` with issues, explain to user |
 

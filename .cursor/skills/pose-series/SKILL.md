@@ -87,8 +87,27 @@ arguments: {
 }
 ```
 
-3. QC (pose-series mode) → copy accepted files to `outputs/approved/`
-4. Deliver: images + brief QC + 小红书系列文案
+3. QC (pose-series mode) → **mkdir a series folder**, copy accepted files in pick order
+4. Deliver: images + brief QC + 小红书系列文案 + **folder path**
+
+### Save paths (mandatory)
+
+| Kind | Where | Filename |
+|------|--------|----------|
+| **pose-series (一组)** | `outputs/approved/series/<task_id>/` | `01_<pose_id>.png`, `02_<pose_id>.png`, … |
+| **single still** | `outputs/approved/` | `xiaohongshu_<task_id>.png` |
+
+Never dump a series as loose files next to singles. Create the folder **before** copying. Number prefix = user pick order (01, 02, …). Keep GenerateImage `filename` as `xiaohongshu_<task_id>_<pose_id>.png` for the tool; after QC, copy/rename into the series folder.
+
+Example:
+
+```text
+outputs/approved/xiaohongshu_20260829_tom_studio.png          ← 单图（源成图）
+outputs/approved/series/20260829_tom_studio_series/
+  01_look_camera.png
+  02_phone_call.png
+  03_chin_hand.png
+```
 
 Default 3 poses if user says 「日常三连」without ids. Max **8** images per turn.
 
@@ -184,7 +203,7 @@ Source image is the look-lock; face ref is identity backup.
 
 `scene_consistency` here means environment lock, **not** pose copy.
 
-`accept` → `outputs/approved/`  
+`accept` → `outputs/approved/series/<task_id>/` (numbered files)  
 `regenerate` → tighten pose/outfit lock, max 1 retry  
 `reject` → `outputs/rejected/`
 

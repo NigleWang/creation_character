@@ -31,5 +31,9 @@ outputs/rejected/*
 scenes/*
 !outputs/drafts/.gitkeep
 !outputs/approved/.gitkeep
+!outputs/approved/series/
+!outputs/approved/series/.gitkeep
+outputs/approved/series/**
+!outputs/approved/series/.gitkeep
 !outputs/rejected/.gitkeep
 !scenes/.gitkeep

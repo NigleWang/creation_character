@@ -7,6 +7,10 @@
 
 East Asian man, ~38, mature. **Square jaw**, dark brown eyes with **smile lines**. **Short spiky black hair** styled up. Groomed stubble. Golden tan skin. **Muscular broad** build — defined shoulders, chest, deltoids.
 
+## Occupation
+
+健康科技公司产品总监。工位是双屏、表格、文件堆、网椅。不是霸道总裁；会加班也会准时收工回 Tom。肌肉是下班练的，不是职业运动员。
+
 ## Personality on camera
 
 Warm, confident, protective. Open smile. Strong posture. In couple scenes he reads as the leading, outward energy — leaning in, initiating contact, wrapping an arm around Tom.

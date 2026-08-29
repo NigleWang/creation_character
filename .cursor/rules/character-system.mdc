@@ -22,9 +22,15 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 6. Default output: 3:4 vertical for 小红书
 7. **TWO-TURN PROTOCOL:** Turn 1 = analyze + post numbered style options + STOP. Turn 2 = generate after user replies. See `AGENTS.md` and `style-gate.mdc`.
 8. **POSE SERIES:** Existing approved still + 系列/换姿态 → `pose-series` skill. Lock identity + outfit + environment; only pose changes. Turn 1 = numbered pose options + STOP.
+9. **TEXT SCENE:** Words only, no photo → `text-scene` skill. Fill a complete scene from bibles, post the card, wait; then one image.
+10. **GEMINI VIDEO:** Approved still + 图生视频/10秒视频 → `gemini-video` skill. Write a copy-paste Gemini prompt; Japanese kana dialogue. Do **not** call GenerateImage.
 
 ## User triggers
 
 When user uploads scene + @Tom/@James/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
 
 When user points at `outputs/approved/` (or similar) and asks for 系列/换姿态 → **pose-series Turn 1**. Do NOT generate until user picks poses.
+
+When user describes a scene in text with no photo → **text-scene Turn 1**. Do NOT generate until they confirm the filled card.
+
+When user points at an approved still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Do NOT call GenerateImage.

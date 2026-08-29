@@ -11,6 +11,8 @@ description: >-
 
 **Route out:** Existing `outputs/approved/` still + 系列/换姿态/其他 pose → use `pose-series`, not this skill.
 
+**Route out:** Text-only scene (no photo) → use `text-scene`, not this skill.
+
 ## ⚠️ TWO-TURN PROTOCOL (read first)
 
 | Turn | When | Do | Forbidden |
@@ -68,7 +70,7 @@ arguments: {
 }
 ```
 
-5. QC → save to `outputs/approved/` → caption + hashtags
+5. QC → save **single** to `outputs/approved/xiaohongshu_<task_id>.png` → caption + hashtags. pose-series sets use `outputs/approved/series/<task_id>/` (see pose-series skill).
 
 ---
 

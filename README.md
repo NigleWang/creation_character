@@ -36,9 +36,13 @@ Agent 应回复编号选项并 **停止**，不会生图。
 
 Agent 才调用 GenerateImage。
 
----
+**第 1 轮（只发文字，不传图）：**
+```text
+按人设出图：周末早上两个人在厨房
+```
+Agent 补全场景卡并停止。你回 `生成` 才出图。
 
-**一条消息跳过询问（可选）：**
+**一条消息跳过询问（换脸，可选）：**
 ```text
 @virtual-couple @James
 全部保持原场景
@@ -70,6 +74,12 @@ Agent 才调用 GenerateImage。
   outputs/approved/ + 标题/标签建议
 ```
 
+另两条入口：
+
+- **文字场景**（无照片）→ `@text-scene`：先补全场景卡，你回复「生成」后再出一张
+- **已有成图换姿态** → `@pose-series`：先选编号姿态，组图进 `outputs/approved/series/`
+- **成图转动画** → `@gemini-video`：写出可复制进 Gemini 的 10 秒图生视频提示词（台词日语假名）
+
 ---
 
 ## 项目结构
@@ -84,6 +94,9 @@ creation_character/
 │   │   ├── scene-customizer/    ← 换脸前询问装饰/服装选项
 │   │   ├── character-composer/
 │   │   ├── prompt-builder/
+│   │   ├── pose-series/         ← 成图锁定形象，换姿态做系列
+│   │   ├── text-scene/          ← 文字场景按人设补全后再出一张
+│   │   ├── gemini-video/        ← 成图 → Gemini 10s 视频提示词（假名台词）
 │   │   ├── quality-control/
 │   │   └── xiaohongshu-post/
 │   └── rules/
@@ -115,6 +128,7 @@ creation_character/
 | `prompt-builder` | 生成 GenerateImage 描述 |
 | `quality-control` | 成品质检 |
 | `xiaohongshu-post` | 标题/标签/交付格式 |
+| `gemini-video` | 成图 → Gemini 10s 图生视频提示词（台词假名，复制即用） |
 
 ---
 

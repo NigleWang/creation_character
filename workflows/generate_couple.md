@@ -19,6 +19,7 @@
 
 ## Expected output
 
-- `outputs/approved/xiaohongshu_<task_id>.png`
+- Single: `outputs/approved/xiaohongshu_<task_id>.png`
+- pose-series: `outputs/approved/series/<task_id>/01_<pose_id>.png`
 - QC scores
 - 标题 + 正文 + 标签
