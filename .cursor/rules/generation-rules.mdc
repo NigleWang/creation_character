@@ -20,4 +20,8 @@ Do not identify original people in reference images.
 
 ## Pipeline order
 
-virtual-couple → character-registry → scene-analyzer → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
+virtual-couple → character-registry → scene-analyzer → **scene-customizer (AskQuestion, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
+
+## Style differentiation
+
+Before GenerateImage: ask user about accessories, clothing colors, patterns. User may differ from scene; pose/composition must not change.

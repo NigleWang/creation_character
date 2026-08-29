@@ -36,7 +36,7 @@ Or single character:
 单人日常，参考这张场景
 ```
 
-Agent must execute the full pipeline in one session — do not stop after analysis.
+Execute the full pipeline in one session, **but pause after Step 4** until the user confirms style customization (see scene-customizer). Do not call GenerateImage before confirmation.
 
 ## Pipeline checklist
 
@@ -46,12 +46,25 @@ Copy and track:
 - [ ] 1. Parse user intent (characters, content type, scene path)
 - [ ] 2. Load character bibles → read character-registry skill
 - [ ] 3. Analyze scene → read scene-analyzer skill, write scene_blueprint.json
-- [ ] 4. Compose binding → read character-composer skill
-- [ ] 5. Build prompt → read prompt-builder skill
-- [ ] 6. Generate image → CallDynamicTool cursor/GenerateImage
-- [ ] 7. Quality control → read quality-control skill
-- [ ] 8. Save to outputs/ + return Xiaohongshu-ready asset
+- [ ] 4. **Style gate** → read scene-customizer skill, AskQuestion, wait for user
+- [ ] 5. Compose binding → read character-composer skill
+- [ ] 6. Build prompt → read prompt-builder skill (include customization_manifest)
+- [ ] 7. Generate image → CallDynamicTool cursor/GenerateImage
+- [ ] 8. Quality control → read quality-control skill
+- [ ] 9. Save to outputs/ + return Xiaohongshu-ready asset
 ```
+
+## Step 4 — Style differentiation gate (mandatory)
+
+Before swap-face / GenerateImage:
+
+1. Read [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md)
+2. Extract `customizable_elements` from scene (accessories, clothing colors, patterns)
+3. Use **AskQuestion** to let user choose per item (include「保持原场景」and alternatives)
+4. Write `outputs/drafts/customization_<task_id>.json`
+5. **Stop and wait** for user answers — do NOT generate until `user_confirmed: true`
+
+Skip AskQuestion only if user already specified all choices in the same message (e.g.「全部保持原场景」).
 
 ## Step 1 — Parse input
 
@@ -85,14 +98,15 @@ Write task manifest to `outputs/drafts/task_<YYYYMMDD_HHMM>.json`:
 }
 ```
 
-## Step 2–5 — Sub-skills
+## Step 2–6 — Sub-skills
 
 Read in order (paths relative to project root):
 
 1. [.cursor/skills/character-registry/SKILL.md](.cursor/skills/character-registry/SKILL.md)
 2. [.cursor/skills/scene-analyzer/SKILL.md](.cursor/skills/scene-analyzer/SKILL.md)
-3. [.cursor/skills/character-composer/SKILL.md](.cursor/skills/character-composer/SKILL.md)
-4. [.cursor/skills/prompt-builder/SKILL.md](.cursor/skills/prompt-builder/SKILL.md)
+3. [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md) — **pause for user**
+4. [.cursor/skills/character-composer/SKILL.md](.cursor/skills/character-composer/SKILL.md)
+5. [.cursor/skills/prompt-builder/SKILL.md](.cursor/skills/prompt-builder/SKILL.md)
 
 ## Step 6 — Image generation (required)
 

@@ -58,6 +58,8 @@ Agent 会自动执行完整 Pipeline 并用 **Cursor 内置 GenerateImage** 生�
         ↓
   scene-analyzer → 提取构图/动作/光影（不识别原图人物）
         ↓
+  scene-customizer → ★ 询问装饰/衣服/图案选项，等你确认 ★
+        ↓
   character-composer → 左=Tom(受) 右=James(攻)
         ↓
   prompt-builder → 组装生图 Prompt
@@ -80,6 +82,7 @@ creation_character/
 │   │   ├── virtual-couple/      ← 主入口，手机 @ 这个
 │   │   ├── character-registry/
 │   │   ├── scene-analyzer/
+│   │   ├── scene-customizer/    ← 换脸前询问装饰/服装选项
 │   │   ├── character-composer/
 │   │   ├── prompt-builder/
 │   │   ├── quality-control/
@@ -108,6 +111,7 @@ creation_character/
 | `virtual-couple` | 主编排，手机端 @ 入口 |
 | `character-registry` | 加载角色 Bible 与参考图路径 |
 | `scene-analyzer` | 场景结构提取 → Scene Blueprint |
+| `scene-customizer` | **换脸前询问**：装饰物、衣服颜色、图案 |
 | `character-composer` | 角色与场景位置绑定 |
 | `prompt-builder` | 生成 GenerateImage 描述 |
 | `quality-control` | 成品质检 |

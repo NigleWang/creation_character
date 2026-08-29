@@ -1,0 +1,37 @@
+{
+  "task_id": "example_001",
+  "user_confirmed": true,
+  "tom": {
+    "accessories": {
+      "choice": "browline_glasses",
+      "source": "character_default",
+      "note": "角色设定眉框眼镜，替代场景中的墨镜"
+    },
+    "top": {
+      "choice": "keep_scene",
+      "scene_value": "white ribbed tank top"
+    },
+    "bottom": {
+      "choice": "charcoal",
+      "pattern": "solid",
+      "note": "与原场景黑色略有区分"
+    }
+  },
+  "james": {
+    "accessories": {
+      "choice": "no_accessories",
+      "source": "user_choice",
+      "note": "去掉场景墨镜"
+    },
+    "top": {
+      "choice": "light_blue",
+      "pattern": "solid",
+      "detail": "unbuttoned linen shirt"
+    },
+    "bottom": {
+      "choice": "keep_scene",
+      "scene_value": "black shorts"
+    }
+  },
+  "differentiation_note": "Only listed fields differ from scene reference. Pose and composition unchanged."
+}

@@ -22,6 +22,8 @@ rad.json
 #Test results file
 TestResults.xml
 
+.DS_Store
+
 ### Virtual Couple Studio ###
 outputs/drafts/*
 outputs/approved/*

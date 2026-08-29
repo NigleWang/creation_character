@@ -12,7 +12,34 @@ description: >-
 - `character_bundle`
 - `generation_blueprint`
 - `scene_blueprint`
+- `customization_manifest` from scene-customizer (**required** unless user said 全部保持原场景)
 - `content_type` (default: `xiaohongshu_post`)
+
+## Apply customization
+
+For each character, resolve clothing/accessories from `customization_manifest`:
+
+| `choice` | Prompt behavior |
+|----------|-----------------|
+| `keep_scene` | Use `scene_value` from scene blueprint |
+| `character_default` | Tom → browline glasses; James → no glasses |
+| specific value | Use user's color/item/pattern explicitly |
+
+Add block to prompt:
+
+```text
+[STYLE CUSTOMIZATION — may differ from scene reference]
+
+Tom accessories: {resolved}
+Tom top: {color} {pattern} {type}
+Tom bottom: {color} {pattern}
+
+James accessories: {resolved}
+James top: ...
+James bottom: ...
+
+Pose, composition, environment unchanged. Only these style details differ from scene where specified.
+```
 
 ## Template
 

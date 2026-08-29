@@ -6,7 +6,8 @@
 
 1. Save scene to `scenes/scene_<timestamp>.jpg`
 2. Run pipeline per `@virtual-couple` skill
-3. Deliver approved image + caption
+3. **Agent 会 AskQuestion 询问装饰/服装/图案选项** — 确认后再生图
+4. Deliver approved image + caption
 
 ## Example user message (mobile)
 

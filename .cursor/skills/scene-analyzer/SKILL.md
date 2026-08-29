@@ -33,6 +33,7 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
 10. Color palette
 11. Visual texture (film, digital, soft, grain)
 12. Emotional atmosphere
+13. **Customizable style elements** (for scene-customizer — per person: accessories, top/bottom color, pattern, material)
 
 ## Output schema
 
@@ -75,10 +76,24 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
       "lighting": "cinematic",
       "color_tone": "warm",
       "texture": "film photography"
+    },
+    "customizable_elements": {
+      "subject_1": {
+        "accessories": ["sunglasses"],
+        "top": { "type": "shirt", "color": "white", "pattern": "solid" },
+        "bottom": { "type": "pants", "color": "black", "pattern": "solid" }
+      },
+      "subject_2": {
+        "accessories": [],
+        "top": { "type": "jacket", "color": "navy", "pattern": "solid" },
+        "bottom": { "type": "jeans", "color": "blue", "pattern": "solid" }
+      }
     }
   }
 }
 ```
+
+Map subject_1 → left (Tom), subject_2 → right (James) in couple scenes.
 
 ## Rules
 
