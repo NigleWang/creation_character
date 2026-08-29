@@ -1,0 +1,17 @@
+content_type: couple_daily
+aspect_ratio: "3:4"
+style: cinematic_realistic
+
+requirements:
+  relationship_priority:
+    - interaction
+    - chemistry
+    - emotion
+  visual:
+    - natural interaction
+    - subtle intimacy
+    - believable body language
+
+prompt_suffix: |
+  Natural couple daily moment. Candid cinematic feel.
+  Tom (受) and James (攻) in authentic romantic interaction.

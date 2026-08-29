@@ -1,0 +1,26 @@
+---
+description: Virtual couple character system — Tom (受) and James (攻) identity rules
+alwaysApply: true
+---
+
+# Character System
+
+This project generates Xiaohongshu content for two fixed virtual characters.
+
+## Characters
+
+- **Tom** — 受, default LEFT, `characters/tom/`
+- **James** — 攻, default RIGHT, `characters/james/`
+
+## Hard rules
+
+1. Character Bible controls face, body, hair, glasses, personality look
+2. Scene reference controls composition, pose, environment, lighting only
+3. NEVER swap Tom and James positions or identities
+4. NEVER describe identities of people in scene reference photos
+5. Use Cursor `GenerateImage` with scene + character reference paths
+6. Default output: 3:4 vertical for 小红书
+
+## User triggers
+
+When user uploads scene + @Tom/@James/@virtual-couple → run full pipeline via `@virtual-couple` skill.

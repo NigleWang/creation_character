@@ -1,0 +1,17 @@
+{
+  "task_id": "example_001",
+  "characters": ["tom", "james"],
+  "content_type": "xiaohongshu_post",
+  "scene_reference": "scenes/example.jpg",
+  "scene_blueprint": {},
+  "generation_config": {
+    "aspect_ratio": "3:4",
+    "style": "cinematic_realistic",
+    "num_images": 1
+  },
+  "constraints": {
+    "preserve_character_identity": true,
+    "preserve_scene_composition": true,
+    "preserve_scene_pose": true
+  }
+}

@@ -1,0 +1,15 @@
+content_type: wallpaper
+aspect_ratio: "9:16"
+style: cinematic_realistic
+
+requirements:
+  composition:
+    leave_negative_space: true
+    avoid_center_ui_area: true
+  visual_priority:
+    - aesthetic
+    - clean composition
+
+prompt_suffix: |
+  Vertical mobile wallpaper. Leave negative space.
+  Avoid placing faces in bottom third (UI overlap zone).

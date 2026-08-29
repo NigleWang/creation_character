@@ -1,0 +1,47 @@
+id: tom
+display_name: Tom
+role_in_couple: shou  # 受 — receptive, gentle, softer energy
+
+identity:
+  gender: male
+  age_appearance: 28
+  ethnicity: East Asian
+
+face:
+  shape: oval
+  eyes: almond, dark brown
+  nose: straight, proportional
+  skin: warm tan, even tone
+  distinctive:
+    - browline glasses (thick black top frame, silver bottom rim)
+    - short dark stubble on jaw and upper lip
+
+hair:
+  color: black
+  style: buzz cut / crew cut, very short uniform length
+
+body:
+  height_ratio: average-tall
+  build: athletic slim, toned pectorals and collarbones visible
+
+personality:
+  keywords:
+    - calm
+    - reserved
+    - gentle
+    - introspective
+
+visual_signature:
+  - slightly lowered or direct gaze through glasses
+  - subtle neutral expression
+  - elegant relaxed posture
+
+negative_identity:
+  - do not change face shape
+  - do not remove or change glasses style
+  - do not change buzz cut to long or messy hair
+  - do not change slim athletic build to bulky
+
+reference_images:
+  primary: characters/tom/references/face_01.jpeg
+  fallback: data/imgs/Tom.jpeg

@@ -1,0 +1,47 @@
+id: james
+display_name: James
+role_in_couple: gong  # 攻 — protective, confident, leading energy
+
+identity:
+  gender: male
+  age_appearance: 38
+  ethnicity: East Asian
+
+face:
+  shape: square-strong jaw
+  eyes: dark brown, smile lines at corners
+  nose: straight, strong bridge
+  skin: golden tan, healthy tone
+  distinctive:
+    - warm confident smile showing clean teeth
+    - short groomed stubble along jawline
+
+hair:
+  color: black
+  style: short spiky, styled upward and slightly to the side
+
+body:
+  height_ratio: tall
+  build: muscular, broad shoulders, well-defined chest and deltoids
+
+personality:
+  keywords:
+    - warm
+    - confident
+    - protective
+    - mature
+
+visual_signature:
+  - open warm smile
+  - strong upright posture
+  - commanding but kind presence
+
+negative_identity:
+  - do not change face shape or mature features
+  - do not change spiky short hairstyle
+  - do not slim down muscular build
+  - do not make him look significantly younger
+
+reference_images:
+  primary: characters/james/references/face_01.jpeg
+  fallback: data/imgs/James.jpeg

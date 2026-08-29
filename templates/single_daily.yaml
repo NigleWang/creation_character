@@ -1,0 +1,13 @@
+content_type: single_daily
+aspect_ratio: "3:4"
+style: cinematic_realistic
+
+requirements:
+  visual:
+    - solo portrait
+    - character identity from reference
+    - scene pose and environment preserved
+
+prompt_suffix: |
+  Single character daily life portrait.
+  Preserve scene composition for one person only.

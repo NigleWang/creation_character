@@ -1,0 +1,21 @@
+content_type: xiaohongshu_post
+aspect_ratio: "3:4"
+style: cinematic_realistic
+
+requirements:
+  platform: xiaohongshu
+  visual:
+    - cover-worthy
+    - clear faces
+    - warm emotional tone
+    - tasteful BL couple content
+
+prompt_suffix: |
+  Xiaohongshu-ready vertical portrait. High aesthetic cover quality.
+  No watermark, no text overlay.
+
+hashtag_defaults:
+  - 情侣日常
+  - 虚拟情侣
+  - BL
+  - 氛围感

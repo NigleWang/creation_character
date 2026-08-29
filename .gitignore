@@ -21,3 +21,13 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+### Virtual Couple Studio ###
+outputs/drafts/*
+outputs/approved/*
+outputs/rejected/*
+scenes/*
+!outputs/drafts/.gitkeep
+!outputs/approved/.gitkeep
+!outputs/rejected/.gitkeep
+!scenes/.gitkeep

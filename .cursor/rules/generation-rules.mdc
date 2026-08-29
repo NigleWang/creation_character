@@ -1,0 +1,23 @@
+---
+description: Scene analysis and image generation rules for reference-driven content
+globs: scenes/**,outputs/**,workflows/**
+alwaysApply: false
+---
+
+# Scene & Generation Rules
+
+## Scene analysis
+
+Extract structure only: environment, composition, pose, lighting, color.
+Do not identify original people in reference images.
+
+## Generation
+
+- Tool: `CallDynamicTool` → `cursor` / `GenerateImage`
+- `aspect_ratio`: `3:4` (小红书), `9:16` (壁纸)
+- `reference_image_paths`: [scene, tom ref, james ref] as applicable
+- Save outputs to `outputs/approved/` or `outputs/rejected/`
+
+## Pipeline order
+
+virtual-couple → character-registry → scene-analyzer → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
