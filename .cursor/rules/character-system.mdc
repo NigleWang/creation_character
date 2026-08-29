@@ -20,7 +20,8 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 4. NEVER describe identities of people in scene reference photos
 5. Use Cursor `GenerateImage` with scene + character reference paths
 6. Default output: 3:4 vertical for 小红书
+7. **TWO-TURN PROTOCOL:** Turn 1 = analyze + post numbered style options + STOP. Turn 2 = generate after user replies. See `AGENTS.md` and `style-gate.mdc`.
 
 ## User triggers
 
-When user uploads scene + @Tom/@James/@virtual-couple → run full pipeline via `@virtual-couple` skill.
+When user uploads scene + @Tom/@James/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.

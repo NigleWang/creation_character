@@ -1,194 +1,93 @@
 ---
 name: virtual-couple
 description: >-
-  Xiaohongshu virtual couple content pipeline. Generates 3:4 portrait images of
-  Tom (受) and James (攻) from a user-uploaded scene reference. Use when the user
-  @mentions Tom, James, virtual-couple, uploads a scene photo, or asks for
-  小红书/情侣/角色/换脸/场景图 content in creation_character.
+  Xiaohongshu virtual couple pipeline for Tom (受) and James (攻). ALWAYS uses
+  two-turn protocol: Turn 1 analyze scene and post numbered style options in
+  chat; Turn 2 generate after user replies. Use when user uploads scene photo,
+  @mentions Tom, James, virtual-couple, 换脸, or 小红书 in creation_character.
 ---
 
-# Virtual Couple Studio — Main Workflow
+# Virtual Couple Studio
 
-Orchestrates the full pipeline: **Character → Scene Analysis → Compose → Generate → QC → Deliver**.
+## ⚠️ TWO-TURN PROTOCOL (read first)
 
-## When to run
+| Turn | When | Do | Forbidden |
+|------|------|-----|-----------|
+| **1** | User uploads scene, no style choices yet | Analyze + **post numbered text options** + STOP | GenerateImage |
+| **2** | User replies with choices | Write manifest → GenerateImage → QC | — |
 
-User provides (any combination):
-- Scene reference image (upload in chat or path under `scenes/`)
-- `@Tom` / `@James` / both / `@virtual-couple`
-- Optional: content type (`couple_daily`, `single`, `wallpaper`, `xiaohongshu_post`)
+Skip Turn 1 only if user's first message includes e.g. `全部保持原场景` or `角色默认，上衣藏青`.
 
-**Always read this skill first**, then load sub-skills only as needed.
+**Mobile/cloud:** AskQuestion does NOT work. Always post text options in chat.
 
-## Mobile / Cursor Cloud usage
+---
 
-Works on Cursor mobile and cloud. User uploads scene image in chat, then sends:
+## Turn 1 — Ask (mandatory unless choices pre-specified)
 
-```text
-@virtual-couple @Tom @James
-情侣日常，保持场景构图
-```
-
-**Important:** On mobile/cloud, Agent will post **numbered text options** for accessories/clothing — user must **reply in the next message** before image generation. AskQuestion UI may not appear on phone; text reply always works.
-
-Or include choices in one message to skip the gate:
+After analyzing scene, reply with this exact structure:
 
 ```text
-@virtual-couple @James
-全部保持原场景
+✅ 场景已分析（构图/动作/环境将保持不变）
+
+换脸前请确认（回复数字或文字）：
+
+【James】（单人时只列此块；情侣加 Tom 块）
+1️⃣ 装饰物：1保持原场景({value}) 2角色默认 3墨镜 4耳机 5无装饰
+2️⃣ 上衣颜色：1保持({value}) 2白 3藏青 4浅蓝 5黑
+3️⃣ 上衣图案：1保持 2纯色 3条纹 4格子
+4️⃣ 下装颜色：1保持({value}) 2黑 3灰 4藏青
+
+快捷：「全部保持原场景」
+
+⏸️ 请回复后我再生成图片。
 ```
 
-```text
-@virtual-couple @James
-角色默认，上衣藏青，下装灰
-```
+**Then END this turn. Do not call GenerateImage.**
 
-Execute the full pipeline in one session, **but pause after Step 4** until the user confirms style customization (see scene-customizer). Do not call GenerateImage before confirmation.
+Character defaults: Tom → browline glasses; James → no glasses.
 
-## Pipeline checklist
+---
 
-Copy and track:
+## Turn 2 — Generate (after user reply)
 
-```
-- [ ] 1. Parse user intent (characters, content type, scene path)
-- [ ] 2. Load character bibles → read character-registry skill
-- [ ] 3. Analyze scene → read scene-analyzer skill, write scene_blueprint.json
-- [ ] 4. **Style gate** → read scene-customizer skill, **post text options in chat**, wait for user reply (do NOT use AskQuestion alone on mobile/cloud)
-- [ ] 5. Compose binding → read character-composer skill
-- [ ] 6. Build prompt → read prompt-builder skill (include customization_manifest)
-- [ ] 7. Generate image → CallDynamicTool cursor/GenerateImage
-- [ ] 8. Quality control → read quality-control skill
-- [ ] 9. Save to outputs/ + return Xiaohongshu-ready asset
-```
-
-## Step 4 — Style differentiation gate (mandatory)
-
-Before swap-face / GenerateImage:
-
-1. Read [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md)
-2. Extract `customizable_elements` from scene (accessories, clothing colors, patterns)
-3. **Post numbered text options in chat** (required on mobile/cloud; AskQuestion is optional desktop extra)
-4. Write `outputs/drafts/customization_<task_id>.json` only **after** user replies
-5. **Stop this turn** — do NOT call GenerateImage until user confirms
-
-Skip gate only if user already specified all choices (e.g.「全部保持原场景」「角色默认，上衣藏青」).
-
-## Step 1 — Parse input
-
-Determine:
-
-| Field | Default | Notes |
-|-------|---------|-------|
-| `characters` | `[tom, james]` if couple scene with 2 people | Single `@Tom` → only Tom |
-| `content_type` | `xiaohongshu_post` | 3:4 vertical |
-| `aspect_ratio` | `3:4` | Xiaohongshu standard |
-| `scene_reference` | User upload or latest in `scenes/` | Save uploads to `scenes/` |
-
-Write task manifest to `outputs/drafts/task_<YYYYMMDD_HHMM>.json`:
-
-```json
-{
-  "task_id": "20260829_001",
-  "characters": ["tom", "james"],
-  "content_type": "xiaohongshu_post",
-  "scene_reference": "scenes/scene_001.jpg",
-  "generation_config": {
-    "aspect_ratio": "3:4",
-    "style": "cinematic_realistic",
-    "num_images": 1
-  },
-  "constraints": {
-    "preserve_character_identity": true,
-    "preserve_scene_composition": true,
-    "preserve_scene_pose": true
-  }
-}
-```
-
-## Step 2–6 — Sub-skills
-
-Read in order (paths relative to project root):
-
-1. [.cursor/skills/character-registry/SKILL.md](.cursor/skills/character-registry/SKILL.md)
-2. [.cursor/skills/scene-analyzer/SKILL.md](.cursor/skills/scene-analyzer/SKILL.md)
-3. [.cursor/skills/scene-customizer/SKILL.md](.cursor/skills/scene-customizer/SKILL.md) — **post text options, wait for user reply**
-4. [.cursor/skills/character-composer/SKILL.md](.cursor/skills/character-composer/SKILL.md)
-5. [.cursor/skills/prompt-builder/SKILL.md](.cursor/skills/prompt-builder/SKILL.md)
-
-## Step 6 — Image generation (required)
-
-Use **Cursor built-in GenerateImage** via `CallDynamicTool`:
+1. Parse user reply → write `outputs/drafts/customization_<task_id>.json` with `"user_confirmed": true`
+2. Load characters from `characters/tom/`, `characters/james/`
+3. Build prompt (include customization choices)
+4. Call `GenerateImage` via CallDynamicTool:
 
 ```json
 namespace: "cursor"
 toolName: "GenerateImage"
 arguments: {
-  "description": "<full prompt from prompt-builder>",
+  "description": "<prompt>",
   "filename": "xiaohongshu_<task_id>.png",
   "aspect_ratio": "3:4",
-  "reference_image_paths": [
-    "<scene_reference_path>",
-    "characters/tom/references/face_01.jpeg",
-    "characters/james/references/face_01.jpeg"
-  ]
+  "reference_image_paths": ["<scene>", "<character refs>"]
 }
 ```
 
-**Reference image order matters:**
-1. Scene reference (composition/pose)
-2. Tom face reference (if in scene)
-3. James face reference (if in scene)
+5. QC → save to `outputs/approved/` → caption + hashtags
 
-For single-character tasks, only include that character's reference.
+---
 
-Only include character refs that are in the scene. Always include scene ref when user provided one.
+## Characters
 
-## Step 7 — Quality control
-
-Read [.cursor/skills/quality-control/SKILL.md](.cursor/skills/quality-control/SKILL.md).
-
-If QC fails → regenerate once with tightened prompt (emphasize failed checks). Max 2 attempts.
-
-## Step 8 — Deliver
-
-On pass:
-- Move/copy final image to `outputs/approved/`
-- Reply with:
-  - Image (tool output displays automatically)
-  - Brief QC score summary
-  - Suggested Xiaohongshu caption (1–2 sentences, 受/攻 dynamic tone)
-  - Hashtag suggestions: `#情侣日常 #虚拟男友 #BL #氛围感`
-
-On fail after retries:
-- Save to `outputs/rejected/` with QC notes
-
-## Character quick reference
-
-| Name | Role | Side default | Reference |
-|------|------|--------------|-----------|
+| Name | Role | Side | Reference |
+|------|------|------|-----------|
 | Tom | 受 | left | `characters/tom/references/face_01.jpeg` |
 | James | 攻 | right | `characters/james/references/face_01.jpeg` |
 
-## Content type routing
-
-| User says | content_type | aspect_ratio |
-|-----------|--------------|--------------|
-| 壁纸 / wallpaper | wallpaper | 9:16 |
-| 单人 / @Tom only / @James only | single_daily | 3:4 |
-| 情侣 / couple / default | couple_daily or xiaohongshu_post | 3:4 |
-| 小红书 | xiaohongshu_post | 3:4 |
-
-For wallpaper skill extras, also read [.cursor/skills/xiaohongshu-post/SKILL.md](.cursor/skills/xiaohongshu-post/SKILL.md).
-
-## Critical rules
+## Rules
 
 ```
-Character controls IDENTITY.
-Scene controls COMPOSITION and ACTION.
-Neither overrides the other.
-
-LEFT → Tom (受)
-RIGHT → James (攻)
+Character = IDENTITY (face, body, hair)
+Scene = COMPOSITION + POSE + ENVIRONMENT
+Customization = accessories/clothing (user confirms, may differ from scene)
+LEFT = Tom | RIGHT = James — never swap
 ```
 
-Never describe or replicate identities of people in the scene reference — extract structure only.
+## Sub-skills (Turn 2 detail)
+
+- `character-registry`, `scene-analyzer`, `scene-customizer`, `character-composer`, `prompt-builder`, `quality-control`, `xiaohongshu-post`
+
+See also: `AGENTS.md` at project root.
