@@ -10,7 +10,7 @@
 ## Example
 
 ```text
-@virtual-couple @Tom @James
+@virtual-couple @Teo @Kai
 [上传场景图]
 手机壁纸 9:16
 ```

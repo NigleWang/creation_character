@@ -2,7 +2,7 @@
 name: text-scene
 description: >-
   From a text scene brief (no photo), expand a complete Xiaohongshu scene using
-  Tom and James character bibles, then generate one image after the user
+  Teo and Kai character bibles, then generate one image after the user
   confirms. Use when the user describes a scene in words, 文字场景, 场景需求,
   按人设出图, 完善场景, 没有参考图, or asks to generate from a written prompt.
 ---
@@ -35,8 +35,8 @@ Skip wait only if the **same** first message already says `直接生成` or `不
 ## Turn 1 — 完善场景
 
 1. Load `character-registry` (bibles + yaml, including **occupation**).
-2. Parse who is in frame: `@Tom` / `@James` / 两人 / 我们. Default **couple** if unspecified and the brief is 日常/约会; default the @mentioned person if only one name.
-3. Fill every gap using the checklist below. User text **overrides** defaults. Bibles override any request that would swap faces, drop Tom's glasses, or bulk Tom up.
+2. Parse who is in frame: `@Teo` / `@Kai` / 两人 / 我们. Default **couple** if unspecified and the brief is 日常/约会; default the @mentioned person if only one name.
+3. Fill every gap using the checklist below. User text **overrides** defaults. Bibles override any request that would swap faces, drop Teo's glasses, or bulk Teo up.
 4. Write `outputs/drafts/text_scene_<task_id>.json` with `"user_confirmed": false`.
 5. Reply with the card. **END. Do not call GenerateImage.**
 
@@ -44,34 +44,34 @@ Skip wait only if the **same** first message already says `直接生成` or `不
 
 | Slot | If user omitted | Default |
 |------|-----------------|---------|
-| Who | — | Couple, Tom left / James right |
+| Who | — | Couple, Teo left / Kai right |
 | Place | — | Match occupation or 居家 |
 | Time | — | Late afternoon unless 夜/晨 specified |
 | Light | — | Natural/cinematic, 小红书封面 |
-| Tom pose | — | Softer, receiving, still, looking through glasses |
-| James pose | — | Leading, upright or leaning in, initiating contact |
-| Tom clothes | — | Occupation or scene: linen/neutral; **always browline glasses** |
-| James clothes | — | Occupation or scene: shirt, no glasses |
+| Teo pose | — | Softer, receiving, still, looking through glasses |
+| Kai pose | — | Leading, upright or leaning in, initiating contact |
+| Teo clothes | — | Occupation or scene: linen/neutral; **always browline glasses** |
+| Kai clothes | — | Occupation or scene: shirt, no glasses |
 | Props | — | 1–2 that belong to the place (样品 / 双屏 / 杯子) |
 | Framing | — | 3:4 medium, faces in upper two-thirds |
 | Tone | — | Intimate, tasteful, not explicit |
 
-Do not add extra people. Do not put Tom in James's fluorescent cubicle unless the brief says so (or the reverse for Tom's studio).
+Do not add extra people. Do not put Teo in Kai's fluorescent cubicle unless the brief says so (or the reverse for Teo's studio).
 
 ### Turn 1 reply template
 
 ```text
 ✅ 场景已按人设补全（构图/动作如下，可改）
 
-【谁】{双人 Tom左 James右 / 仅Tom / 仅James}
+【谁】{双人 Teo左 Kai右 / 仅Teo / 仅Kai}
 【时间地点】{...}
 【构图】3:4 {中景/近景}，{机位}
-【动作】Tom：{...} ｜ James：{...}
-【服装】Tom：{眼镜+}{上衣/下装} ｜ James：{上衣/下装}
+【动作】Teo：{...} ｜ Kai：{...}
+【服装】Teo：{眼镜+}{上衣/下装} ｜ Kai：{上衣/下装}
 【光与道具】{...}
 【人设】{一句：受/攻能量、职业细节}
 
-改法直接说，例如：改成只有Tom、James穿藏青衬衫、再近一点。
+改法直接说，例如：改成只有Teo、Kai穿藏青衬衫、再近一点。
 快捷：「生成」
 
 ⏸️ 请确认后再出图。
@@ -92,14 +92,14 @@ arguments: {
   "description": "<prompt>",
   "filename": "xiaohongshu_<task_id>.png",
   "aspect_ratio": "3:4",
-  "reference_image_paths": ["<tom face if in frame>", "<james face if in frame>"]
+  "reference_image_paths": ["<teo face if in frame>", "<kai face if in frame>"]
 }
 ```
 
 No scene photograph in `reference_image_paths`. Face refs only.
 
 4. QC → `outputs/approved/xiaohongshu_<task_id>.png` (single still, not a series folder).
-5. Caption via `xiaohongshu-post` (单人帖用对方第一人称).
+5. Caption via `xiaohongshu-caption`.
 
 After this still exists, 换姿态 → `pose-series`.
 
@@ -110,10 +110,10 @@ After this still exists, 换姿态 → `pose-series`.
 ```text
 [CHARACTER IDENTITY — highest priority]
 
-{If couple:} Two recurring virtual East Asian men. LEFT is Tom (受): {tom identity_prompt}. RIGHT is James (攻): {james identity_prompt}.
-{If single:} Only {Tom or James}: {identity_prompt}. One person.
+{If couple:} Two recurring virtual East Asian men. LEFT is Teo (受): {teo identity_prompt}. RIGHT is Kai (攻): {kai identity_prompt}.
+{If single:} Only {Teo or Kai}: {identity_prompt}. One person.
 
-Use attached face references. Tom: browline glasses, buzz cut, slim athletic, not bulky. James: spiky hair, mature, muscular, no glasses. Do not swap them. Do not merge faces.
+Use attached face references. Teo: browline glasses, buzz cut, slim athletic, not bulky. Kai: spiky hair, mature, muscular, no glasses. Do not swap them. Do not merge faces.
 
 [SCENE — filled brief]
 
@@ -123,16 +123,16 @@ Use attached face references. Tom: browline glasses, buzz cut, slim athletic, no
 [COMPOSITION]
 
 Vertical 3:4. {framing}. {camera}.
-Tom on the left, James on the right (if both). Faces in the upper two-thirds.
+Teo on the left, Kai on the right (if both). Faces in the upper two-thirds.
 
 [POSE]
 
-Tom: {filled pose}. James: {filled pose}.
+Teo: {filled pose}. Kai: {filled pose}.
 {interaction}. Tasteful, natural, not staged-glamour.
 
 [CLOTHING]
 
-Tom: {filled}. James: {filled}.
+Teo: {filled}. Kai: {filled}.
 
 [VISUAL STYLE]
 
@@ -152,22 +152,22 @@ Identity from references. One frame, correct headcount. No extra limbs. No 总�
   "task_id": "20260829_weekend_kitchen",
   "user_confirmed": false,
   "user_brief": "周末早上两个人在厨房",
-  "cast": ["tom", "james"],
+  "cast": ["teo", "kai"],
   "scene": {
     "place": "home kitchen",
     "time": "weekend morning",
     "lighting": "soft window light",
     "framing": "medium 3:4",
-    "tom": { "pose": "...", "clothes": "..." },
-    "james": { "pose": "...", "clothes": "..." },
+    "teo": { "pose": "...", "clothes": "..." },
+    "kai": { "pose": "...", "clothes": "..." },
     "props": [],
-    "interaction": "James cooking, Tom leaning on counter watching"
+    "interaction": "Kai cooking, Teo leaning on counter watching"
   }
 }
 ```
 
 ## Sub-skills
 
-`character-registry`, `character-composer` (left/right), `quality-control`, `xiaohongshu-post`
+`character-registry`, `character-composer` (left/right), `quality-control`, `xiaohongshu-caption`
 
 See [examples.md](examples.md).

@@ -93,7 +93,7 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
 }
 ```
 
-Map subject_1 → left (Tom), subject_2 → right (James) in couple scenes.
+Map subject_1 → left (Teo), subject_2 → right (Kai) in couple scenes.
 
 ## Rules
 

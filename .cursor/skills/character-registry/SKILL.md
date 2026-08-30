@@ -1,8 +1,8 @@
 ---
 name: character-registry
 description: >-
-  Loads Tom and James character bibles and reference paths for the virtual couple
-  pipeline. Use when resolving @Tom, @James, character identity, or face
+  Loads Teo and Kai character bibles and reference paths for the virtual couple
+  pipeline. Use when resolving @Teo, @Kai, character identity, or face
   consistency in creation_character.
 ---
 
@@ -12,8 +12,8 @@ description: >-
 
 | ID | Display | Role | Bible | YAML | Reference |
 |----|---------|------|-------|------|-----------|
-| `tom` | Tom | 受 | `characters/tom/bible.md` | `characters/tom/character.yaml` | `characters/tom/references/face_01.jpeg` |
-| `james` | James | 攻 | `characters/james/bible.md` | `characters/james/character.yaml` | `characters/james/references/face_01.jpeg` |
+| `teo` | Teo | 受 | `characters/teo/bible.md` | `characters/teo/character.yaml` | `characters/teo/references/face_01.jpeg` |
+| `kai` | Kai | 攻 | `characters/kai/bible.md` | `characters/kai/character.yaml` | `characters/kai/references/face_01.jpeg` |
 
 Relationship: `relationship/relationship.yaml`
 
@@ -29,10 +29,14 @@ For each requested character ID:
 
 | User input | Maps to |
 |------------|---------|
-| Tom, tom, @Tom | `tom` |
-| James, james, @James | `james` |
-| 受 | `tom` |
-| 攻 | `james` |
+| Teo, teo, @Teo | `teo` |
+| Kai, kai, @Kai | `kai` |
+| 受 | `teo` |
+| 攻 | `kai` |
+
+Do **not** use Tom / James. Those names are retired.
+
+Legacy `outputs/` paths may still contain `tom` / `james` in the filename; they are Teo / Kai stills. Do not treat them as different people. New files use `teo` / `kai`.
 
 ## Output: character_bundle
 
@@ -40,22 +44,22 @@ Append to task manifest:
 
 ```yaml
 character_bundle:
-  tom:
+  teo:
     role: shou
     default_side: left
-    reference: characters/tom/references/face_01.jpeg
+    reference: characters/teo/references/face_01.jpeg
     identity_prompt: |
-      Tom: East Asian man ~28, oval face, almond eyes, browline glasses
+      Teo: East Asian man ~28, oval face, almond eyes, browline glasses
       (black top/silver bottom frame), buzz cut black hair, short stubble,
       warm tan skin, slim athletic build. Calm gentle reserved expression.
       Independent interior designer (small studio, material samples).
 
-  james:
+  kai:
     role: gong
     default_side: right
-    reference: characters/james/references/face_01.jpeg
+    reference: characters/kai/references/face_01.jpeg
     identity_prompt: |
-      James: East Asian man ~38, square jaw, warm smile with smile lines,
+      Kai: East Asian man ~38, square jaw, warm smile with smile lines,
       short spiky black hair, groomed stubble, golden tan skin, muscular
       broad build. Confident protective mature expression.
       Product director at a health-tech company (office, dual monitors).
@@ -64,6 +68,6 @@ character_bundle:
 ## Consistency rules
 
 - Face identity from reference images has **highest priority**
-- Do not merge Tom and James features
-- Preserve glasses on Tom always
-- Preserve James's mature muscular look always
+- Do not merge Teo and Kai features
+- Preserve glasses on Teo always
+- Preserve Kai's mature muscular look always

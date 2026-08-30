@@ -1,8 +1,9 @@
 ---
 name: xiaohongshu-post
 description: >-
-  Formats final images and captions for Xiaohongshu (小红书) posting — 3:4
-  aspect, hashtags, cover-friendly composition. Use for 小红书 content delivery.
+  Formats final Xiaohongshu (小红书) images — 3:4 aspect, cover-friendly
+  composition, delivery layout. Caption/hashtags belong to xiaohongshu-caption
+  (Teo/Kai). Use for 小红书 image delivery specs.
 ---
 
 # Xiaohongshu Post Skill
@@ -16,23 +17,11 @@ description: >-
 | Style | Cinematic, warm, lifestyle / BL couple |
 | Avoid | Watermarks, text overlays, explicit content |
 
-## Caption template
+## Caption
 
-After QC pass, generate for user:
+Do **not** write copy here. After QC, run `xiaohongshu-caption` (**Teo** / **Kai**, tags `#TeoKai` `#TeoKaiDaily`).
 
-```text
-【标题】{short emotional hook, ≤20 chars}
-
-{1-2 sentences scene description in casual 小红书 tone}
-
-#情侣日常 #虚拟情侣 #BL #氛围感 #恋爱日常 #{scene_tag}
-```
-
-**pose-series:** One caption for the set. Title may include `办公室日常` / `1/n`. Same hashtags; add scene tag like `#办公室`.
-
-## Scene tag examples
-
-`#咖啡馆` `#雨天` `#居家` `#旅行` `#海边` `#圣诞`
+**pose-series:** one caption for the whole set.
 
 ## Cover tips (prompt additions)
 
@@ -48,5 +37,5 @@ Reply structure:
 
 1. **成品图** — generated image
 2. **QC 评分** — brief scores
-3. **建议标题 + 正文 + 标签** — copy-paste ready
+3. **建议标题 + 正文 + 标签** — via `xiaohongshu-caption`，copy-paste ready
 4. **文件路径** — 单图 `outputs/approved/xiaohongshu_<task_id>.png`；组图 `outputs/approved/series/<task_id>/`

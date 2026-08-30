@@ -1,10 +1,10 @@
 ---
 name: virtual-couple
 description: >-
-  Xiaohongshu virtual couple pipeline for Tom (受) and James (攻). ALWAYS uses
+  Xiaohongshu virtual couple pipeline for Teo (受) and Kai (攻). ALWAYS uses
   two-turn protocol: Turn 1 analyze scene and post numbered style options in
   chat; Turn 2 generate after user replies. Use when user uploads scene photo,
-  @mentions Tom, James, virtual-couple, 换脸, or 小红书 in creation_character.
+  @mentions Teo, Kai, virtual-couple, 换脸, or 小红书 in creation_character.
 ---
 
 # Virtual Couple Studio
@@ -35,7 +35,7 @@ After analyzing scene, reply with this exact structure:
 
 换脸前请确认（回复数字或文字）：
 
-【James】（单人时只列此块；情侣加 Tom 块）
+【Kai】（单人时只列此块；情侣加 Teo 块）
 1️⃣ 装饰物：1保持原场景({value}) 2角色默认 3墨镜 4耳机 5无装饰
 2️⃣ 上衣颜色：1保持({value}) 2白 3藏青 4浅蓝 5黑
 3️⃣ 上衣图案：1保持 2纯色 3条纹 4格子
@@ -48,14 +48,14 @@ After analyzing scene, reply with this exact structure:
 
 **Then END this turn. Do not call GenerateImage.**
 
-Character defaults: Tom → browline glasses; James → no glasses.
+Character defaults: Teo → browline glasses; Kai → no glasses.
 
 ---
 
 ## Turn 2 — Generate (after user reply)
 
 1. Parse user reply → write `outputs/drafts/customization_<task_id>.json` with `"user_confirmed": true`
-2. Load characters from `characters/tom/`, `characters/james/`
+2. Load characters from `characters/teo/`, `characters/kai/`
 3. Build prompt (include customization choices)
 4. Call `GenerateImage` via CallDynamicTool:
 
@@ -70,7 +70,7 @@ arguments: {
 }
 ```
 
-5. QC → save **single** to `outputs/approved/xiaohongshu_<task_id>.png` → caption + hashtags. pose-series sets use `outputs/approved/series/<task_id>/` (see pose-series skill).
+5. QC → save **single** to `outputs/approved/xiaohongshu_<task_id>.png` → run `xiaohongshu-caption` if user wants 文案. pose-series sets use `outputs/approved/series/<task_id>/` then **must** run `xiaohongshu-caption`.
 
 ---
 
@@ -78,8 +78,8 @@ arguments: {
 
 | Name | Role | Side | Reference |
 |------|------|------|-----------|
-| Tom | 受 | left | `characters/tom/references/face_01.jpeg` |
-| James | 攻 | right | `characters/james/references/face_01.jpeg` |
+| Teo | 受 | left | `characters/teo/references/face_01.jpeg` |
+| Kai | 攻 | right | `characters/kai/references/face_01.jpeg` |
 
 ## Rules
 
@@ -87,11 +87,11 @@ arguments: {
 Character = IDENTITY (face, body, hair)
 Scene = COMPOSITION + POSE + ENVIRONMENT
 Customization = accessories/clothing (user confirms, may differ from scene)
-LEFT = Tom | RIGHT = James — never swap
+LEFT = Teo | RIGHT = Kai — never swap
 ```
 
 ## Sub-skills (Turn 2 detail)
 
-- `character-registry`, `scene-analyzer`, `scene-customizer`, `character-composer`, `prompt-builder`, `quality-control`, `xiaohongshu-post`
+- `character-registry`, `scene-analyzer`, `scene-customizer`, `character-composer`, `prompt-builder`, `quality-control`, `xiaohongshu-caption`, `xiaohongshu-post`
 
 See also: `AGENTS.md` at project root.

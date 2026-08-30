@@ -48,16 +48,16 @@ Source pose for typical office still: arms crossed in chair → do **not** offer
 | `lean_wall` | 靠墙 | Shoulder to wall, ankles crossed |
 | `look_back` | 回眸 | Walk away, head turned back to camera |
 
-## couple (Tom left, James right — never swap)
+## couple (Teo left, Kai right — never swap)
 
 Only if source already has both. Keep relative left/right.
 
 | id | Name | Action |
 |----|------|--------|
 | `walk_side` | 并肩走 | Side by side, same direction |
-| `sit_close` | 并坐 | Seated close, James slightly more upright |
+| `sit_close` | 并坐 | Seated close, Kai slightly more upright |
 | `look_each` | 对视 | Facing each other, eye contact |
-| `from_behind` | 背后环抱 | James behind or beside, arm around Tom |
+| `from_behind` | 背后环抱 | Kai behind or beside, arm around Teo |
 
 ## Chat option lines
 

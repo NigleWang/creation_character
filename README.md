@@ -1,6 +1,6 @@
 # Xiaohongshu Virtual Couple Studio
 
-**Tom（受）× James（攻）** — 角色驱动的小红书内容生产流水线。
+**Teo（受）× Kai（攻）** — 角色驱动的小红书内容生产流水线。
 
 上传场景参考图 → @角色名 → 自动分析场景、绑定角色、生图、QC → 返回可发小红书竖图。
 
@@ -10,10 +10,10 @@
 
 | 角色 | 定位 | 默认位置 | 参考图 |
 |------|------|----------|--------|
-| **Tom** | 受 | 左 | `characters/tom/references/face_01.jpeg` |
-| **James** | 攻 | 右 | `characters/james/references/face_01.jpeg` |
+| **Teo** | 受 | 左 | `characters/teo/references/face_01.jpeg` |
+| **Kai** | 攻 | 右 | `characters/kai/references/face_01.jpeg` |
 
-原始参考图备份：`data/imgs/Tom.jpeg`、`data/imgs/James.jpeg`
+原始参考图备份：`data/imgs/Teo.jpeg`、`data/imgs/Kai.jpeg`
 
 ---
 
@@ -23,7 +23,7 @@
 
 **第 1 轮（上传场景图）：**
 ```text
-@virtual-couple @James
+@virtual-couple @Kai
 ```
 
 Agent 应回复编号选项并 **停止**，不会生图。
@@ -44,7 +44,7 @@ Agent 补全场景卡并停止。你回 `生成` 才出图。
 
 **一条消息跳过询问（换脸，可选）：**
 ```text
-@virtual-couple @James
+@virtual-couple @Kai
 全部保持原场景
 ```
 
@@ -57,13 +57,13 @@ Agent 补全场景卡并停止。你回 `生成` 才出图。
         ↓
   @virtual-couple（主编排）
         ↓
-  character-registry → 加载 Tom/James Bible
+  character-registry → 加载 Teo/Kai Bible
         ↓
   scene-analyzer → 提取构图/动作/光影（不识别原图人物）
         ↓
   scene-customizer → ★ 聊天里发编号选项，等你文字回复 ★
         ↓
-  character-composer → 左=Tom(受) 右=James(攻)
+  character-composer → 左=Teo(受) 右=Kai(攻)
         ↓
   prompt-builder → 组装生图 Prompt
         ↓
@@ -77,8 +77,9 @@ Agent 补全场景卡并停止。你回 `生成` 才出图。
 另两条入口：
 
 - **文字场景**（无照片）→ `@text-scene`：先补全场景卡，你回复「生成」后再出一张
-- **已有成图换姿态** → `@pose-series`：先选编号姿态，组图进 `outputs/approved/series/`
+- **已有成图换姿态** → `@pose-series`：先选编号姿态，组图进 `outputs/approved/series/`，出图后自动给小红书文案（Teo / Kai）
 - **成图转动画** → `@gemini-video`：写出可复制进 Gemini 的 10 秒图生视频提示词（台词日语假名）
+- **只要文案** → `@xiaohongshu-caption`：对着成图/系列写标题+正文+标签
 
 ---
 
@@ -95,14 +96,15 @@ creation_character/
 │   │   ├── character-composer/
 │   │   ├── prompt-builder/
 │   │   ├── pose-series/         ← 成图锁定形象，换姿态做系列
+│   │   ├── xiaohongshu-caption/ ← 系列/成图 → 小红书发布文案（Teo/Kai）
 │   │   ├── text-scene/          ← 文字场景按人设补全后再出一张
 │   │   ├── gemini-video/        ← 成图 → Gemini 10s 视频提示词（假名台词）
 │   │   ├── quality-control/
 │   │   └── xiaohongshu-post/
 │   └── rules/
 ├── characters/
-│   ├── tom/                     # 受
-│   └── james/                   # 攻
+│   ├── teo/                     # 受
+│   └── kai/                     # 攻
 ├── relationship/
 ├── templates/
 ├── workflows/
@@ -127,7 +129,8 @@ creation_character/
 | `character-composer` | 角色与场景位置绑定 |
 | `prompt-builder` | 生成 GenerateImage 描述 |
 | `quality-control` | 成品质检 |
-| `xiaohongshu-post` | 标题/标签/交付格式 |
+| `xiaohongshu-caption` | 成图/系列 → 小红书标题+正文+标签（Teo/Kai） |
+| `xiaohongshu-post` | 3:4 规格 / 封面构图 / 交付格式 |
 | `gemini-video` | 成图 → Gemini 10s 图生视频提示词（台词假名，复制即用） |
 
 ---
@@ -137,7 +140,7 @@ creation_character/
 ```
 Character 决定「是谁」（脸、身材、发型、气质）
 Scene 决定「在哪、做什么、怎么构图」
-左 = Tom（受）  右 = James（攻）  永不互换
+左 = Teo（受）  右 = Kai（攻）  永不互换
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Generate Couple Xiaohongshu Post
 
-**Trigger:** `@virtual-couple` + scene upload + `@Tom` `@James`
+**Trigger:** `@virtual-couple` + scene upload + `@Teo` `@Kai`
 
 ## Steps
 
@@ -12,7 +12,7 @@
 ## Example user message (mobile)
 
 ```text
-@virtual-couple @Tom @James
+@virtual-couple @Teo @Kai
 [上传场景图]
 情侣咖啡馆日常，保持构图，小红书竖图
 ```

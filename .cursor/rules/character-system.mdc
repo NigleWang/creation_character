@@ -1,5 +1,5 @@
 ---
-description: Virtual couple character system — Tom (受) and James (攻) identity rules
+description: Virtual couple character system — Teo (受) and Kai (攻) identity rules
 alwaysApply: true
 ---
 
@@ -9,14 +9,14 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 
 ## Characters
 
-- **Tom** — 受, default LEFT, `characters/tom/`
-- **James** — 攻, default RIGHT, `characters/james/`
+- **Teo** — 受, default LEFT, `characters/teo/`
+- **Kai** — 攻, default RIGHT, `characters/kai/`
 
 ## Hard rules
 
 1. Character Bible controls face, body, hair, glasses, personality look
 2. Scene reference controls composition, pose, environment, lighting only
-3. NEVER swap Tom and James positions or identities
+3. NEVER swap Teo and Kai positions or identities
 4. NEVER describe identities of people in scene reference photos
 5. Use Cursor `GenerateImage` with scene + character reference paths
 6. Default output: 3:4 vertical for 小红书
@@ -24,13 +24,16 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 8. **POSE SERIES:** Existing approved still + 系列/换姿态 → `pose-series` skill. Lock identity + outfit + environment; only pose changes. Turn 1 = numbered pose options + STOP.
 9. **TEXT SCENE:** Words only, no photo → `text-scene` skill. Fill a complete scene from bibles, post the card, wait; then one image.
 10. **GEMINI VIDEO:** Approved still + 图生视频/10秒视频 → `gemini-video` skill. Write a copy-paste Gemini prompt; Japanese kana dialogue. Do **not** call GenerateImage.
+11. **XHS CAPTION:** After pose-series (or 文案/标题/标签) → `xiaohongshu-caption`. Names **Teo**（受）/ **Kai**（攻）. Do **not** call GenerateImage.
 
 ## User triggers
 
-When user uploads scene + @Tom/@James/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
+When user uploads scene + @Teo/@Kai/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
 
 When user points at `outputs/approved/` (or similar) and asks for 系列/换姿态 → **pose-series Turn 1**. Do NOT generate until user picks poses.
 
 When user describes a scene in text with no photo → **text-scene Turn 1**. Do NOT generate until they confirm the filled card.
 
 When user points at an approved still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Do NOT call GenerateImage.
+
+When pose-series finishes, or user asks 文案 / 标题 / 标签 / 小红书发布 → **xiaohongshu-caption**. Copy-paste title + body + tags. Names in copy: Teo / Kai. Do NOT call GenerateImage.

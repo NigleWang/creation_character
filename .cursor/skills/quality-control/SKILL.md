@@ -1,7 +1,7 @@
 ---
 name: quality-control
 description: >-
-  Visual QC for generated Tom/James images — character consistency, scene
+  Visual QC for generated Teo/Kai images — character consistency, scene
   preservation, Xiaohongshu suitability. Use after GenerateImage in
   creation_character pipeline.
 ---
@@ -11,7 +11,7 @@ description: >-
 ## Input
 
 - Generated image (from GenerateImage output)
-- Character references: `characters/tom/references/face_01.jpeg`, `characters/james/references/face_01.jpeg`
+- Character references: `characters/teo/references/face_01.jpeg`, `characters/kai/references/face_01.jpeg`
 - Scene reference (if provided)
 - `generation_blueprint`
 
@@ -19,9 +19,9 @@ description: >-
 
 ### 1. Character consistency
 
-- Tom looks like Tom? (glasses, buzz cut, slim build)
-- James looks like James? (spiky hair, muscular, mature face)
-- No face swap between Tom and James?
+- Teo looks like Teo? (glasses, buzz cut, slim build)
+- Kai looks like Kai? (spiky hair, muscular, mature face)
+- No face swap between Teo and Kai?
 
 ### 2. Scene consistency
 
@@ -71,7 +71,7 @@ description: >-
 
 | Issue | Add to prompt |
 |-------|---------------|
-| Tom/James swapped | "CRITICAL: Tom MUST be on LEFT with glasses. James MUST be on RIGHT, muscular." |
+| Teo/Kai swapped | "CRITICAL: Teo MUST be on LEFT with glasses. Kai MUST be on RIGHT, muscular." |
 | Face drift | "Match face reference images exactly. Do not alter facial features." |
 | Pose lost | "Strictly copy body positions from scene reference." |
 | Extra limbs | "Exactly two people, two arms each, anatomically correct." |

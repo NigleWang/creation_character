@@ -35,8 +35,8 @@ Fill `{value}` from detected scene. One block per character.
 
 | Character | Default accessory |
 |-----------|-------------------|
-| Tom | browline glasses |
-| James | no glasses |
+| Teo | browline glasses |
+| Kai | no glasses |
 
 ## After user replies
 
@@ -45,7 +45,7 @@ Write `outputs/drafts/customization_<task_id>.json`:
 ```json
 {
   "user_confirmed": true,
-  "james": {
+  "kai": {
     "accessories": { "choice": "character_default" },
     "top": { "choice": "navy", "pattern": "solid" },
     "bottom": { "choice": "grey", "pattern": "solid" }

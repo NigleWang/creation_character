@@ -1,7 +1,7 @@
 ---
 name: gemini-video
 description: >-
-  From a Tom/James still (solo or couple), writes a 10-second Gemini
+  From a Teo/Kai still (solo or couple), writes a 10-second Gemini
   image-to-video prompt with Japanese kana dialogue, copy-paste ready for
   Gemini. Use when the user asks for 图生视频, 视频提示词, Gemini视频, 10秒视频,
   i2v, Veo, Omni, image-to-video, or to animate an approved still.
@@ -9,7 +9,7 @@ description: >-
 
 # Gemini Video — Still → 10s Copy-Paste Prompt
 
-从一张 **Tom / James / 两人** 的场景成图，写出可直接粘贴进 **Gemini** 的 **10 秒图生视频**提示词。台词必须是 **日语假名**（ひらがな / カタカナ，不用汉字）。
+从一张 **Teo / Kai / 两人** 的场景成图，写出可直接粘贴进 **Gemini** 的 **10 秒图生视频**提示词。台词必须是 **日语假名**（ひらがな / カタカナ，不用汉字）。
 
 本 skill **只写提示词**。不要调用 `GenerateImage`。不要走 virtual-couple / pose-series / text-scene。
 
@@ -19,7 +19,7 @@ description: >-
 | `pose-series` | 成图换姿态 | 系列静帧 |
 | **`gemini-video`** | **成图（静帧）** | **Gemini 10s 视频提示词** |
 
-优先用 `outputs/approved/` 里已经是 Tom/James 的成图。原场景未换脸图会把原图人物动起来，身份会漂。
+优先用 `outputs/approved/` 里已经是 Teo/Kai 的成图。原场景未换脸图会把原图人物动起来，身份会漂。
 
 ---
 
@@ -40,10 +40,10 @@ If they also asked to 换脸 or 出图: finish that pipeline first, then run thi
 
 | In frame | Cast |
 |----------|------|
-| one man, glasses + buzz | Tom only |
-| one man, spiky + muscular, no glasses | James only |
-| two men | Tom left / James right unless user says otherwise |
-| user @Tom / @James | honor @mention |
+| one man, glasses + buzz | Teo only |
+| one man, spiky + muscular, no glasses | Kai only |
+| two men | Teo left / Kai right unless user says otherwise |
+| user @Teo / @Kai | honor @mention |
 
 5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Write short **假名** lines that fit occupation + 受/攻.
 6. Save:
@@ -70,7 +70,7 @@ Header:
 
 【用法】打开 Gemini → 上传这张成图 → 粘贴下面英文块 → 生成视频（时长选 10s / 竖屏）
 
-【谁】{仅Tom / 仅James / 双人 Tom左 James右}
+【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右}
 【从静止到动作】{一句}
 【台词（假名）】
 {Name}：「{kana}」
@@ -93,9 +93,9 @@ Animate the uploaded image into a photorealistic 10-second video. Image-to-video
 IDENTITY LOCK: Keep the exact faces, hair, glasses, bodies, clothing, props, lighting, and room from the uploaded image. Do not restyle. Do not add or remove people. Do not swap the two men.
 
 CAST:
-{If Tom:} The slimmer East Asian man with buzz-cut black hair and browline glasses is Tom. Soft reserved energy. Voice: quiet gentle Japanese male, late 20s.
-{If James:} The broader East Asian man with short spiky black hair, no glasses, mature smile lines, is James. Warm protective energy. Voice: lower warm Japanese male, late 30s.
-{If couple:} Tom is on the left. James is on the right. Do not swap.
+{If Teo:} The slimmer East Asian man with buzz-cut black hair and browline glasses is Teo. Soft reserved energy. Voice: quiet gentle Japanese male, late 20s.
+{If Kai:} The broader East Asian man with short spiky black hair, no glasses, mature smile lines, is Kai. Warm protective energy. Voice: lower warm Japanese male, late 30s.
+{If couple:} Teo is on the left. Kai is on the right. Do not swap.
 
 MOTION (10s, continue this pose, do not freeze):
 0.0-2.0s: tiny living motion from the still — breath, blink, micro weight shift. No teleport.
@@ -123,19 +123,19 @@ Speech is short. Most of the 10s is motion + silence.
 | Cast | Lines | Mora (音) | When |
 |------|-------|-----------|------|
 | Solo | 1 line | 8–16 | start ~2.5s |
-| Couple | James then Tom (or reverse if Tom starts) | 8–14 then 4–10 | ~2.5s and ~6.5s |
+| Couple | Kai then Teo (or reverse if Teo starts) | 8–14 then 4–10 | ~2.5s and ~6.5s |
 | User asked 不要台词 | 0 | — | breathe + foley only |
 
 Do not write a monologue. One breath per line. Leave 1s+ pause after speech.
 
-James（攻）先开口、句子稍完整。Tom（受）更短、更轻。ため口。不要每条都「だいすき」.
+Kai（攻）先开口、句子稍完整。Teo（受）更短、更轻。ため口。不要每条都「だいすき」.
 
 ---
 
 ## 假名 rules (mandatory)
 
 - Spoken lines: **only ひらがな and カタカナ**. No 漢字.
-- Names in speech: `トム` / `ジェームズ` if needed; usually skip names.
+- Names in speech: `テオ` / `カイ` if needed; usually skip names.
 - Loanwords: カタカナ (`コーヒー`, `メール`).
 - Convert user Chinese/English lines into kana. Put the kana in the paste quotes.
 - Natural casual Japanese, not textbook ですます (unless office-call / client).
@@ -145,8 +145,8 @@ Voice tags in the English prompt (not spoken):
 
 | Who | Voice |
 |-----|--------|
-| Tom | quiet, gentle, slightly breathy Japanese male, late 20s |
-| James | lower, warm, unhurried Japanese male, late 30s |
+| Teo | quiet, gentle, slightly breathy Japanese male, late 20s |
+| Kai | lower, warm, unhurried Japanese male, late 30s |
 
 ---
 
@@ -164,7 +164,7 @@ Continue **this** pose. Do not invent a new room.
 | couple, looking at each other | lean in a little, blink, two short lines |
 | looking at camera | hold gaze, small smile, one line, look down to work/prop |
 
-Forbidden motion: teleport, outfit change, extra people, Tom loses glasses, James becomes slim, swapping sides, dance/music-video blocking, on-screen karaoke subtitles.
+Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai becomes slim, swapping sides, dance/music-video blocking, on-screen karaoke subtitles.
 
 ---
 
@@ -172,14 +172,14 @@ Forbidden motion: teleport, outfit change, extra people, Tom loses glasses, Jame
 
 ```json
 {
-  "task_id": "20260829_james_office_v",
-  "source_image": "outputs/approved/xiaohongshu_20260829_james_office.png",
-  "cast": ["james"],
+  "task_id": "20260829_kai_office_v",
+  "source_image": "outputs/approved/xiaohongshu_20260829_kai_office.png",
+  "cast": ["kai"],
   "duration_sec": 10,
   "aspect_ratio": "3:4",
   "target": "gemini_image_to_video",
   "dialogue": [
-    { "who": "james", "kana": "きょうははやくあがるよ。", "mora": 12 }
+    { "who": "kai", "kana": "きょうははやくあがるよ。", "mora": 12 }
   ],
   "ambience": "quiet open office, distant keyboard, HVAC hush",
   "camera": "slow push-in, eye level, slight handheld"

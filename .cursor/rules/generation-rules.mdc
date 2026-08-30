@@ -15,18 +15,18 @@ Do not identify original people in reference images.
 
 - Tool: `CallDynamicTool` → `cursor` / `GenerateImage`
 - `aspect_ratio`: `3:4` (小红书), `9:16` (壁纸)
-- `reference_image_paths`: [scene, tom ref, james ref] as applicable
+- `reference_image_paths`: [scene, teo ref, kai ref] as applicable
 - Single still → `outputs/approved/xiaohongshu_<task_id>.png`
 - pose-series set → `outputs/approved/series/<task_id>/01_<pose_id>.png` (new folder per set)
 - Rejects → `outputs/rejected/`
 
 ## Pipeline order
 
-virtual-couple → character-registry → scene-analyzer → **scene-customizer (text options in chat, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-post
+virtual-couple → character-registry → scene-analyzer → **scene-customizer (text options in chat, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-caption
 
-pose-series (approved still + 换姿态) → character-registry → look-lock JSON → **pose options in chat, wait** → GenerateImage per pose → quality-control (environment lock, new pose) → xiaohongshu-post
+pose-series (approved still + 换姿态) → character-registry → look-lock JSON → **pose options in chat, wait** → GenerateImage per pose → quality-control (environment lock, new pose) → **xiaohongshu-caption** (Teo/Kai 发布文案)
 
-text-scene (文字场景，无照片) → character-registry → **fill scene card, wait** → GenerateImage once (face refs only) → quality-control → xiaohongshu-post
+text-scene (文字场景，无照片) → character-registry → **fill scene card, wait** → GenerateImage once (face refs only) → quality-control → xiaohongshu-caption
 
 gemini-video (成图 + 图生视频/10秒) → character-registry → **write Gemini 10s i2v prompt, kana dialogue** → save `outputs/drafts/video_prompt_*.txt` → **no GenerateImage**
 

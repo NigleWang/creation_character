@@ -1,6 +1,6 @@
 # Generate Single Character Post
 
-**Trigger:** `@virtual-couple` + scene upload + one of `@Tom` / `@James`
+**Trigger:** `@virtual-couple` + scene upload + one of `@Teo` / `@Kai`
 
 ## Steps
 
@@ -12,7 +12,7 @@
 ## Example
 
 ```text
-@virtual-couple @Tom
+@virtual-couple @Teo
 [上传场景图]
-Tom单人日常，小红书
+Teo单人日常，小红书
 ```

@@ -4,13 +4,13 @@ Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 
 ## Project purpose
 
-Generate Xiaohongshu images of **Tom（受, left）** and **James（攻, right）** from scene reference photos.
+Generate Xiaohongshu images of **Teo（受, left）** and **Kai（攻, right）** from scene reference photos.
 
 ## TWO-TURN PROTOCOL (non-negotiable)
 
 ### Turn 1 — Analyze + ask only
 
-When user uploads a scene + mentions Tom/James/virtual-couple/换脸:
+When user uploads a scene + mentions Teo/Kai/virtual-couple/换脸:
 
 1. Analyze scene (composition, pose, environment)
 2. Post **numbered text options** for accessories / clothing / patterns (see template below)
@@ -44,7 +44,7 @@ When user replies with numbers or text choices (or said「全部保持原场景�
 ⏸️ 请回复后我再生成图片。
 ```
 
-Character defaults: Tom → browline glasses; James → no glasses.
+Character defaults: Teo → browline glasses; Kai → no glasses.
 
 ## Skip Turn 1 only if
 
@@ -57,6 +57,7 @@ User's **first message** already includes explicit style choices, e.g.:
 `.cursor/skills/virtual-couple/SKILL.md` — 换脸：场景图定姿态，角色圣经定身份  
 `.cursor/skills/scene-customizer/SKILL.md` — customization details  
 `.cursor/skills/pose-series/SKILL.md` — 换姿态做系列：已有成图锁定形象/服装/场景，只换 pose  
+`.cursor/skills/xiaohongshu-caption/SKILL.md` — 成图/系列 → 小红书发布文案（Teo/Kai，只出文案不出图）  
 `.cursor/skills/text-scene/SKILL.md` — 文字场景：按人设补全场景卡，确认后生成一张  
 `.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）
 
@@ -76,6 +77,7 @@ When user has `outputs/approved/...` and asks for 系列 / 换姿态 / 其他 po
 1. Turn 1: lock look + post numbered **pose** options + STOP
 2. Turn 2: GenerateImage per selected pose (`aspect_ratio` 3:4, refs = [approved still, face ref])
 3. Save the set to `outputs/approved/series/<task_id>/` as `01_<pose_id>.png`, `02_...` — never as loose files in `outputs/approved/`
+4. Run `xiaohongshu-caption`: one 标题+正文+标签 for the set. Names **Teo**（受）/ **Kai**（攻）.
 
 Single stills stay at `outputs/approved/xiaohongshu_<task_id>.png`.
 
@@ -86,6 +88,15 @@ Do **not** run virtual-couple 换脸流程 for this case.
 - Tool: `cursor` / `GenerateImage`
 - aspect_ratio: `3:4`
 - reference_image_paths: [scene, character face refs]
+
+## Xiaohongshu caption (发布文案)
+
+When pose-series Turn 2 finishes, **or** the user asks 文案 / 标题 / 标签 / 小红书发布:
+
+1. Follow `.cursor/skills/xiaohongshu-caption/SKILL.md`
+2. **Do not** call GenerateImage
+3. Names in copy: **Teo**（受）/ **Kai**（攻）— never Tom/James
+4. One title + 30–80字 body + 6–10 tags (`#TeoKai` `#TeoKaiDaily` always)
 
 ## Image-to-video prompt (Gemini)
 

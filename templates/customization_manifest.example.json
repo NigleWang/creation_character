@@ -1,7 +1,7 @@
 {
   "task_id": "example_001",
   "user_confirmed": true,
-  "tom": {
+  "teo": {
     "accessories": {
       "choice": "browline_glasses",
       "source": "character_default",
@@ -17,7 +17,7 @@
       "note": "与原场景黑色略有区分"
     }
   },
-  "james": {
+  "kai": {
     "accessories": {
       "choice": "no_accessories",
       "source": "user_choice",

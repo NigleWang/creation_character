@@ -1,10 +1,11 @@
 ---
 name: pose-series
 description: >-
-  From an approved Tom/James image, lock face, body, outfit, and environment,
+  From an approved Teo/Kai image, lock face, body, outfit, and environment,
   then generate a Xiaohongshu pose series. Two-turn: analyze look + post
-  numbered pose options and STOP; generate only after user picks poses. Use
-  when user has outputs/approved (or similar) and asks for 系列, 换姿态, 其他pose,
+  numbered pose options and STOP; generate only after user picks poses.
+  After the set is saved, run xiaohongshu-caption (Teo/Kai copy). Use when
+  user has outputs/approved (or similar) and asks for 系列, 换姿态, 其他pose,
   同一形象, 锁定形象, pose series, or look-lock variants.
 ---
 
@@ -33,7 +34,7 @@ Skip Turn 1 only if the first message already lists poses, e.g. `1,3,5` or `伏�
 ## Turn 1 — Analyze + ask (mandatory)
 
 1. Identify source image (user @path, `outputs/approved/*.png`, or latest approved).
-2. Resolve character: `@James` / `@Tom` / filename / visual match. Load bible via `character-registry`.
+2. Resolve character: `@Kai` / `@Teo` / filename / visual match. Load bible via `character-registry`.
 3. Extract **look-lock** (do not identify random people; this source is already our character):
    - face, hair, glasses, body
    - top / bottom / accessories (exact colors, fit, rolled sleeves, etc.)
@@ -88,7 +89,8 @@ arguments: {
 ```
 
 3. QC (pose-series mode) → **mkdir a series folder**, copy accepted files in pick order
-4. Deliver: images + brief QC + 小红书系列文案 + **folder path**
+4. Run `xiaohongshu-caption` on the folder → **one** Teo/Kai 发布文案（标题+正文+标签）
+5. Deliver: images + brief QC + **复制发布文案** + **folder path**
 
 ### Save paths (mandatory)
 
@@ -102,8 +104,8 @@ Never dump a series as loose files next to singles. Create the folder **before**
 Example:
 
 ```text
-outputs/approved/xiaohongshu_20260829_tom_studio.png          ← 单图（源成图）
-outputs/approved/series/20260829_tom_studio_series/
+outputs/approved/xiaohongshu_20260829_teo_studio.png          ← 单图（源成图）
+outputs/approved/series/20260829_teo_studio_series/
   01_look_camera.png
   02_phone_call.png
   03_chin_hand.png
@@ -117,11 +119,11 @@ Default 3 poses if user says 「日常三连」without ids. Max **8** images per
 
 ```json
 {
-  "task_id": "20260829_james_office_series",
-  "source_image": "outputs/approved/xiaohongshu_20260829_james_office.png",
-  "characters": ["james"],
+  "task_id": "20260829_kai_office_series",
+  "source_image": "outputs/approved/xiaohongshu_20260829_kai_office.png",
+  "characters": ["kai"],
   "lock": {
-    "identity": "James bible + source image face/body/hair",
+    "identity": "Kai bible + source image face/body/hair",
     "outfit": {
       "accessories": [],
       "top": { "type": "button-down", "color": "navy", "detail": "sleeves rolled mid-forearm, tight fit" },
@@ -138,9 +140,9 @@ Default 3 poses if user says 「日常三连」without ids. Max **8** images per
 
 ```json
 {
-  "task_id": "20260829_james_office_series",
+  "task_id": "20260829_kai_office_series",
   "user_confirmed": true,
-  "source_image": "outputs/approved/xiaohongshu_20260829_james_office.png",
+  "source_image": "outputs/approved/xiaohongshu_20260829_kai_office.png",
   "selected_poses": ["desk_work", "look_camera", "lean_back"]
 }
 ```
@@ -154,7 +156,7 @@ Same continuous `description` every pose; only the `[NEW POSE]` block changes.
 ```text
 [IDENTITY LOCK — highest priority]
 
-Single recurring virtual character: {Tom or James}.
+Single recurring virtual character: {Teo or Kai}.
 {identity_prompt from character-registry}
 
 The FIRST reference image is the locked look: copy this exact face, hair,
@@ -219,4 +221,5 @@ Source image is the look-lock; face ref is identity backup.
 
 - `character-registry` — identity prompt + face path
 - `quality-control` — use pose-series QC table above
-- `xiaohongshu-post` — series caption (`1/n` in title ok)
+- `xiaohongshu-caption` — **required after Turn 2**: one 小红书笔记 for the set (Teo / Kai)
+- `xiaohongshu-post` — 3:4 / cover framing only

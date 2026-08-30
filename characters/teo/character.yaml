@@ -1,5 +1,5 @@
-id: tom
-display_name: Tom
+id: teo
+display_name: Teo
 role_in_couple: shou  # 受 — receptive, gentle, softer energy
 
 identity:
@@ -28,7 +28,7 @@ occupation:
   title: 独立室内设计师
   scope: 住宅与小型商业改造
   workplace: 自己的小工作室
-  notes: 交图前会消失；对着材料样品发呆；有自己的甲方和工期，不是 James 的附属
+  notes: 交图前会消失；对着材料样品发呆；有自己的甲方和工期，不是 Kai 的附属
 
 personality:
   keywords:
@@ -49,5 +49,5 @@ negative_identity:
   - do not change slim athletic build to bulky
 
 reference_images:
-  primary: characters/tom/references/face_01.jpeg
-  fallback: data/imgs/Tom.jpeg
+  primary: characters/teo/references/face_01.jpeg
+  fallback: data/imgs/Teo.jpeg

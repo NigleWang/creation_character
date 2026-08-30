@@ -1,7 +1,7 @@
-# Tom — Character Bible
+# Teo — Character Bible
 
 **Role:** 受 (receptive partner)  
-**Reference:** `characters/tom/references/face_01.jpeg`
+**Reference:** `characters/teo/references/face_01.jpeg`
 
 ## Visual Identity (must preserve every generation)
 
@@ -9,15 +9,15 @@ East Asian man, ~28. Oval face, almond dark-brown eyes behind **browline glasses
 
 ## Occupation
 
-独立室内设计师。接住宅和小型商业改造，工作室很小。交图前会消失，对着材料发呆。有自己的甲方和工期，不是 James 的附属。
+独立室内设计师。接住宅和小型商业改造，工作室很小。交图前会消失，对着材料发呆。有自己的甲方和工期，不是 Kai 的附属。
 
 ## Personality on camera
 
-Calm, reserved, gentle. Soft eye contact. Subtle expressions. In couple scenes he reads as the quieter, more inward partner — comfortable being held, leaned on, or receiving attention from James.
+Calm, reserved, gentle. Soft eye contact. Subtle expressions. In couple scenes he reads as the quieter, more inward partner — comfortable being held, leaned on, or receiving attention from Kai.
 
 ## Scene binding rules
 
-| Scene position | Assign Tom when |
+| Scene position | Assign Teo when |
 |----------------|-----------------|
 | Left person   | Scene subject on left (default for 受 in intimate poses) |
 | Receiving pose | Leaning into partner, being embraced, looked at |
@@ -25,6 +25,6 @@ Calm, reserved, gentle. Soft eye contact. Subtle expressions. In couple scenes h
 
 ## Do NOT
 
-- Swap Tom's face onto James's body or vice versa
+- Swap Teo's face onto Kai's body or vice versa
 - Remove glasses or change hair length
-- Make Tom muscular like James — keep slim athletic type
+- Make Teo muscular like Kai — keep slim athletic type

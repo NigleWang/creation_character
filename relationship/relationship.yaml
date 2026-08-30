@@ -1,21 +1,21 @@
-couple_id: tom_james
-display_name: Tom & James
+couple_id: teo_kai
+display_name: Teo & Kai
 
 characters:
-  shou: tom    # 受
-  gong: james  # 攻
+  shou: teo    # 受
+  gong: kai    # 攻
 
 dynamic:
   type: romantic male couple
   tone: natural, cinematic, intimate but restrained
 
 character_roles:
-  tom:
+  teo:
     role: shou
     keywords: [calm, gentle, reserved, receptive]
     default_scene_side: left
 
-  james:
+  kai:
     role: gong
     keywords: [warm, confident, protective, leading]
     default_scene_side: right
@@ -23,16 +23,16 @@ character_roles:
 interaction_patterns:
   - walking together
   - eye contact across table
-  - James arm around Tom
+  - Kai arm around Teo
   - quiet domestic moments
   - subtle physical contact
-  - Tom leaning into James
+  - Teo leaning into Kai
 
 binding_rules:
-  - LEFT person in scene → Tom unless user explicitly says otherwise
-  - RIGHT person in scene → James unless user explicitly says otherwise
-  - NEVER swap Tom and James faces or roles
-  - Tom is always 受 energy; James is always 攻 energy
+  - LEFT person in scene → Teo unless user explicitly says otherwise
+  - RIGHT person in scene → Kai unless user explicitly says otherwise
+  - NEVER swap Teo and Kai faces or roles
+  - Teo is always 受 energy; Kai is always 攻 energy
   - If scene has one person only, use the @mentioned character's bible
 
 emotion_rules:

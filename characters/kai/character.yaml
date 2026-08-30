@@ -1,5 +1,5 @@
-id: james
-display_name: James
+id: kai
+display_name: Kai
 role_in_couple: gong  # 攻 — protective, confident, leading energy
 
 identity:
@@ -28,7 +28,7 @@ occupation:
   title: 健康科技公司产品总监
   scope: 运动/健康相关产品
   workplace: 公司办公室（双屏、文件、网椅）
-  notes: 周中泡在评审和数据里；肌肉是下班练的；对 Tom 的保护写在会收工、会改行程
+  notes: 周中泡在评审和数据里；肌肉是下班练的；对 Teo 的保护写在会收工、会改行程
 
 personality:
   keywords:
@@ -49,5 +49,5 @@ negative_identity:
   - do not make him look significantly younger
 
 reference_images:
-  primary: characters/james/references/face_01.jpeg
-  fallback: data/imgs/James.jpeg
+  primary: characters/kai/references/face_01.jpeg
+  fallback: data/imgs/Kai.jpeg

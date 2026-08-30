@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Style Gate — Mandatory Two-Turn Protocol
 
-Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new scene** for Tom/James/virtual-couple/换脸/小红书.
+Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new scene** for Teo/Kai/virtual-couple/换脸/小红书.
 
 **Exception — pose-series:** If the input is an already-approved character still and the user wants 系列/换姿态, follow `.cursor/skills/pose-series/SKILL.md`.
 
@@ -29,7 +29,7 @@ Call GenerateImage **only after** user replies with numbers/text, or if their **
 ```
 ✅ 场景已分析（构图/动作/环境将保持不变）
 
-【James】
+【Kai】
 1️⃣ 装饰物：1保持原场景 2角色默认(无眼镜) 3墨镜 4耳机 5无
 2️⃣ 上衣：1保持 2白 3藏青 4浅蓝 5黑
 3️⃣ 图案：1保持 2纯色 3条纹 4格子
@@ -38,7 +38,7 @@ Call GenerateImage **only after** user replies with numbers/text, or if their **
 ⏸️ 请回复后我再生成图片。
 ```
 
-(Add Tom block for couple scenes.)
+(Add Teo block for couple scenes.)
 
 ## Forbidden
 

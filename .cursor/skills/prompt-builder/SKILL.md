@@ -22,7 +22,7 @@ For each character, resolve clothing/accessories from `customization_manifest`:
 | `choice` | Prompt behavior |
 |----------|-----------------|
 | `keep_scene` | Use `scene_value` from scene blueprint |
-| `character_default` | Tom → browline glasses; James → no glasses |
+| `character_default` | Teo → browline glasses; Kai → no glasses |
 | specific value | Use user's color/item/pattern explicitly |
 
 Add block to prompt:
@@ -30,13 +30,13 @@ Add block to prompt:
 ```text
 [STYLE CUSTOMIZATION — may differ from scene reference]
 
-Tom accessories: {resolved}
-Tom top: {color} {pattern} {type}
-Tom bottom: {color} {pattern}
+Teo accessories: {resolved}
+Teo top: {color} {pattern} {type}
+Teo bottom: {color} {pattern}
 
-James accessories: {resolved}
-James top: ...
-James bottom: ...
+Kai accessories: {resolved}
+Kai top: ...
+Kai bottom: ...
 
 Pose, composition, environment unchanged. Only these style details differ from scene where specified.
 ```
@@ -50,11 +50,11 @@ Assemble one continuous `description` string for GenerateImage:
 
 Two recurring virtual East Asian male characters in a romantic couple.
 
-LEFT person is Tom (受): {tom identity_prompt from character-registry}
-RIGHT person is James (攻): {james identity_prompt from character-registry}
+LEFT person is Teo (受): {teo identity_prompt from character-registry}
+RIGHT person is Kai (攻): {kai identity_prompt from character-registry}
 
 Use the attached face reference images to preserve exact facial identity.
-Tom must keep browline glasses and buzz cut. James must keep spiky hair and muscular build.
+Teo must keep browline glasses and buzz cut. Kai must keep spiky hair and muscular build.
 
 [SCENE — from scene_blueprint]
 
@@ -64,13 +64,13 @@ Tom must keep browline glasses and buzz cut. James must keep spiky hair and musc
 
 Preserve the exact composition from the scene reference image.
 {composition.framing}, {composition.camera_angle}.
-Tom on the left, James on the right.
+Teo on the left, Kai on the right.
 {aspect_ratio} vertical frame.
 
 [POSE — inherit from scene]
 
-{pose details for subject_1 → Tom}
-{pose details for subject_2 → James}
+{pose details for subject_1 → Teo}
+{pose details for subject_2 → Kai}
 {interaction.type}, {interaction.emotional_tone}.
 
 [VISUAL STYLE]
@@ -88,7 +88,7 @@ Tasteful romantic BL couple content, not explicit.
 
 Character identity overrides original people in scene reference.
 Preserve: composition, body positions, interaction, camera angle, lighting.
-Do not: swap Tom/James, change faces, merge faces, extra limbs, missing people.
+Do not: swap Teo/Kai, change faces, merge faces, extra limbs, missing people.
 No text, no watermark, no logo.
 ```
 
