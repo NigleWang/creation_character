@@ -31,9 +31,12 @@ outputs/rejected/*
 scenes/*
 !outputs/drafts/.gitkeep
 !outputs/approved/.gitkeep
+!outputs/rejected/.gitkeep
+!scenes/.gitkeep
+
+# pose-series PNGs must be trackable so Cloud generations can be committed and synced
 !outputs/approved/series/
 !outputs/approved/series/.gitkeep
 outputs/approved/series/**
-!outputs/approved/series/.gitkeep
-!outputs/rejected/.gitkeep
-!scenes/.gitkeep
+!outputs/approved/series/**/
+!outputs/approved/series/**/*.png
