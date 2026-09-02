@@ -38,7 +38,7 @@ Skip Turn 1 only if the first message already lists poses, e.g. `1,3,5` or `伏�
 3. Extract **look-lock** (do not identify random people; this source is already our character):
    - face, hair, glasses, body
    - top / bottom / accessories (exact colors, fit, rolled sleeves, etc.)
-   - environment, lighting, camera height, 3:4 framing
+   - environment, lighting (**exposure / brightness**, not just "warm"), camera height, 3:4 framing
    - **current pose** (so options are not duplicates)
 4. Write `outputs/drafts/look_lock_<task_id>.json`
 5. Read [pose-catalog.md](pose-catalog.md). Pick **6–8 poses** that fit this environment. Drop poses that clash (e.g. beach poses in an office).
@@ -129,7 +129,7 @@ Default 3 poses if user says 「日常三连」without ids. Max **8** images per
       "top": { "type": "button-down", "color": "navy", "detail": "sleeves rolled mid-forearm, tight fit" },
       "bottom": { "type": "dress trousers", "color": "dark grey" }
     },
-    "environment": { "location": "office", "details": "...", "lighting": "..." },
+    "environment": { "location": "office", "details": "...", "lighting": "indoor office, natural exposure, not bright, shadows kept" },
     "composition": { "framing": "medium shot", "camera_angle": "slightly low", "aspect_ratio": "3:4" },
     "source_pose": "sitting, arms crossed, gaze to the right"
   }
@@ -166,9 +166,15 @@ Do not add or remove glasses unless the locked look already has them.
 [ENVIRONMENT LOCK]
 
 Same location as the first reference: {environment.details}.
-Same lighting, color grade, furniture, and background clutter.
-Same 3:4 vertical framing and similar camera height unless the new pose
-requires standing (then keep the same room, pull back slightly).
+Same furniture, background clutter, 3:4 framing, and similar camera height
+unless the new pose requires standing (then keep the same room, pull back slightly).
+
+[LIGHTING LOCK — copy the first reference, do not brighten]
+
+Same lighting as the first reference: {environment.lighting}.
+Same light direction, color temperature, contrast, shadow density, and EXPOSURE.
+Do not brighten. Do not lift shadows. Do not add fill, beauty lighting, rim glow, HDR, or even studio light.
+Keep dark corners and mixed indoor light as they are. Over-bright or glowing light looks AI-generated — forbidden.
 
 [NEW POSE — this is the only change]
 
@@ -177,15 +183,17 @@ Do not copy the source pose (source was: {source_pose}).
 
 [VISUAL STYLE]
 
-Photorealistic, same texture and lighting as the first reference.
-Xiaohongshu cover quality. No text, watermark, or logo.
+Photorealistic, same texture, grain, and lighting as the first reference.
+Natural photography, not cinematic glow. Xiaohongshu cover quality.
+No text, watermark, or logo.
 
 [CONSTRAINTS]
 
-Preserve: identity, outfit, environment.
+Preserve: identity, outfit, environment, lighting, brightness, color grade.
 Change: body pose, hands, gaze, and micro-expression only.
 One person only (unless source is a couple series).
 No extra limbs, no face morph, no outfit redesign.
+Do not make any frame brighter or cleaner-lit than the source still.
 ```
 
 **reference_image_paths order:** `[source approved image, characters/<id>/references/face_01.jpeg]`  
@@ -200,13 +208,14 @@ Source image is the look-lock; face ref is identity backup.
 | Identity | Same person as source + bible |
 | Outfit | Same clothes/colors/fit/accessories |
 | Environment | Same room / lighting language |
+| Lighting | Same exposure as source — not brighter, no HDR/glow/beauty light |
 | Pose | Matches the **chosen** pose, not the source pose |
-| Series | Same grade across images in this batch |
+| Series | Same grade across images in this batch (do not brighten later frames) |
 
 `scene_consistency` here means environment lock, **not** pose copy.
 
 `accept` → `outputs/approved/series/<task_id>/` (numbered files)  
-`regenerate` → tighten pose/outfit lock, max 1 retry  
+`regenerate` → tighten pose/outfit/**lighting-exposure** lock, max 1 retry  
 `reject` → `outputs/rejected/`
 
 ---

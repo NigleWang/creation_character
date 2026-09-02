@@ -2,9 +2,10 @@
 name: gemini-video
 description: >-
   From a Teo/Kai still (solo or couple), writes a 10-second Gemini
-  image-to-video prompt with Japanese kana dialogue, copy-paste ready for
-  Gemini. Use when the user asks for 图生视频, 视频提示词, Gemini视频, 10秒视频,
-  i2v, Veo, Omni, image-to-video, or to animate an approved still.
+  image-to-video prompt with dense Japanese kana dialogue (first line at 2s,
+  Douyin hook), copy-paste ready for Gemini. Use when the user asks for
+  图生视频, 视频提示词, Gemini视频, 10秒视频, i2v, Veo, Omni, image-to-video,
+  or to animate an approved still.
 ---
 
 # Gemini Video — Still → 10s Copy-Paste Prompt
@@ -45,7 +46,7 @@ If they also asked to 换脸 or 出图: finish that pipeline first, then run thi
 | two men | Teo left / Kai right unless user says otherwise |
 | user @Teo / @Kai | honor @mention |
 
-5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Write short **假名** lines that fit occupation + 受/攻.
+5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Write **dense 假名** lines that fit occupation + 受/攻. **Douyin hook:** first spoken line starts at **2.0s** — never open with silent eye contact.
 6. Save:
    - `outputs/drafts/video_prompt_<task_id>.json`
    - `outputs/drafts/video_prompt_<task_id>.txt` (the paste block only)
@@ -72,7 +73,8 @@ Header:
 
 【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右}
 【从静止到动作】{一句}
-【台词（假名）】
+【台词（假名）】第一条 @2.0s
+{Name}：「{kana}」
 {Name}：「{kana}」
 {Name}：「{kana}」
 
@@ -98,10 +100,11 @@ CAST:
 {If couple:} Teo is on the left. Kai is on the right. Do not swap.
 
 MOTION (10s, continue this pose, do not freeze):
-0.0-2.0s: tiny living motion from the still — breath, blink, micro weight shift. No teleport.
-2.0-5.5s: {beat 1 matching the still}.
-5.5-8.0s: {beat 2}.
-8.0-10.0s: settle — small smile or hold eye line, natural end hold.
+0.0-2.0s: tiny living motion from the still — breath, blink, micro weight shift, inhale as if about to speak. No teleport. Do not linger on silent eye contact.
+2.0-4.5s: first spoken line STARTS here (at 2.0s) + matching motion.
+4.5-7.0s: second line (partner reply, or solo follow-up).
+7.0-9.0s: third line (couple: back to first speaker; solo: last short line or react).
+9.0-10.0s: optional fourth short line, then natural end hold. Do not close on a long silent stare.
 
 CAMERA: {slow push-in / slight handheld / static with breathing room}. Eye level unless the still is clearly high/low. Do not whip-pan. Do not cut.
 
@@ -109,26 +112,32 @@ AUDIO: Japanese speech only. Lip-sync the quoted lines. Lines are hiragana/katak
 
 DIALOGUE (spoken in Japanese, written in kana):
 {Name} says: "{kana line 1}"
-{optional second line}
+{Name} says: "{kana line 2}"
+{Name} says: "{kana line 3}"
+{optional fourth short line}
 
-CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Tasteful intimate couple energy, not explicit. Natural pauses between lines. Do not fill all 10 seconds with talking.
+CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Tasteful intimate couple energy, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact.
 ```
 
 ---
 
-## 10s timing + 台词预算
+## 10s timing + 台词预算（抖音留存）
 
-Speech is short. Most of the 10s is motion + silence.
+目标平台是 **抖音竖屏小视频**。开头只有眼神/微笑不对口，观众会划走。
 
-| Cast | Lines | Mora (音) | When |
-|------|-------|-----------|------|
-| Solo | 1 line | 8–16 | start ~2.5s |
-| Couple | Kai then Teo (or reverse if Teo starts) | 8–14 then 4–10 | ~2.5s and ~6.5s |
-| User asked 不要台词 | 0 | — | breathe + foley only |
+**硬规则：** 第一条台词在 **2.0s** 开口（可到 2.2s，不得晚于 2.5s）。0–2s 只做呼吸、眨眼、准备说话，**禁止**对视、对笑、对望而不说话。
 
-Do not write a monologue. One breath per line. Leave 1s+ pause after speech.
+台词要密。2s 之后几乎一直在说话，句与句之间只留半拍换气，不要留 1s+ 的沉默对视。
 
-Kai（攻）先开口、句子稍完整。Teo（受）更短、更轻。ため口。不要每条都「だいすき」.
+| Cast | Lines | Mora (音) / 条 | When |
+|------|-------|----------------|------|
+| Solo | **2–3** lines | 6–12 each | 1st @ **2.0s**, 2nd ~4.5s, 3rd ~7.0s |
+| Couple | **3–4** lines, Kai/Teo 交替 | 4–12 each | 1st @ **2.0s**, then ~every 2s |
+| User asked 不要台词 | 0 | — | breathe + foley only（仅用户明确要求时） |
+
+禁止：整段独白、一条超长句占满 10 秒、0–5s 只有对视。一条一句、一口气说完。
+
+Kai（攻）先开口、句子稍完整。Teo（受）更短、更轻。ため口。不要每条都「だいすき」。
 
 ---
 
@@ -139,7 +148,7 @@ Kai（攻）先开口、句子稍完整。Teo（受）更短、更轻。ため�
 - Loanwords: カタカナ (`コーヒー`, `メール`).
 - Convert user Chinese/English lines into kana. Put the kana in the paste quotes.
 - Natural casual Japanese, not textbook ですます (unless office-call / client).
-- After writing a line, silently check: no kanji, fits mora budget, matches who is speaking.
+- After writing lines, silently check: no kanji, mora budget, speaker matches, **first line @2.0s**, solo 2–3 / couple 3–4 lines.
 
 Voice tags in the English prompt (not spoken):
 
@@ -156,15 +165,15 @@ Continue **this** pose. Do not invent a new room.
 
 | Still looks like | Good 10s continuation |
 |------------------|------------------------|
-| sitting at desk / laptop | type 2s, glance at camera or phone, one line, sit back |
-| on a call | listen, nod, short reply, lower the phone slightly |
-| coffee / cup in hand | sip, look aside, small smile, one line |
-| standing at window | shift weight, look out, inhale, one line |
-| couple, one cooking | stir, glance at partner, line + short reply |
-| couple, looking at each other | lean in a little, blink, two short lines |
-| looking at camera | hold gaze, small smile, one line, look down to work/prop |
+| sitting at desk / laptop | 2s inhale, look camera, line @2s, type/reply, second line, sit back |
+| on a call | nod, first reply @2s, listen half-beat, second short line, lower phone |
+| coffee / cup in hand | sip 0–2s, look aside, first line @2s, small smile, second line |
+| standing at window | shift weight, inhale, first line @2s, look out, second line |
+| couple, one cooking | 0–2s stir, first line @2s (Kai), Teo reply, Kai follow-up — no silent stare |
+| couple, looking at each other | 0–2s blink/inhale only, then 3–4 short lines; do not lean-in in silence |
+| looking at camera | hold gaze, first line @2s, second line, glance to work/prop |
 
-Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai becomes slim, swapping sides, dance/music-video blocking, on-screen karaoke subtitles.
+Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai becomes slim, swapping sides, dance/music-video blocking, on-screen karaoke subtitles, **opening with silent eye contact / long mute stare**.
 
 ---
 
@@ -178,8 +187,10 @@ Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai 
   "duration_sec": 10,
   "aspect_ratio": "3:4",
   "target": "gemini_image_to_video",
+  "first_line_at_sec": 2.0,
   "dialogue": [
-    { "who": "kai", "kana": "きょうははやくあがるよ。", "mora": 12 }
+    { "who": "kai", "kana": "きょうははやくあがるよ。", "mora": 12, "at_sec": 2.0 },
+    { "who": "kai", "kana": "かえったら、れんらくする。", "mora": 12, "at_sec": 5.0 }
   ],
   "ambience": "quiet open office, distant keyboard, HVAC hush",
   "camera": "slow push-in, eye level, slight handheld"

@@ -15,7 +15,7 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 ## Hard rules
 
 1. Character Bible controls face, body, hair, glasses, personality look
-2. Scene reference controls composition, pose, environment, lighting only
+2. Scene reference controls composition, pose, environment, lighting only — **match exposure**; do not brighten (over-bright = AI look)
 3. NEVER swap Teo and Kai positions or identities
 4. NEVER describe identities of people in scene reference photos
 5. Use Cursor `GenerateImage` with scene + character reference paths

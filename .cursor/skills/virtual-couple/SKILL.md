@@ -85,9 +85,10 @@ arguments: {
 
 ```
 Character = IDENTITY (face, body, hair)
-Scene = COMPOSITION + POSE + ENVIRONMENT
+Scene = COMPOSITION + POSE + ENVIRONMENT + LIGHTING/EXPOSURE
 Customization = accessories/clothing (user confirms, may differ from scene)
 LEFT = Teo | RIGHT = Kai — never swap
+Lighting must match the scene photo. Do not brighten. Over-bright = AI look.
 ```
 
 ## Sub-skills (Turn 2 detail)

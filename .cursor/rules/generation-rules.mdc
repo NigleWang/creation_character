@@ -19,6 +19,7 @@ Do not identify original people in reference images.
 - Single still → `outputs/approved/xiaohongshu_<task_id>.png`
 - pose-series set → `outputs/approved/series/<task_id>/01_<pose_id>.png` (new folder per set)
 - Rejects → `outputs/rejected/`
+- **Lighting:** copy the scene/source still — same direction, color, **exposure**. Do not brighten, lift shadows, add HDR/beauty/rim glow. Over-bright looks AI-generated.
 
 ## Pipeline order
 

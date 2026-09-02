@@ -29,7 +29,12 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
 6. Interaction type (eye contact, embrace, walking, etc.)
 7. Hand positions
 8. Head and gaze direction
-9. Lighting (direction, warmth, cinematic/natural)
+9. Lighting — copy what is there, do **not** upgrade it:
+   - direction and key/fill balance
+   - color temperature (warm / cool / mixed / fluorescent)
+   - **exposure / brightness** (dim, natural, or already bright — record the actual level)
+   - shadow density (keep dark corners if they exist)
+   Never rewrite ordinary indoor light as "cinematic" or "cover-bright"
 10. Color palette
 11. Visual texture (film, digital, soft, grain)
 12. Emotional atmosphere
@@ -43,7 +48,7 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
     "environment": {
       "location": "cafe",
       "time": "afternoon",
-      "lighting": "warm sunlight through window"
+      "lighting": "warm window light from camera-left, natural indoor exposure, not bright, shadows kept"
     },
     "composition": {
       "framing": "medium shot",
@@ -73,9 +78,9 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
     },
     "visual_style": {
       "realism": "high",
-      "lighting": "cinematic",
-      "color_tone": "warm",
-      "texture": "film photography"
+      "lighting": "natural indoor, match reference exposure",
+      "color_tone": "warm but not lifted",
+      "texture": "ordinary photograph, not HDR"
     },
     "customizable_elements": {
       "subject_1": {
@@ -97,7 +102,8 @@ Map subject_1 → left (Teo), subject_2 → right (Kai) in couple scenes.
 
 ## Rules
 
-- Preserve original composition and action logic
+- Preserve original composition, action logic, **and lighting/exposure**
 - Never output names or identities of people in the reference
 - If single person scene → `subjects.count: 1`, bind to @mentioned character only
 - Subject_1 = leftmost person, subject_2 = rightmost person
+- Do not describe lighting as cinematic/glowing/cover-bright unless the photo actually looks that way

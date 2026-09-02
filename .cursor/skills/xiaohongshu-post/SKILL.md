@@ -13,9 +13,9 @@ description: >-
 | Field | Value |
 |-------|-------|
 | Aspect ratio | 3:4 (primary) |
-| Min feel | High-res, cover-worthy |
-| Style | Cinematic, warm, lifestyle / BL couple |
-| Avoid | Watermarks, text overlays, explicit content |
+| Min feel | High-res, cover-worthy, **same brightness as the scene/source still** |
+| Style | Natural photograph, lifestyle / BL couple — not cinematic glow |
+| Avoid | Watermarks, text overlays, explicit content, over-bright / HDR / beauty lighting |
 
 ## Caption
 
@@ -28,8 +28,8 @@ Do **not** write copy here. After QC, run `xiaohongshu-caption` (**Teo** / **Kai
 When user asks for 封面 / cover:
 
 - Faces in upper two-thirds
-- Strong color contrast
 - Clear emotional beat (eye contact, smile, embrace)
+- Do **not** brighten or add contrast/glow to make it "cover-like" — keep original lighting
 
 ## Delivery format
 

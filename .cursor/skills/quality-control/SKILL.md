@@ -28,8 +28,11 @@ description: >-
 - Composition roughly matches reference?
 - Left/right positions correct?
 - Pose and interaction preserved?
+- Lighting matches the scene / source still (direction, warmth, **brightness**)?
 
-**pose-series mode:** Do not require source pose. Require same identity, outfit, and environment; pose must match the **chosen** catalog pose.
+**Lighting fail (common AI tell):** Output is brighter, flatter, glowy, or more evenly lit than the reference. Over-bright = regenerate. Do not "improve" exposure.
+
+**pose-series mode:** Do not require source pose. Require same identity, outfit, environment, and **exposure**; pose must match the **chosen** catalog pose.
 
 ### 3. Couple consistency
 
@@ -39,8 +42,8 @@ description: >-
 ### 4. Xiaohongshu quality
 
 - 3:4 works as cover/thumbnail?
-- Faces visible and attractive?
-- Warm cinematic feel?
+- Faces visible and attractive (without lifting overall exposure)?
+- Natural photograph, not HDR / beauty-light / cinematic glow?
 - Tasteful for platform (not explicit)?
 
 ## Output
@@ -75,3 +78,4 @@ description: >-
 | Face drift | "Match face reference images exactly. Do not alter facial features." |
 | Pose lost | "Strictly copy body positions from scene reference." |
 | Extra limbs | "Exactly two people, two arms each, anatomically correct." |
+| Too bright / AI glow | "Match the reference exposure exactly. Do not brighten, lift shadows, add fill, HDR, rim glow, or beauty lighting. Keep original shadow density." |

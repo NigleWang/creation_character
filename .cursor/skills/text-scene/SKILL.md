@@ -47,7 +47,7 @@ Skip wait only if the **same** first message already says `直接生成` or `不
 | Who | — | Couple, Teo left / Kai right |
 | Place | — | Match occupation or 居家 |
 | Time | — | Late afternoon unless 夜/晨 specified |
-| Light | — | Natural/cinematic, 小红书封面 |
+| Light | — | Natural indoor, match real room brightness — not cover-bright, not cinematic glow |
 | Teo pose | — | Softer, receiving, still, looking through glasses |
 | Kai pose | — | Leading, upright or leaning in, initiating contact |
 | Teo clothes | — | Occupation or scene: linen/neutral; **always browline glasses** |
@@ -117,8 +117,14 @@ Use attached face references. Teo: browline glasses, buzz cut, slim athletic, no
 
 [SCENE — filled brief]
 
-{place}, {time}. {lighting}.
+{place}, {time}.
 {environment details and props}.
+
+[LIGHTING]
+
+{lighting}. Natural room light at real exposure — do not brighten for a cover look.
+Do not add beauty lighting, rim glow, HDR, or even studio fill. Keep shadows.
+Over-bright or glowing light looks AI-generated — forbidden.
 
 [COMPOSITION]
 
@@ -136,11 +142,13 @@ Teo: {filled}. Kai: {filled}.
 
 [VISUAL STYLE]
 
-Photorealistic, cinematic film, Xiaohongshu cover. No text, watermark, logo.
+Photorealistic natural photography, not cinematic glow. Xiaohongshu cover.
+Same grain and contrast as a real phone photo in this room. No text, watermark, logo.
 
 [CONSTRAINTS]
 
 Identity from references. One frame, correct headcount. No extra limbs. No 总裁秘书 costume unless the user asked.
+Do not overexpose or make the scene look brighter than a real indoor photograph.
 ```
 
 ---
@@ -156,7 +164,7 @@ Identity from references. One frame, correct headcount. No extra limbs. No 总�
   "scene": {
     "place": "home kitchen",
     "time": "weekend morning",
-    "lighting": "soft window light",
+    "lighting": "soft window light, natural indoor exposure, not bright",
     "framing": "medium 3:4",
     "teo": { "pose": "...", "clothes": "..." },
     "kai": { "pose": "...", "clothes": "..." },

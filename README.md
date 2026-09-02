@@ -50,6 +50,31 @@ Agent 补全场景卡并停止。你回 `生成` 才出图。
 
 ---
 
+## Cloud 远程出图并提交到同一条 branch
+
+默认 Cloud Agent 会推到新的 `cursor/…` 分支。本仓库脚本强制 `workOnCurrentBranch: true`、`autoCreatePR: false`，把系列 PNG 提交到你指定的 branch（默认当前 git 分支）。
+
+图必须写在 `outputs/approved/series/<task_id>/*.png`（gitignore 已放行）。根目录的 `outputs/approved/xiaohongshu_*.png` 提交不进去。
+
+```bash
+export CURSOR_API_KEY="cursor_..."   # Dashboard → Integrations / API Keys
+# GitHub 仓库需已在 Cursor Integrations 里连上
+
+# 新建 Cloud Agent，生成后 commit + push 到当前分支
+node scripts/launch_cloud_series.mts launch \
+  --task-id 20260902_kai_office_series \
+  -- "全套日常姿态，锁定现有形象与服装，生成后提交到当前分支"
+
+# 同一 agent、同一分支再补图（不要重新 launch）
+node scripts/launch_cloud_series.mts follow -- "再补 04_coffee.png"
+
+node scripts/launch_cloud_series.mts status
+```
+
+agent id 会写到 gitignored 的 `outputs/drafts/cloud_agent.json`。指定分支：`--branch main`。已有 PR 往 head 堆 commit：`--pr-url https://github.com/…/pull/123`。
+
+---
+
 ## Pipeline
 
 ```text
@@ -108,6 +133,8 @@ creation_character/
 ├── relationship/
 ├── templates/
 ├── workflows/
+├── scripts/
+│   └── launch_cloud_series.mts  # Cloud 出图并 push 到同一条 branch
 ├── scenes/                      # 上传的场景图存这里
 ├── outputs/
 │   ├── drafts/

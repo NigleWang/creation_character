@@ -88,6 +88,7 @@ Do **not** run virtual-couple 换脸流程 for this case.
 - Tool: `cursor` / `GenerateImage`
 - aspect_ratio: `3:4`
 - reference_image_paths: [scene, character face refs]
+- Lighting: match the scene/source still exactly (direction, color, **exposure**). Do not brighten. Over-bright / glow / HDR looks AI-generated.
 
 ## Xiaohongshu caption (发布文案)
 

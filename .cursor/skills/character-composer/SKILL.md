@@ -46,7 +46,7 @@ interaction:
   inherit_scene: true
 
 environment:
-  inherit_scene: true
+  inherit_scene: true   # includes lighting direction, color, and exposure — do not brighten
 
 composition:
   preserve_scene: true
