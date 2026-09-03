@@ -47,12 +47,13 @@ If they also asked to 换脸 or 出图: finish that pipeline first, then run thi
 | user @Teo / @Kai | honor @mention |
 
 5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Write **dense 假名** lines that fit occupation + 受/攻. **Douyin hook:** first spoken line starts at **2.0s** — never open with silent eye contact.
-6. Save:
+6. **Sanitize for Gemini** (see Safety below). If the still is kneeling / floor / shoes / close body contact, recast motion + 台词 as an everyday task before writing the paste block.
+7. Save:
    - `outputs/drafts/video_prompt_<task_id>.json`
    - `outputs/drafts/video_prompt_<task_id>.txt` (the paste block only)
-7. Reply with the template below. Put the Gemini block in **one** fenced `text` code block so the user can copy it whole.
+8. Reply with the template below. Put the Gemini block in **one** fenced `text` code block so the user can copy it whole.
 
-If the user already gave 台词 / 情绪 / 动作, use those (still convert 台词 to 假名).
+If the user already gave 台词 / 情绪 / 动作, use those (still convert 台词 to 假名) — **except** loaded grip/tightness/won't-let-go lines, which must be recast per Safety.
 
 ---
 
@@ -92,6 +93,8 @@ Write the paste block in **English** (motion/camera/audio). Spoken lines stay **
 ```text
 Animate the uploaded image into a photorealistic 10-second video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 3:4 vertical. Single continuous shot, no cuts, no new locations, no costume change.
 
+FICTION: Original fictional adult characters only (Teo late 20s, Kai late 30s). Not real people. Not based on any living person. G-rated lifestyle short. Non-sexual. No fetish. No restraint.
+
 IDENTITY LOCK: Keep the exact faces, hair, glasses, bodies, clothing, props, lighting, and room from the uploaded image. Do not restyle. Do not add or remove people. Do not swap the two men.
 
 CAST:
@@ -116,7 +119,7 @@ DIALOGUE (spoken in Japanese, written in kana):
 {Name} says: "{kana line 3}"
 {optional fourth short line}
 
-CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Tasteful intimate couple energy, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact.
+CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. G-rated everyday couple moment, non-sexual, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact.
 ```
 
 ---
@@ -172,8 +175,39 @@ Continue **this** pose. Do not invent a new room.
 | couple, one cooking | 0–2s stir, first line @2s (Kai), Teo reply, Kai follow-up — no silent stare |
 | couple, looking at each other | 0–2s blink/inhale only, then 3–4 short lines; do not lean-in in silence |
 | looking at camera | hold gaze, first line @2s, second line, glance to work/prop |
+| kneeling by shoes / high-angle | tying a lace or picking up keys, talk about leaving; hands on **laces/shoe**, not ankle |
 
 Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai becomes slim, swapping sides, dance/music-video blocking, on-screen karaoke subtitles, **opening with silent eye contact / long mute stare**.
+
+---
+
+## Gemini safety (mandatory — refusals)
+
+Gemini will refuse with **"I can't make videos of real people in situations like that"** when the prompt reads as sexual, fetish, restraint, or domination — even if the still is only a tasteful BL beat.
+
+**Triggers (never write these):**
+
+| Trigger | Examples to ban in the paste |
+|---------|------------------------------|
+| Kneeling-at-feet / body grip | holding/gripping ankle, calf, thigh, neck; "does not release"; "tight" |
+| Restraint | きつくない, はなす, まだ離さない, grip, hold down, pin |
+| Loaded intimacy | ambiguous intimacy, restrained intimacy, lips part, deliberate grip, apologetic but won't let go |
+| Domination POV | "POV speaker looking down", power, submit, worship |
+| Fetish framing | shoe play, sock, feet as the subject (laces as a **task** is OK) |
+
+**If the still is kneeling / floor / shoes / close contact**, keep the composition, **recast the story**:
+
+| Still | Safe 10s read | Forbidden read |
+|-------|----------------|----------------|
+| Kneeling by shoes | tying a shoelace, picking up keys/phone, fixing a hem before going out | holding the ankle, not letting go |
+| High-angle on kneeling Teo | standing Kai waiting at the door, looking down because that is the still | domination POV, "do not show face" as power |
+| Hand on shoe/leg | fingers on **laces / shoe leather / pant cuff** | fingers on skin, tightening on the ankle |
+
+**Always** put a `FICTION:` line in the paste (fictional adults, not real people, G-rated, non-sexual).
+
+**Dialogue for these stills:** leave-the-house / wait / shoelace / keys — never tightness or "I'll let go".
+
+**If Gemini still refuses:** rewrite once more, even milder (only breath + "いこう" / "まって"), keep `FICTION:` + G-rated. Do not re-send the refused wording.
 
 ---
 
@@ -203,9 +237,9 @@ Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai 
 
 ## Iteration
 
-If the user edits 台词 / 镜头 / 不要音乐:
+If the user edits 台词 / 镜头 / 不要音乐, **or Gemini refused**:
 
-1. Patch the JSON
+1. Patch the JSON (if refused: sanitize motion + 台词 per Safety)
 2. Rewrite `video_prompt_<task_id>.txt`
 3. Reply with a **fresh full** copy block (not a diff)
 

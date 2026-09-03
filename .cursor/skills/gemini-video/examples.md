@@ -128,3 +128,46 @@ Kai `きょう、はやくかえれた。` / Teo `まってた。` / Kai `かえ
 
 **不要台词**（仅用户明确要求）  
 Prompt 写：`No spoken dialogue. Only breath, room tone, and foley.`
+
+---
+
+## 4) Gemini 拒稿后改写（跪地 / 鞋）
+
+拒稿原文若写「抓脚踝、抓紧、还不放手」，Gemini 会回 *I can't make videos of real people in situations like that*。改成出门系鞋带：
+
+**台词：**  
+Kai「そろそろ、いこうか。」@2.0s  
+Teo「くつひも、まって。」@4.5s  
+Kai「いそがなくていい。」@7.0s  
+Teo「うん、できたよ。」@9.0s
+
+```text
+Animate the uploaded image into a photorealistic 10-second video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 3:4 vertical. Single continuous shot, no cuts, no new locations, no costume change.
+
+FICTION: Original fictional adult characters only (Teo late 20s, Kai late 30s). Not real people. Not based on any living person. G-rated lifestyle short. Non-sexual. No fetish. No restraint.
+
+IDENTITY LOCK: Keep faces, hair, glasses, clothes, parquet floor, and framing from the uploaded image. Teo stays kneeling. Kai stays the standing legs and shoes in the foreground. Do not restyle. Do not add people.
+
+CAST:
+The kneeling man with buzz-cut hair and browline glasses is Teo, late 20s, quiet gentle Japanese male.
+The standing legs in navy trousers and black dress shoes belong to Kai, late 30s, lower warm Japanese male. High-angle because he is standing and waiting to go out.
+
+MOTION (10s, continue this pose, do not freeze):
+0.0-2.0s: Teo blinks, breathes, fingers adjust a shoelace on the dress shoe. Kai's shoe stays planted. Inhale to speak.
+2.0-4.5s: Kai says the first line at 2.0s (heard from above). Teo looks up briefly, keeps working the lace.
+4.5-7.0s: Teo says his line, looks back down, finishes the bow.
+7.0-9.0s: Kai replies. Teo nods, gives the lace a last tug.
+9.0-10.0s: Teo says the last short line, hands leave the shoe because the lace is done. Natural end hold.
+
+CAMERA: Keep the high-angle of the still. Slow tiny push-in. Slight handheld. Do not whip-pan. Do not cut. Do not invent Kai's face into frame.
+
+AUDIO: Japanese speech only. Lip-sync Teo's lines to Teo's mouth. Kai's lines are off-camera from above. Hiragana/katakana only. No English. No Chinese. No on-screen text or subtitles. No background music. Room tone: quiet indoor parquet, distant HVAC. Foley: one lace tug, light shoe leather.
+
+DIALOGUE (spoken in Japanese, written in kana):
+Kai says: "そろそろ、いこうか。"
+Teo says: "くつひも、まって。"
+Kai says: "いそがなくていい。"
+Teo says: "うん、できたよ。"
+
+CONSTRAINTS: Photorealistic. Glasses stay on. Lighting unchanged — do not brighten. G-rated everyday moment: tying a shoelace before going out. Non-sexual. First spoken line at 2.0s. Keep dialogue dense after 2s.
+```

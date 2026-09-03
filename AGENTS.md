@@ -106,3 +106,4 @@ When user has a still (usually `outputs/approved/`) and asks 图生视频 / Gemi
 1. Follow `.cursor/skills/gemini-video/SKILL.md`
 2. **Do not** call GenerateImage
 3. Deliver one copy-paste English prompt; spoken lines in Japanese kana only
+4. Sanitize for Gemini: fictional adults, G-rated. Kneeling/shoes = tying laces / picking up keys — never ankle-grip or "won't let go" (that refusal is "real people in situations like that")
