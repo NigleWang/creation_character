@@ -1,0 +1,73 @@
+id: tagame
+display_name: Tagame
+pipeline: tagame-anime  # separate from Teo/Kai photoreal couple
+role: office_dominant  # 办公室肌肉上司；直接对观众说话
+
+identity:
+  gender: male
+  age_appearance: 38-42
+  ethnicity: East Asian
+
+face:
+  shape: square-strong jaw
+  eyes: dark brown, thick slightly angled brows, confident half-smile
+  nose: straight, strong bridge
+  skin: lightly tanned
+  distinctive:
+    - neat brown stubble / short beard along jaw and upper lip
+    - mature, slightly rugged, not pretty-boy
+    - strong neck
+
+hair:
+  color: dark brown
+  style: short, thick, slightly wavy spikes swept up and a little forward
+
+body:
+  height_ratio: tall
+  build: extremely muscular, broad shoulders, full chest, thick arms, narrow waist
+
+occupation:
+  title: 部门主管 / 精英职场男性
+  workplace: 公司办公室、走廊、加班工位
+  notes: 固定「办公室肌肉上司」；每条都是他和「你」（镜头）的互动，不换脸
+
+personality:
+  keywords:
+    - mature
+    - confident
+    - commanding
+    - slightly teasing
+    - possessive toward the viewer
+
+visual_signature:
+  - low-angle shot, imposing height
+  - tight white dress shirt, collar open, optional sweat-damp fabric
+  - black suit pants, black belt silver buckle
+  - looking straight at camera as if speaking to お前 / 你
+
+art_style:
+  lock: high-quality Japanese anime / modern digital illustration
+  notes: clean linework, refined lighting, bara muscular aesthetic matching the face ref
+  forbidden:
+    - photorealistic
+    - 3D CGI
+    - Teo/Kai couple pipeline
+    - slim pretty-boy redesign
+
+wardrobe_default:
+  shirt: tight white dress shirt, two buttons undone, collar open
+  jacket: black suit jacket optional (on, off, or over shoulder)
+  pants: black high-waist dress trousers
+  belt: black leather, silver square buckle
+  tie: usually off for the wet-shirt formula; black tie only if user asks
+
+negative_identity:
+  - do not change face, beard, or dark-brown short hair
+  - do not slim the muscular build
+  - do not make him a pretty-boy or teenager
+  - do not restyle as photoreal
+  - do not mix with Teo or Kai
+
+reference_images:
+  primary: characters/Tagame/references/face_01.jpeg
+  fallback: characters/Tagame/Tagame.jpeg

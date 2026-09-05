@@ -8,6 +8,8 @@ description: >-
 
 # Quality Controller
 
+**Tagame / anime stills:** use the QC table in `tagame-anime` (style must stay Japanese anime). This skill is Teo/Kai photoreal.
+
 ## Input
 
 - Generated image (from GenerateImage output)

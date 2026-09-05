@@ -5,7 +5,8 @@ description: >-
   image-to-video prompt with dense Japanese kana dialogue (first line at 2s,
   Douyin hook), copy-paste ready for Gemini. Use when the user asks for
   图生视频, 视频提示词, Gemini视频, 10秒视频, i2v, Veo, Omni, image-to-video,
-  or to animate an approved still.
+  or to animate an approved Teo/Kai still. Do not use for Tagame — that is
+  tagame-anime (Japanese anime style).
 ---
 
 # Gemini Video — Still → 10s Copy-Paste Prompt
@@ -13,6 +14,8 @@ description: >-
 从一张 **Teo / Kai / 两人** 的场景成图，写出可直接粘贴进 **Gemini** 的 **10 秒图生视频**提示词。台词必须是 **日语假名**（ひらがな / カタカナ，不用汉字）。
 
 本 skill **只写提示词**。不要调用 `GenerateImage`。不要走 virtual-couple / pose-series / text-scene。
+
+**Route out:** Tagame / 动漫画风 / `docs/anime.md` 公式 → `tagame-anime` Turn C。本 skill 是 Teo/Kai **写实** 10s，不要把 Tagame 写成 photoreal。
 
 | Pipeline | Input | Output |
 |----------|--------|--------|

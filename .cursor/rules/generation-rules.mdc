@@ -29,7 +29,11 @@ pose-series (approved still + 换姿态) → character-registry → look-lock JS
 
 text-scene (文字场景，无照片) → character-registry → **fill scene card, wait** → GenerateImage once (face refs only) → quality-control → xiaohongshu-caption
 
-gemini-video (成图 + 图生视频/10秒) → character-registry → **write Gemini 10s i2v prompt, kana dialogue** → save `outputs/drafts/video_prompt_*.txt` → **no GenerateImage**
+gemini-video (Teo/Kai 成图 + 图生视频/10秒) → character-registry → **write Gemini 10s i2v prompt, kana dialogue** → save `outputs/drafts/video_prompt_*.txt` → **no GenerateImage**
+
+tagame-anime (@Tagame / docs/anime.md) → load `characters/Tagame/` → **fill anime scene card, wait** → GenerateImage once (anime, Tagame face ref only) → `outputs/approved/tagame_<task_id>.png` → **write 10s i2v prompt** (invite/heat/possession) → `outputs/drafts/tagame_video_*.txt` → **no GenerateImage on the video step**
+
+cover-collage (系列成图 + 拼接/封面/九宫格) → **3 layout+copy schemes, wait** → `python3 scripts/make_cover.py` → `outputs/approved/series/<task_id>/cover_<layout>.png` → **no GenerateImage**
 
 ## Style differentiation
 

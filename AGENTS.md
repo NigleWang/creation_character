@@ -1,10 +1,19 @@
-# AGENTS.md — Virtual Couple Studio
+# AGENTS.md — Virtual Couple Studio + Tagame Anime
 
 Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 
+## Two tracks (do not mix)
+
+| Track | Characters | Style | Skills |
+|-------|------------|-------|--------|
+| **Couple** | Teo（受, left）+ Kai（攻, right） | Photoreal Xiaohongshu | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `cover-collage` |
+| **Tagame** | Tagame only | **Japanese anime** | `tagame-anime` |
+
+@Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai faces. Never `gemini-video` photoreal paste.
+
 ## Project purpose
 
-Generate Xiaohongshu images of **Teo（受, left）** and **Kai（攻, right）** from scene reference photos.
+Generate Xiaohongshu photoreal images of **Teo（受, left）** and **Kai（攻, right）** from scene photos — **or** Tagame Japanese-anime stills + 10s i2v prompts (separate track).
 
 ## TWO-TURN PROTOCOL (non-negotiable)
 
@@ -59,7 +68,9 @@ User's **first message** already includes explicit style choices, e.g.:
 `.cursor/skills/pose-series/SKILL.md` — 换姿态做系列：已有成图锁定形象/服装/场景，只换 pose  
 `.cursor/skills/xiaohongshu-caption/SKILL.md` — 成图/系列 → 小红书发布文案（Teo/Kai，只出文案不出图）  
 `.cursor/skills/text-scene/SKILL.md` — 文字场景：按人设补全场景卡，确认后生成一张  
-`.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）
+`.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）  
+`.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：场景卡确认 → 一张静帧 → 10s 图生视频提示词（`docs/anime.md` 公式）  
+`.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）
 
 ## Text scene (no photo)
 
@@ -81,13 +92,23 @@ When user has `outputs/approved/...` and asks for 系列 / 换姿态 / 其他 po
 
 Single stills stay at `outputs/approved/xiaohongshu_<task_id>.png`.
 
-Do **not** run virtual-couple 换脸流程 for this case.
+## Cover collage (首页拼接)
+
+When user has **2+ stills** (usually `outputs/approved/series/<task_id>/`) and asks 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面:
+
+1. Follow `.cursor/skills/cover-collage/SKILL.md`
+2. Turn 1: post **3** layout schemes + 笔记文案 → STOP. Default cover has **no overlay text and no N图 badge**.
+3. Turn 2: `python3 scripts/make_cover.py --config …` → one 1080×1440 PNG in the series folder
+4. **Do not** call GenerateImage — this is Pillow pixel composite, not a redraw
+
+Do **not** run virtual-couple 换脸 or pose-series 生图 for this case.
 
 ## GenerateImage
 
 - Tool: `cursor` / `GenerateImage`
 - aspect_ratio: `3:4`
-- reference_image_paths: [scene, character face refs]
+- Teo/Kai: `reference_image_paths` = [scene if any, character face refs]; photoreal; match exposure
+- Tagame: `reference_image_paths` = [Tagame face ref only]; **Japanese anime**, never photoreal
 - Lighting: match the scene/source still exactly (direction, color, **exposure**). Do not brighten. Over-bright / glow / HDR looks AI-generated.
 
 ## Xiaohongshu caption (发布文案)
@@ -101,9 +122,23 @@ When pose-series Turn 2 finishes, **or** the user asks 文案 / 标题 / 标签 
 
 ## Image-to-video prompt (Gemini)
 
-When user has a still (usually `outputs/approved/`) and asks 图生视频 / Gemini视频 / 10秒视频:
+When user has a **Teo/Kai** still (usually `outputs/approved/`) and asks 图生视频 / Gemini视频 / 10秒视频:
 
 1. Follow `.cursor/skills/gemini-video/SKILL.md`
 2. **Do not** call GenerateImage
 3. Deliver one copy-paste English prompt; spoken lines in Japanese kana only
 4. Sanitize for Gemini: fictional adults, G-rated. Kneeling/shoes = tying laces / picking up keys — never ankle-grip or "won't let go" (that refusal is "real people in situations like that")
+
+If the still is **Tagame** / anime: use `tagame-anime` Turn C instead (anime lock + invite/heat/possession formula).
+
+## Tagame anime (separate track)
+
+When user @Tagame / `characters/Tagame` / `docs/anime.md` / 办公室肌肉上司 / 动漫画风:
+
+1. Follow `.cursor/skills/tagame-anime/SKILL.md`
+2. Turn 1: load Tagame bible → fill scene card → **STOP** for confirmation
+3. Turn 2: one GenerateImage, **Japanese anime** (never photoreal), face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
+4. Then write 10s i2v prompt: invite → body-heat → possession; kana dialogue; first line at 2.0s. Do **not** call GenerateImage for the video step
+5. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration
+
+Do **not** run virtual-couple, text-scene, pose-series, or gemini-video for Tagame.

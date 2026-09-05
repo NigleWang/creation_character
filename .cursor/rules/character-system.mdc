@@ -1,18 +1,25 @@
 ---
-description: Virtual couple character system — Teo (受) and Kai (攻) identity rules
+description: Character system — Teo/Kai photoreal couple vs Tagame Japanese anime
 alwaysApply: true
 ---
 
 # Character System
 
-This project generates Xiaohongshu content for two fixed virtual characters.
+Two tracks. **Do not mix.**
 
-## Characters
+## Track A — Teo / Kai (photoreal)
 
 - **Teo** — 受, default LEFT, `characters/teo/`
 - **Kai** — 攻, default RIGHT, `characters/kai/`
 
-## Hard rules
+## Track B — Tagame (Japanese anime)
+
+- **Tagame** — 办公室肌肉上司, solo, `characters/Tagame/`
+- Skill: `tagame-anime`
+- Style: high-quality Japanese anime / digital illustration **always**
+- Never photoreal, never Teo/Kai, never `gemini-video` photoreal paste
+
+## Hard rules (Teo/Kai)
 
 1. Character Bible controls face, body, hair, glasses, personality look
 2. Scene reference controls composition, pose, environment, lighting only — **match exposure**; do not brighten (over-bright = AI look)
@@ -25,6 +32,15 @@ This project generates Xiaohongshu content for two fixed virtual characters.
 9. **TEXT SCENE:** Words only, no photo → `text-scene` skill. Fill a complete scene from bibles, post the card, wait; then one image.
 10. **GEMINI VIDEO:** Approved still + 图生视频/10秒视频 → `gemini-video` skill. Write a copy-paste Gemini prompt; Japanese kana dialogue. Do **not** call GenerateImage.
 11. **XHS CAPTION:** After pose-series (or 文案/标题/标签) → `xiaohongshu-caption`. Names **Teo**（受）/ **Kai**（攻）. Do **not** call GenerateImage.
+12. **COVER COLLAGE:** 2+ stills + 拼接/封面图/九宫格 → `cover-collage`. Turn 1 = 3 schemes + copy + STOP. Turn 2 = Pillow `make_cover.py`, one 1080×1440 PNG. **Never** GenerateImage.
+
+## Hard rules (Tagame)
+
+1. Bible + `characters/Tagame/references/face_01.jpeg` lock face, beard, hair, extreme muscle
+2. **Anime lock** on every still and every i2v prompt
+3. Two-turn: scene card → wait → one still → then 10s video prompt (`docs/anime.md` formula: invite → heat → possession)
+4. Direct address to the viewer (`おまえ` / 你). First spoken line at 2.0s
+5. Clothes stay on (suit / wet shirt / undone buttons). No Teo/Kai pipeline skills
 
 ## User triggers
 
@@ -37,3 +53,7 @@ When user describes a scene in text with no photo → **text-scene Turn 1**. Do 
 When user points at an approved still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Do NOT call GenerateImage.
 
 When pose-series finishes, or user asks 文案 / 标题 / 标签 / 小红书发布 → **xiaohongshu-caption**. Copy-paste title + body + tags. Names in copy: Teo / Kai. Do NOT call GenerateImage.
+
+When user has series stills and asks 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面 → **cover-collage Turn 1**. Post 3 schemes + copy and wait. Do NOT run `make_cover.py` or GenerateImage until they pick a scheme.
+
+When user @Tagame / `characters/Tagame` / `docs/anime.md` → **tagame-anime**. Scene card first, wait; then anime still; then 10s i2v prompt. Do NOT generate the still until they confirm the card.

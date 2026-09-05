@@ -25,7 +25,9 @@ Do **not** write copy here. After QC, run `xiaohongshu-caption` (**Teo** / **Kai
 
 ## Cover tips (prompt additions)
 
-When user asks for 封面 / cover:
+When user asks for **拼接封面 / 九宫格 / 多图拼一张** → `cover-collage` (Pillow), not GenerateImage.
+
+When user asks for 封面 / cover on a **single generated still**:
 
 - Faces in upper two-thirds
 - Clear emotional beat (eye contact, smile, embrace)
