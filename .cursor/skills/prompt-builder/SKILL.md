@@ -7,6 +7,8 @@ description: >-
 
 # Prompt Builder
 
+**Route out:** Tagame stills → `.cursor/skills/tagame-anime/SKILL.md` (anime prompt). This builder is Teo/Kai photoreal only.
+
 ## Input
 
 - `character_bundle`

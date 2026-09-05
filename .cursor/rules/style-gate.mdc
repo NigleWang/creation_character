@@ -11,6 +11,10 @@ Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new sce
 
 **Exception — text-scene:** If there is **no scene photo** and the user gave a **text** brief, do **not** use the clothing template below. Follow `.cursor/skills/text-scene/SKILL.md`: post the filled scene card and STOP.
 
+**Exception — tagame-anime:** @Tagame / `characters/Tagame` / `docs/anime.md` → follow `.cursor/skills/tagame-anime/SKILL.md`. Post the anime scene card and STOP. Do not use the Teo/Kai clothing template. Never photoreal.
+
+**Exception — cover-collage:** 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面 → follow `.cursor/skills/cover-collage/SKILL.md`. Post 3 layout+copy schemes and STOP. Do **not** call GenerateImage (Pillow composite only).
+
 ## Turn 1: ASK ONLY — never generate
 
 If the user has **not** replied with customization choices in this conversation:

@@ -3,8 +3,9 @@ name: text-scene
 description: >-
   From a text scene brief (no photo), expand a complete Xiaohongshu scene using
   Teo and Kai character bibles, then generate one image after the user
-  confirms. Use when the user describes a scene in words, 文字场景, 场景需求,
-  按人设出图, 完善场景, 没有参考图, or asks to generate from a written prompt.
+  confirms. Use when the user describes a Teo/Kai scene in words, 文字场景,
+  场景需求, 按人设出图, 完善场景, 没有参考图, or asks to generate from a
+  written prompt. Do not use for Tagame — that is tagame-anime.
 ---
 
 # Text Scene — Brief → Complete → One Image
@@ -17,7 +18,10 @@ No scene photo. Identity comes from character bibles + face refs.
 |----------|--------|----------------|
 | `virtual-couple` | 场景**照片** | 换脸服装选项 |
 | `pose-series` | 已有成图 | 姿态选项 |
-| **`text-scene`** | **文字**场景 | **补全场景卡，停** |
+| **`text-scene`** | **文字**场景（Teo/Kai） | **补全场景卡，停** |
+| `tagame-anime` | @Tagame / 动漫上司 | 动漫场景卡 → 静帧 → 10s 视频词 |
+
+**Route out:** @Tagame → `tagame-anime`（动漫画风，禁止走本 skill 的写实提示词）。
 
 ## ⚠️ TWO-TURN PROTOCOL
 

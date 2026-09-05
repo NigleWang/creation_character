@@ -5,6 +5,7 @@ description: >-
   two-turn protocol: Turn 1 analyze scene and post numbered style options in
   chat; Turn 2 generate after user replies. Use when user uploads scene photo,
   @mentions Teo, Kai, virtual-couple, 换脸, or 小红书 in creation_character.
+  Do not use for Tagame — that is tagame-anime.
 ---
 
 # Virtual Couple Studio
@@ -12,6 +13,10 @@ description: >-
 **Route out:** Existing `outputs/approved/` still + 系列/换姿态/其他 pose → use `pose-series`, not this skill.
 
 **Route out:** Text-only scene (no photo) → use `text-scene`, not this skill.
+
+**Route out:** @Tagame / `characters/Tagame` / 动漫画风肌肉上司 → use `tagame-anime`, not this skill.
+
+**Route out:** 已有多张成图 + 拼接/封面/九宫格 → use `cover-collage`, not this skill.
 
 ## ⚠️ TWO-TURN PROTOCOL (read first)
 

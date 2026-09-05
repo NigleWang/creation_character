@@ -5,11 +5,13 @@ description: >-
   then generate a Xiaohongshu pose series. Two-turn: analyze look + post
   numbered pose options and STOP; generate only after user picks poses.
   After the set is saved, run xiaohongshu-caption (Teo/Kai copy). Use when
-  user has outputs/approved (or similar) and asks for 系列, 换姿态, 其他pose,
-  同一形象, 锁定形象, pose series, or look-lock variants.
+  user has outputs/approved Teo/Kai stills (or similar) and asks for 系列, 换姿态, 其他pose,
+  同一形象, 锁定形象, pose series, or look-lock variants. Do not use for Tagame.
 ---
 
 # Pose Series — Look Lock + New Poses
+
+**Route out:** @Tagame / 动漫画风 → `tagame-anime`, not this skill.
 
 Sibling of `virtual-couple`. Different job:
 
@@ -232,3 +234,4 @@ Source image is the look-lock; face ref is identity backup.
 - `quality-control` — use pose-series QC table above
 - `xiaohongshu-caption` — **required after Turn 2**: one 小红书笔记 for the set (Teo / Kai)
 - `xiaohongshu-post` — 3:4 / cover framing only
+- `cover-collage` — 用户要首页拼接 / 九宫格封面时再跑；不要在本 skill 里把多张 pose 拼成一张

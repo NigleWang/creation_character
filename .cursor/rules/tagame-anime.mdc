@@ -1,0 +1,15 @@
+---
+description: Tagame Japanese-anime lock — scene card, still, then 10s i2v formula
+globs: characters/Tagame/**,docs/anime.md,.cursor/skills/tagame-anime/**,outputs/approved/tagame*
+alwaysApply: false
+---
+
+# Tagame Anime Lock
+
+If the task involves Tagame, **always** follow `.cursor/skills/tagame-anime/SKILL.md`.
+
+- Art: high-quality Japanese anime / digital illustration. Never photoreal.
+- Face ref: `characters/Tagame/references/face_01.jpeg`
+- Confirm the scene card before GenerateImage
+- After the still: 10s i2v prompt from `docs/anime.md` (invite → body heat → possession)
+- Do not use virtual-couple / text-scene / gemini-video for this character

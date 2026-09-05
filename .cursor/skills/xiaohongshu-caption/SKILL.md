@@ -198,6 +198,7 @@ Closing: `改法直接说，例如：再甜一点、不要提问、改成只写K
 - pose-series 出图中 → 先把图做完，再跑本 skill
 - 只要文案、不要出图 → 只要本 skill
 - 图生视频 → `gemini-video`，不是本 skill
+- 首页拼接封面 → `cover-collage`（默认封面上不叠字；若用户要求加字，封面钩子 **不要** 和本 skill 的笔记标题重复）
 
 ## Sub-skills
 
