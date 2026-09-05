@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import time
 from pathlib import Path
@@ -17,7 +18,13 @@ from urllib.parse import parse_qs, unquote, urlparse
 from playwright.sync_api import TimeoutError as PlaywrightTimeout
 from playwright.sync_api import sync_playwright
 
-DEFAULT_URL = "https://xhslink.cn/o/9s6VJcV9Lom"
+# Short links (xhslink.cn) only bounce here. Keep xsec_token — it is part of the public share URL.
+DEFAULT_URL = (
+    "https://www.xiaohongshu.com/explore/6a9bd064000000002603bb94"
+    "?xsec_token=CBVfk62nAefhR-TN8GBZf1FWVWzq1hRwAaee-1EbRORbw="
+    "&xsec_source=app_share"
+)
+NOTE_URL_RE = re.compile(r".*(/explore/|/discovery/item/|website-login/error).*")
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = ROOT / "outputs" / "drafts" / "xhs_public_og.json"
 
@@ -64,8 +71,10 @@ def fetch_one(page, url: str) -> dict[str, Any]:
     row: dict[str, Any] = {"url": url, "ok": False}
     try:
         page.goto(url, wait_until="domcontentloaded", timeout=25000)
-        page.wait_for_timeout(1800)
+        page.wait_for_url(NOTE_URL_RE, timeout=15000)
+        page.wait_for_timeout(1500)
     except PlaywrightTimeout:
+        row["final_url"] = page.url
         row["reason"] = "timeout"
         return row
 
@@ -109,7 +118,7 @@ def parse_args() -> argparse.Namespace:
         "urls",
         nargs="*",
         default=[DEFAULT_URL],
-        help="Public note or share URLs (default: the test xhslink)",
+        help="Public note or share URLs (default: resolved explore URL with xsec_token)",
     )
     parser.add_argument(
         "--out",
