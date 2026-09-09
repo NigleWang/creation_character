@@ -46,7 +46,7 @@ interaction:
   inherit_scene: true
 
 environment:
-  inherit_scene: true   # includes lighting direction, color, and exposure — do not brighten
+  inherit_scene: true   # lighting direction, color, exposure, grime — do not brighten or sanitize
 
 composition:
   preserve_scene: true
@@ -54,6 +54,7 @@ composition:
 constraints:
   - Character controls IDENTITY
   - Scene controls COMPOSITION and ACTION
+  - Scene grime (reflections, clutter, uneven shadows) must pass through to prompt-builder
   - Do not swap Teo and Kai
   - Do not add or remove people
 ```

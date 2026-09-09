@@ -34,7 +34,11 @@ description: >-
 
 **Lighting fail (common AI tell):** Output is brighter, flatter, glowy, or more evenly lit than the reference. Over-bright = regenerate. Do not "improve" exposure.
 
-**pose-series mode:** Do not require source pose. Require same identity, outfit, environment, and **exposure**; pose must match the **chosen** catalog pose.
+**Scene grime fail:** Reference had reflections, clutter, uneven shadows, or mixed indoor light — output cleaned them up, added studio evenness, or removed surface reflections. Regenerate with grime-preservation language from `docs/light.md`.
+
+**Over-polished fail:** Plastic skin, airbrushed faces, hyper-sharp hair strands, clinically clean backgrounds, HDR glow. Regenerate with anti-AI module from `prompt-builder`.
+
+**pose-series mode:** Do not require source pose. **Hard-lock** same face, hairstyle, outfit, environment, and **exposure** across the whole batch; pose must match the **chosen** catalog pose only. Any drift in hair/clothes between frames = regenerate that frame.
 
 ### 3. Couple consistency
 
@@ -47,6 +51,20 @@ description: >-
 - Faces visible and attractive (without lifting overall exposure)?
 - Natural photograph, not HDR / beauty-light / cinematic glow?
 - Tasteful for platform (not explicit)?
+
+## Pre-publish gate (mandatory before `accept`)
+
+Run this checklist **every time** before saving to `outputs/approved/` or delivering to the user. Any fail → `regenerate` (max 1 retry) or `reject`; do **not** ship.
+
+| Gate | Fail if |
+|------|---------|
+| Exposure | Brighter than reference / lifted shadows / glow |
+| Scene grime | Reflections, clutter, or uneven shadows removed or smoothed |
+| AI polish | Plastic skin, HDR, studio evenness, hyper-sharp everything |
+| pose-series lock | Face, hair, or outfit differs from source still or from sibling frames |
+| Series grade | Later frames brighter or cleaner than frame 01 |
+
+Prompt fixes: `docs/light.md` §6 module + `prompt-builder` anti-AI block.
 
 ## Output
 
@@ -81,3 +99,6 @@ description: >-
 | Pose lost | "Strictly copy body positions from scene reference." |
 | Extra limbs | "Exactly two people, two arms each, anatomically correct." |
 | Too bright / AI glow | "Match the reference exposure exactly. Do not brighten, lift shadows, add fill, HDR, rim glow, or beauty lighting. Keep original shadow density." |
+| Scene too clean | "Preserve reflections, background clutter, uneven shadows, mixed light. Do not sanitize or polish the environment." |
+| Over-polished / plastic | "natural available light, slightly imperfect exposure, natural skin texture, unretouched look, not overly sharp, not airbrushed. See docs/light.md." |
+| pose-series outfit/hair drift | "Copy exact face, hairstyle, and clothing from the FIRST reference image. Only pose changes." |

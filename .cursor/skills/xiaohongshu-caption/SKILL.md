@@ -2,10 +2,11 @@
 name: xiaohongshu-caption
 description: >-
   Writes Xiaohongshu (小红书) posting copy for Teo/Kai stills and pose-series —
-  short scene + detail + emotion, title, 30–80字 body, 6–10 hashtags. Names
-  are Teo (受) and Kai (攻). Use after pose-series generates a set, or when
-  the user asks for 文案, 标题, 标签, 小红书发布, caption, or copy for
-  approved images.
+  short scene + detail + emotion, title, 30–80字 body, 6–10 hashtags. Tag mix:
+  half self-built (#TeoKai #TeoKaiDaily) + half discovery pool (#氛围感男生
+  #男生拍照 #健身 #人夫感 #日常碎片). Names are Teo (受) and Kai (攻). Use
+  after pose-series generates a set, or when the user asks for 文案, 标题, 标签,
+  小红书发布, caption, or copy for approved images.
 ---
 
 # Xiaohongshu Caption — 发布文案
@@ -33,7 +34,7 @@ description: >-
 
 正文、标题、标签、prompt、新文件名里 **只出现 Teo / Kai**（`teo` / `kai`）。Tom / James 已废弃。
 
-专属标签（每条都带，长期固定）：`#TeoKai` `#TeoKaiDaily`
+标签策略：**自建词 + 大池子各一半**。每条必带 `#TeoKai` `#TeoKaiDaily`，同时按画面加大池子；不必写 AI/虚拟，但别只用自建标签。
 
 ---
 
@@ -76,7 +77,7 @@ If the user already gave 标题 / 情绪 / 不要提问, honor that.
 |----|------|
 | 标题 | ≤20 字，情绪钩子，不要「1/n」 |
 | 正文 | **30–80 字**（汉字计）。太长没人看 |
-| 标签 | **6–10 个**，放正文最后 |
+| 标签 | **6–10 个**，放正文最后；自建词 + 大池子各一半 |
 
 ### 进阶
 
@@ -103,31 +104,42 @@ If the user already gave 标题 / 情绪 / 不要提问, honor that.
 
 ## 标签
 
-每条笔记 **6–10 个**。不要堆无关热搜。
+每条笔记 **6–10 个**。**自建词 + 大池子各一半**（8 个 = 4+4）。不要堆无关热搜。不要只打自建词。
 
-### 固定核心（每条都带，至少前 2 个）
+### 自建词（账号沉淀，约一半）
 
-`#TeoKai` `#TeoKaiDaily` `#双人设` `#固定角色` `#日常碎片`
+每条必带：`#TeoKai` `#TeoKaiDaily`
 
-双人再加 `#情侣日常`。单人可不加重复的情侣词。
+再补满一半：`#双人设` `#固定角色`
 
-### 内容类型（按 cast 选 3–4 个）
+### 大池子（按画面选，约一半）
 
-| Cast | 标签 |
+优先从画面里挑：
+
+`#氛围感男生` `#男生拍照` `#健身` `#人夫感` `#日常碎片`
+
+| 画面 | 用 |
+|------|----|
+| 男生单人 / 氛围照 | `#氛围感男生` `#男生拍照` |
+| 生活片段、碎片感 | `#日常碎片` |
+| 居家、成熟、照顾感 | `#人夫感` |
+| 健身、运动、肌肉、工装出力 | `#健身` |
+
+对不上的不要硬加。还差条数时，按 cast 从下面补，仍算大池子。
+
+| Cast | 补位 |
 |------|------|
-| 仅 Kai | `#帅哥` `#氛围感男生` `#侧颜杀` `#男生拍照` |
-| 仅 Teo | `#帅哥` `#氛围感男生` `#清冷感` `#男生拍照` |
-| 双人 | `#双人照` `#氛围感情侣` `#甜度超标` `#情侣拍照` |
+| 仅 Kai | `#帅哥` `#侧颜杀` |
+| 仅 Teo | `#帅哥` `#清冷感` |
+| 双人 | `#情侣日常` `#双人照` `#氛围感情侣` `#情侣拍照` |
 
-### 氛围（选 1–2 个）
+氛围（最多再 1 个）：`#氛围感` `#胶片感` `#日系氛围` `#生活感`
 
-`#氛围感` `#胶片感` `#日系氛围` `#温柔系` `#高级感` `#生活感` `#治愈系`
+场景（0–1 个）：`#办公室` `#咖啡馆` `#居家` `#厨房` `#雨天` `#旅行` `#海边`
 
-### 场景（0–1 个，从画面来）
+### 禁止
 
-`#办公室` `#咖啡馆` `#居家` `#厨房` `#雨天` `#旅行` `#海边`
-
-不要加 `#虚拟情侣` `#BL` `#AI`。
+不要加 `#虚拟情侣` `#BL` `#AI`。正文也不写虚拟、AI、换脸。
 
 ---
 
@@ -174,7 +186,7 @@ Closing: `改法直接说，例如：再甜一点、不要提问、改成只写K
   "cover_file": "01_look_camera.png",
   "title": "今天的侧颜有点犯规",
   "body": "刚开完会的Kai，袖口还挽着。\n靠回椅背的时候，下颌线突然变得很锋利。\n看久了会有点移不开眼。",
-  "tags": ["#TeoKai", "#TeoKaiDaily", "#双人设", "#帅哥", "#氛围感男生", "#侧颜杀", "#男生拍照", "#氛围感"],
+  "tags": ["#TeoKai", "#TeoKaiDaily", "#双人设", "#固定角色", "#氛围感男生", "#男生拍照", "#人夫感", "#日常碎片"],
   "alt_titles": ["刚散会的下颌线", "今天懒得拉链"]
 }
 ```

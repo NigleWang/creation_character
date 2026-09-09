@@ -34,11 +34,16 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
    - color temperature (warm / cool / mixed / fluorescent)
    - **exposure / brightness** (dim, natural, or already bright — record the actual level)
    - shadow density (keep dark corners if they exist)
+   - uneven shadow falloff, mixed lighting, slightly imperfect exposure
    Never rewrite ordinary indoor light as "cinematic" or "cover-bright"
-10. Color palette
-11. Visual texture (film, digital, soft, grain)
-12. Emotional atmosphere
-13. **Customizable style elements** (for scene-customizer — per person: accessories, top/bottom color, pattern, material)
+10. **Scene grime** (preserve in generation — do not sanitize):
+    - surface reflections (glass, metal, wet floor, screens)
+    - background clutter (cables, cups, papers, random objects)
+    - uneven shadows and patchy light
+11. Color palette
+12. Visual texture (film, digital, soft, grain)
+13. Emotional atmosphere
+14. **Customizable style elements** (for scene-customizer — per person: accessories, top/bottom color, pattern, material)
 
 ## Output schema
 
@@ -49,6 +54,11 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
       "location": "cafe",
       "time": "afternoon",
       "lighting": "warm window light from camera-left, natural indoor exposure, not bright, shadows kept"
+    },
+    "scene_grime": {
+      "reflections": "window glare on desk",
+      "clutter": "mug, papers, cable on table",
+      "shadow_notes": "dark corner camera-right, uneven falloff under shelf"
     },
     "composition": {
       "framing": "medium shot",
@@ -80,7 +90,7 @@ Extract only visual structure. Write result to `outputs/drafts/scene_blueprint_<
       "realism": "high",
       "lighting": "natural indoor, match reference exposure",
       "color_tone": "warm but not lifted",
-      "texture": "ordinary photograph, not HDR"
+      "texture": "ordinary photograph, not HDR, slight imperfections OK"
     },
     "customizable_elements": {
       "subject_1": {
@@ -102,8 +112,9 @@ Map subject_1 → left (Teo), subject_2 → right (Kai) in couple scenes.
 
 ## Rules
 
-- Preserve original composition, action logic, **and lighting/exposure**
+- Preserve original composition, action logic, **lighting/exposure**, and **scene grime** (reflections, clutter, uneven shadows)
 - Never output names or identities of people in the reference
+- Prompt vocabulary for realism: `docs/light.md` (available light, imperfect exposure, anti-AI module §6)
 - If single person scene → `subjects.count: 1`, bind to @mentioned character only
 - Subject_1 = leftmost person, subject_2 = rightmost person
 - Do not describe lighting as cinematic/glowing/cover-bright unless the photo actually looks that way

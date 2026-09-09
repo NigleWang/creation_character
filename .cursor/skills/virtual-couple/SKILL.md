@@ -77,6 +77,8 @@ arguments: {
 
 5. QC → save **single** to `outputs/approved/xiaohongshu_<task_id>.png` → run `xiaohongshu-caption` if user wants 文案. pose-series sets use `outputs/approved/series/<task_id>/` then **must** run `xiaohongshu-caption`.
 
+**Pre-publish:** QC must pass the anti-AI gate in `quality-control` (exposure, scene grime, no polish) before any file lands in `outputs/approved/`.
+
 ---
 
 ## Characters
@@ -90,10 +92,13 @@ arguments: {
 
 ```
 Character = IDENTITY (face, body, hair)
-Scene = COMPOSITION + POSE + ENVIRONMENT + LIGHTING/EXPOSURE
+Scene = COMPOSITION + POSE + ENVIRONMENT + LIGHTING/EXPOSURE + SCENE GRIME
 Customization = accessories/clothing (user confirms, may differ from scene)
 LEFT = Teo | RIGHT = Kai — never swap
 Lighting must match the scene photo. Do not brighten. Over-bright = AI look.
+Preserve reflections, clutter, uneven shadows — do not sanitize the scene.
+Before delivery: run quality-control pre-publish gate (exposure + AI polish + grime).
+Prompt realism module: docs/light.md §6 via prompt-builder.
 ```
 
 ## Sub-skills (Turn 2 detail)

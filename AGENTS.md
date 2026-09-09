@@ -118,7 +118,7 @@ When pose-series Turn 2 finishes, **or** the user asks 文案 / 标题 / 标签 
 1. Follow `.cursor/skills/xiaohongshu-caption/SKILL.md`
 2. **Do not** call GenerateImage
 3. Names in copy: **Teo**（受）/ **Kai**（攻）— never Tom/James
-4. One title + 30–80字 body + 6–10 tags (`#TeoKai` `#TeoKaiDaily` always)
+4. One title + 30–80字 body + 6–10 tags：自建词 + 大池子各一半（`#TeoKai` `#TeoKaiDaily` 必带，按画面加 `#氛围感男生` `#男生拍照` `#健身` `#人夫感` `#日常碎片`；不要只打自建词）
 
 ## Image-to-video prompt (Gemini)
 

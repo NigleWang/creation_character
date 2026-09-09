@@ -51,7 +51,7 @@ Skip wait only if the **same** first message already says `直接生成` or `不
 | Who | — | Couple, Teo left / Kai right |
 | Place | — | Match occupation or 居家 |
 | Time | — | Late afternoon unless 夜/晨 specified |
-| Light | — | Natural indoor, match real room brightness — not cover-bright, not cinematic glow |
+| Light | — | Natural indoor, match real room brightness — not cover-bright, not cinematic glow; uneven shadows OK (`docs/light.md`) |
 | Teo pose | — | Softer, receiving, still, looking through glasses |
 | Kai pose | — | Leading, upright or leaning in, initiating contact |
 | Teo clothes | — | Occupation or scene: linen/neutral; **always browline glasses** |
@@ -105,6 +105,8 @@ No scene photograph in `reference_image_paths`. Face refs only.
 4. QC → `outputs/approved/xiaohongshu_<task_id>.png` (single still, not a series folder).
 5. Caption via `xiaohongshu-caption`.
 
+**Pre-publish:** pass `quality-control` anti-AI gate before save.
+
 After this still exists, 换姿态 → `pose-series`.
 
 ---
@@ -127,8 +129,9 @@ Use attached face references. Teo: browline glasses, buzz cut, slim athletic, no
 [LIGHTING]
 
 {lighting}. Natural room light at real exposure — do not brighten for a cover look.
-Do not add beauty lighting, rim glow, HDR, or even studio fill. Keep shadows.
+Do not add beauty lighting, rim glow, HDR, or even studio fill. Keep shadows uneven.
 Over-bright or glowing light looks AI-generated — forbidden.
+Preserve plausible clutter and surface reflections for this place.
 
 [COMPOSITION]
 
@@ -148,6 +151,12 @@ Teo: {filled}. Kai: {filled}.
 
 Photorealistic natural photography, not cinematic glow. Xiaohongshu cover.
 Same grain and contrast as a real phone photo in this room. No text, watermark, logo.
+
+[REALISM — reduce AI look]
+
+natural available light, soft uneven lighting, slightly imperfect exposure,
+natural skin texture, subtle photographic grain, unretouched photographic look,
+not overly sharp, not airbrushed. See docs/light.md §6.
 
 [CONSTRAINTS]
 

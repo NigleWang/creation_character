@@ -85,7 +85,7 @@ Skip Turn 1 only if the first message already picks a layout, e.g. `用主图+�
 | 叠字 | **无** | 标题 ≤20 字 |
 | 角标 | **无** | — |
 | 正文 | 不要写在封面上 | 30–80 字：小场景 + 细节 + 一点情绪 |
-| 标签 | 不要写在封面上 | 6–10 个，`#TeoKai` `#TeoKaiDaily` 必带 |
+| 标签 | 不要写在封面上 | 6–10 个，自建词 + 大池子各一半；`#TeoKai` `#TeoKaiDaily` 必带 |
 
 人名 **Teo / Kai**。不要虚拟、AI、换脸。三套笔记标题不要撞题。
 
