@@ -105,6 +105,8 @@ agent id 会写到 gitignored 的 `outputs/drafts/cloud_agent.json`。指定分�
 - **已有成图换姿态** → `@pose-series`：先选编号姿态，组图进 `outputs/approved/series/`，出图后自动给小红书文案（Teo / Kai）
 - **成图转动画** → `@gemini-video`：写出可复制进 Gemini 的 10 秒图生视频提示词（台词日语假名）
 - **只要文案** → `@xiaohongshu-caption`：对着成图/系列写标题+正文+标签
+- **Tagame 动漫** → `@tagame-anime`：场景卡 → 静帧 → 先选 3–5 组日语台词 → 再写 10s 图生视频提示词
+- **抖音发布（猛男日语教学）** → `@douyin-caption`：标题 + 教学文案 + 标签
 
 ---
 
@@ -124,6 +126,8 @@ creation_character/
 │   │   ├── xiaohongshu-caption/ ← 系列/成图 → 小红书发布文案（Teo/Kai）
 │   │   ├── text-scene/          ← 文字场景按人设补全后再出一张
 │   │   ├── gemini-video/        ← 成图 → Gemini 10s 视频提示词（假名台词）
+│   │   ├── tagame-anime/        ← Tagame 动漫：场景卡 → 静帧 → 台词选项 → 10s 视频词
+│   │   ├── douyin-caption/      ← Tagame 视频 → 抖音文案（猛男日语教学）
 │   │   ├── quality-control/
 │   │   └── xiaohongshu-post/
 │   └── rules/
@@ -159,6 +163,8 @@ creation_character/
 | `xiaohongshu-caption` | 成图/系列 → 小红书标题+正文+标签（Teo/Kai） |
 | `xiaohongshu-post` | 3:4 规格 / 封面构图 / 交付格式 |
 | `gemini-video` | 成图 → Gemini 10s 图生视频提示词（台词假名，复制即用） |
+| `tagame-anime` | Tagame 动漫静帧 + 多样台词选项 + 10s 图生视频提示词 |
+| `douyin-caption` | Tagame 视频 → 抖音标题+教学文案+标签（账号：猛男日语教学） |
 
 ---
 

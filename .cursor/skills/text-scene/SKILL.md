@@ -19,7 +19,7 @@ No scene photo. Identity comes from character bibles + face refs.
 | `virtual-couple` | 场景**照片** | 换脸服装选项 |
 | `pose-series` | 已有成图 | 姿态选项 |
 | **`text-scene`** | **文字**场景（Teo/Kai） | **补全场景卡，停** |
-| `tagame-anime` | @Tagame / 动漫上司 | 动漫场景卡 → 静帧 → 10s 视频词 |
+| `tagame-anime` | @Tagame / 动漫上司 | 动漫场景卡 → 静帧 → 台词选项 → 10s 视频词 → 抖音文案 |
 
 **Route out:** @Tagame → `tagame-anime`（动漫画风，禁止走本 skill 的写实提示词）。
 

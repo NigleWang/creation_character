@@ -7,7 +7,7 @@ Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 | Track | Characters | Style | Skills |
 |-------|------------|-------|--------|
 | **Couple** | Teo（受, left）+ Kai（攻, right） | Photoreal Xiaohongshu | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `cover-collage` |
-| **Tagame** | Tagame only | **Japanese anime** | `tagame-anime` |
+| **Tagame** | Tagame only | **Japanese anime** | `tagame-anime` / `douyin-caption` |
 
 @Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai faces. Never `gemini-video` photoreal paste.
 
@@ -69,7 +69,8 @@ User's **first message** already includes explicit style choices, e.g.:
 `.cursor/skills/xiaohongshu-caption/SKILL.md` — 成图/系列 → 小红书发布文案（Teo/Kai，只出文案不出图）  
 `.cursor/skills/text-scene/SKILL.md` — 文字场景：按人设补全场景卡，确认后生成一张  
 `.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）  
-`.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：场景卡确认 → 一张静帧 → 10s 图生视频提示词（`docs/anime.md` 公式）  
+`.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：场景卡 → 静帧 → **3–5 组台词选项（等选择）** → 10s 图生视频提示词  
+`.cursor/skills/douyin-caption/SKILL.md` — Tagame 视频 → 抖音文案（账号：猛男日语教学，标题+教学正文+标签）  
 `.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）
 
 ## Text scene (no photo)
@@ -120,6 +121,17 @@ When pose-series Turn 2 finishes, **or** the user asks 文案 / 标题 / 标签 
 3. Names in copy: **Teo**（受）/ **Kai**（攻）— never Tom/James
 4. One title + 30–80字 body + 6–10 tags：自建词 + 大池子各一半（`#TeoKai` `#TeoKaiDaily` 必带，按画面加 `#氛围感男生` `#男生拍照` `#健身` `#人夫感` `#日常碎片`；不要只打自建词）
 
+## Douyin caption（猛男日语教学）
+
+When `tagame-anime` Turn C2 finishes, **or** the user asks 抖音文案 / 抖音标题 / 抖音标签 / 猛男日语教学:
+
+1. Follow `.cursor/skills/douyin-caption/SKILL.md`
+2. **Do not** call GenerateImage
+3. Account: **猛男日语教学** — teach the three spoken Japanese lines (kana + 中文 + one grammar hook)
+4. One title + teaching body + 6–10 tags（`#猛男日语教学` `#日语教学` 必带）
+
+Teo/Kai 小红书笔记不要走本段。
+
 ## Image-to-video prompt (Gemini)
 
 When user has a **Teo/Kai** still (usually `outputs/approved/`) and asks 图生视频 / Gemini视频 / 10秒视频:
@@ -129,7 +141,7 @@ When user has a **Teo/Kai** still (usually `outputs/approved/`) and asks 图生�
 3. Deliver one copy-paste English prompt; spoken lines in Japanese kana only
 4. Sanitize for Gemini: fictional adults, G-rated. Kneeling/shoes = tying laces / picking up keys — never ankle-grip or "won't let go" (that refusal is "real people in situations like that")
 
-If the still is **Tagame** / anime: use `tagame-anime` Turn C instead (anime lock + invite/heat/possession formula).
+If the still is **Tagame** / anime: use `tagame-anime` Turn C1 (3–5 dialogue options, wait) then C2 (i2v prompt). Do not default to invite/heat/possession.
 
 ## Tagame anime (separate track)
 
@@ -138,7 +150,9 @@ When user @Tagame / `characters/Tagame` / `docs/anime.md` / 办公室肌肉上�
 1. Follow `.cursor/skills/tagame-anime/SKILL.md`
 2. Turn 1: load Tagame bible → fill scene card → **STOP** for confirmation
 3. Turn 2: one GenerateImage, **Japanese anime** (never photoreal), face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
-4. Then write 10s i2v prompt: invite → body-heat → possession; kana dialogue; first line at 2.0s. Do **not** call GenerateImage for the video step
-5. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration
+4. After the still: post **3–5 diverse Japanese dialogue options** and **STOP**. Do **not** default to invite → body-heat → possession
+5. After the user picks a set: write 10s i2v prompt (kana; first line at 2.0s). Do **not** call GenerateImage for the video step
+6. Then run `douyin-caption` for 抖音 title + teaching caption + tags (account **猛男日语教学**), unless the user skips copy
+7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration
 
 Do **not** run virtual-couple, text-scene, pose-series, or gemini-video for Tagame.
