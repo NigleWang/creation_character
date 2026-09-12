@@ -16,7 +16,7 @@
 【服装】紧身白衬衫（汗湿）、黑西裤、黑皮带银扣；外套未穿
 【光】走廊冷色灯，正常曝光不要提亮
 【情绪强度】标准
-【台词】出图后给 3–5 组不同情绪的日语台词，你选一组再写图生视频提示词
+【台词】出图后先读成图设定，再给 5 组不同风格的日语台词（贴合本角+本场景），你选一组再写图生视频提示词
 
 快捷：「生成」
 ⏸️ 请确认后再出图。
@@ -38,14 +38,20 @@
 
 **User:** 成图已通过 / `@outputs/approved/tagame_20260905_office_corridor.png` 图生视频
 
-必须给 **不同弧**，不能 5 组都是摸胸邀请。
+必须先写【读图】，再给 **5 种不同风格**，不能 5 组都是摸胸邀请，也不能忽略走廊/加班/汗湿衬衫这些成图事实。
 
 ```text
-✅ 台词选项（选一组后我再写 10 秒图生视频提示词）
+✅ 台词选项（先读成图，再按本角+本场景写；选一组后我再写 10 秒图生视频提示词）
 
-【谁】仅 Tagame，对镜头（お前）
-【场景】办公室走廊 · 汗湿白衬衫
-【强度】标准
+【读图】
+地点：公司办公室走廊
+时间：深夜加班后
+姿态：双手插腰，直视镜头 · 镜头：仰拍中近景
+服装：紧身白衬衫汗湿、解开两颗扣、黑西裤
+光 / 强度：走廊冷色灯 · 标准
+本图能说：他在空楼里拦住还没走的你
+
+【谁】仅 Tagame，对镜头（お前）——办公室肌肉上司
 
 1️⃣ 【加班责问】深夜留人 ·好教
 1 こんなじかんまで、のこってたのか ｜ 都这时候了，你还留着？（こんなじかん）
@@ -93,7 +99,7 @@ Tagame「ほら、こっちをみろ」@7.0s
 **复制到模型：**（MOTION 跟弧走）
 
 ```text
-Animate the uploaded image into a 10-second ANIME video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 3:4 vertical. Single continuous shot, no cuts, no new locations, no costume change, no nudity.
+Animate the uploaded image into a 10-second ANIME video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 9:16 vertical. Single continuous shot, no cuts, no new locations, no costume change, no nudity.
 
 ART STYLE LOCK: Keep high-quality Japanese anime / digital illustration look of the still. Do NOT restyle into photorealistic live action. Do NOT turn him into a real person.
 
@@ -137,7 +143,7 @@ C1 应多给 D 温柔允许、B 加班软化、J 教学向；少给命令/调戏
 
 **User:** `@outputs/approved/tagame_20260905_office_corridor.png` 图生视频
 
-跳过 Turn A/B。读图 → **C1 选项 STOP**。用户选编号后才 C2。画风句仍要 `ANIME` / `NOT photorealistic`。
+跳过 Turn A/B。**先读成图设定** → **C1 五组不同风格 STOP**。用户选编号后才 C2。画风句仍要 `ANIME` / `NOT photorealistic`。台词必须吃进这张图的地点/服装/姿态。
 
 ---
 

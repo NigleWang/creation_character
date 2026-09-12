@@ -2,7 +2,7 @@
 name: tagame-anime
 description: >-
   Tagame anime pipeline: confirm a scene card, generate one Japanese-anime
-  still, post 3–5 diverse Japanese dialogue options and wait, then write a 10s
+  still, read the still first, post 5 diverse Japanese dialogue options and wait, then write a 10s
   i2v prompt for the chosen lines. Use when the user mentions Tagame, @Tagame,
   characters/Tagame, docs/anime.md, 动漫画风, 办公室肌肉上司, or asks for Tagame 场景图
   / 图生视频 / 10秒视频. After the video prompt, run douyin-caption (账号：猛男日语教学).
@@ -13,7 +13,7 @@ description: >-
 
 固定角色 **Tagame**（办公室肌肉上司）。画风 **永远是高品质日系动漫**，禁止写实。
 
-先按 Character Bible 补全场景卡，**等用户确认再出静帧**；静帧通过后 **先给 3–5 组不同情绪的日语台词，等用户选一组**，再写 **10 秒图生视频提示词**。不要默认套「邀请 → 身体热度 → 占有」。
+先按 Character Bible 补全场景卡，**等用户确认再出静帧**；静帧通过后 **必须先读成图/场景卡**，再给 **5 组不同风格**的日语台词（贴合本角 + 本场景），等用户选一组，再写 **10 秒图生视频提示词**。不要默认套「邀请 → 身体热度 → 占有」。
 
 公式与台词库：[formula.md](formula.md)。发布文案（抖音 / 猛男日语教学）：`douyin-caption`。
 
@@ -23,7 +23,7 @@ description: >-
 |------|--------|-----|-----------|
 | **A 场景卡** | 文字 / @Tagame / 无静帧 | 填场景卡 → STOP | GenerateImage、视频提示词、定稿台词 |
 | **B 出图** | 用户回复 `生成` / 修改后确认 | GenerateImage **一张** 动漫静帧 → QC | 写实、换脸、立刻写视频词 |
-| **C1 台词** | 已有 Tagame 成图，或 B 刚通过 | 贴 **3–5 组**不同弧的台词 → STOP | GenerateImage、i2v 复制块 |
+| **C1 台词** | 已有 Tagame 成图，或 B 刚通过 | **先读图** → 贴 **5 组**不同风格台词 → STOP | GenerateImage、i2v 复制块、没读图就编台词 |
 | **C2 视频词** | 用户回复编号 / 选定台词 | 写 10s i2v 复制块 → 跑 `douyin-caption` | GenerateImage |
 
 用户同一条消息里说「直接生成」且场景够用：仍先贴场景卡，再出图，再进 C1。  
@@ -91,7 +91,7 @@ Tagame: mature East Asian man ~40, square jaw, dark-brown short slightly wavy sp
 【服装】{白衬衫±汗湿±解开扣 / 西裤 / 外套}
 【光】{冷色办公室光，不要过亮}
 【情绪强度】温柔 / 标准 / 强势 / 调戏  → 当前：{...}
-【台词】出图后给 3–5 组不同情绪的日语台词，你选一组再写图生视频提示词（不会默认「邀请→热→占有」）
+【台词】出图后先读成图设定，再给 5 组不同风格的日语台词（贴合本角+本场景），你选一组再写图生视频提示词（不会默认「邀请→热→占有」）
 
 改法直接说，例如：不要湿衬衫、改成更衣室、强度改温柔、镜头再低。
 快捷：「生成」
@@ -170,35 +170,45 @@ Anime still, one adult man, correct anatomy, no extra limbs. No text, watermark,
 
 ---
 
-## Turn C1 — 3～5 组台词选项（先选再写提示词）
+## Turn C1 — 先读图，再给 5 组不同风格台词
 
 只出选项，**不要** GenerateImage，**不要**写 i2v 复制块。
 
-1. 读成图（谁、场景、姿态、服装、是否汗湿）+ 场景卡强度
-2. 按 [formula.md](formula.md) 选 **3–5 个不同弧**（加班责问 / 命令靠近 / 温柔允许 / 调戏 / 更衣室 / 雨湿 / 车里 / 酒店 / 教学向 / 经典邀请占有）
-3. **禁止** 5 组都是「邀请 → 身体热度 → 占有」，也禁止 5 组只改几个假名、弧名却一样
-4. 至少 1 组标「好教」（语法点清楚，方便抖音号「猛男日语教学」）
-5. 保存 `outputs/drafts/tagame_lines_<task_id>.json`，`"user_confirmed": false`
-6. 按模板回复，然后 **STOP**
+**禁止跳过读图。** 没读成图 / 场景卡就写台词 = 失败。台词必须像这个人、在这个地方会说的话，不能套万能调情三段。
+
+1. **先读原始图片设定**（成图 + 场景卡 JSON + Bible）。看清：地点、时间、姿态、服装、是否汗湿、光线、镜头、强度、他在对谁说话
+2. **先写【读图】摘要**（见模板），证明读过这张图，再写台词
+3. 按 [formula.md](formula.md) 出 **正好 5 组**，5 个 **不同弧 + 不同风格**。从目录里挑最贴本场景的，再混入不同情绪（责问 / 命令 / 温柔 / 调戏 / 教学 / 经典邀请等），**不要 5 组同一种味道**
+4. 每组三句都要吃进本图事实：走廊加班就说留到这么晚；更衣室就说刚练完；雨景才说湿；车里才说挤。禁止更衣室说酒店、雨景说加班、干衬衫硬说汗湿
+5. **禁止** 5 组都是「邀请 → 身体热度 → 占有」，也禁止只改几个假名、弧名却一样
+6. 至少 1 组标「好教」（语法点清楚，方便抖音号「猛男日语教学」）
+7. 保存 `outputs/drafts/tagame_lines_<task_id>.json`，`"user_confirmed": false`
+8. 按模板回复，然后 **STOP**
 
 ### 回复模板
 
 ```text
-✅ 台词选项（身份/服装/场景锁定成图；选一组后我再写 10 秒图生视频提示词）
+✅ 台词选项（先读成图，再按本角+本场景写；选一组后我再写 10 秒图生视频提示词）
 
-【谁】仅 Tagame，对镜头（お前）
-【场景】{地点 · 服装一句话}
-【强度】{温柔 / 标准 / 强势 / 调戏}
+【读图】
+地点：{办公室走廊 / 更衣室 / 车里 / …}
+时间：{深夜加班 / 刚练完 / …}
+姿态：{插腰 / 撑墙 / …} · 镜头：{仰拍中近景}
+服装：{白衬衫±汗湿±解开扣 / 西裤}
+光 / 强度：{冷色室内 · 标准/温柔/强势/调戏}
+本图能说：{一句：他现在为什么开口，例如「抓到你还没走」}
 
-1️⃣ 【{弧名}】{一句话情绪} {好教则标 ·好教}
+【谁】仅 Tagame，对镜头（お前）——办公室肌肉上司，成熟、低沉、直接
+
+1️⃣ 【{弧名}】{本图里这种风格为什么成立} {好教则标 ·好教}
 1 {kana} ｜ {中文}  （{语法钩}）
 2 {kana} ｜ {中文}
 3 {kana} ｜ {中文}
 
-2️⃣ 【{弧名}】…
-3️⃣ 【{弧名}】…
-4️⃣ 【{弧名}】…   ← 至少 3 组，最多 5 组
-5️⃣ 【{弧名}】…
+2️⃣ 【{弧名}】…   ← 与①风格不同
+3️⃣ 【{弧名}】…   ← 再换一种
+4️⃣ 【{弧名}】…
+5️⃣ 【{弧名}】…   ← 必须 5 组，5 种风格
 
 回复编号即可，例如：`2` 或 `用第3组，强度再强一点`。
 也可以自己贴三句（我会转成假名）。
@@ -206,13 +216,13 @@ Anime still, one adult man, correct anatomy, no extra limbs. No text, watermark,
 ⏸️ 请选择后再生成图生视频提示词。
 ```
 
-**本回合结束。禁止输出英文 i2v 块。**
+**本回合结束。禁止输出英文 i2v 块。没写【读图】就贴 5 组 = 不合格。**
 
 ---
 
 ## Turn C2 — 10s 图生视频提示词
 
-用户选定编号（或贴了台词）之后才进入。只写提示词，**不要** GenerateImage。目标：Gemini / 通用 i2v，竖屏 10 秒。
+用户选定编号（或贴了台词）之后才进入。只写提示词，**不要** GenerateImage。目标：Gemini / 通用 i2v，**9:16** 竖屏 10 秒。
 
 1. 把选定弧写入 JSON，`"user_confirmed": true`；三条台词进 `dialogue`
 2. 第一条台词 **2.0s** 开口；动作匹配 **该弧**，不要强行写成摸胸→热→占有（除非选的就是经典 A）
@@ -228,7 +238,7 @@ Anime still, one adult man, correct anatomy, no extra limbs. No text, watermark,
 ```text
 ✅ Tagame 10秒图生视频提示词（身份/服装/场景锁定成图，动漫画风，只加动作和声音）
 
-【用法】打开 Gemini（或你的 i2v）→ 上传这张成图 → 粘贴下面英文块 → 时长 10s / 竖屏
+【用法】打开 Gemini（或你的 i2v）→ 上传这张成图 → 粘贴下面英文块 → 时长 10s / **9:16** 竖屏
 
 【谁】仅 Tagame，对镜头（お前）
 【情绪弧】{用户选的弧名}（不是默认邀请→占有，除非选了那一组）
@@ -254,7 +264,7 @@ Tagame：「{kana}」  {中文}
 `MOTION` 的 2.0 / 4.5 / 7.0 三段按 **所选弧** 填，不要写死 hand-to-chest → body-heat → possession。
 
 ```text
-Animate the uploaded image into a 10-second ANIME video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 3:4 vertical. Single continuous shot, no cuts, no new locations, no costume change, no nudity.
+Animate the uploaded image into a 10-second ANIME video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 9:16 vertical. Single continuous shot, no cuts, no new locations, no costume change, no nudity.
 
 ART STYLE LOCK: Keep high-quality Japanese anime / digital illustration look of the still. Do NOT restyle into photorealistic live action. Do NOT turn him into a real person.
 
@@ -341,6 +351,7 @@ CONSTRAINTS: Anime, not photoreal. Clothes stay on. First spoken line at 2.0s. A
   "source_image": "outputs/approved/tagame_20260905_office_corridor.png",
   "cast": ["tagame"],
   "duration_sec": 10,
+  "aspect_ratio": "9:16",
   "art_style": "japanese_anime",
   "arc": "overtime_blame",
   "first_line_at_sec": 2.0,

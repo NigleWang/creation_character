@@ -31,7 +31,7 @@ text-scene (文字场景，无照片) → character-registry → **fill scene ca
 
 gemini-video (Teo/Kai 成图 + 图生视频/10秒) → character-registry → **write Gemini 10s i2v prompt, kana dialogue** → save `outputs/drafts/video_prompt_*.txt` → **no GenerateImage**
 
-tagame-anime (@Tagame / docs/anime.md) → load `characters/Tagame/` → **fill anime scene card, wait** → GenerateImage once (anime, Tagame face ref only) → `outputs/approved/tagame_<task_id>.png` → **post 3–5 dialogue options, wait** → **write 10s i2v prompt for the chosen lines** → `outputs/drafts/tagame_video_*.txt` → **douyin-caption**（猛男日语教学）→ **no GenerateImage on the video/copy steps**
+tagame-anime (@Tagame / docs/anime.md) → load `characters/Tagame/` → **fill anime scene card, wait** → GenerateImage once (anime, Tagame face ref only) → `outputs/approved/tagame_<task_id>.png` → **read still first** → **post 5 diverse dialogue options (character + this scene), wait** → **write 10s i2v prompt for the chosen lines** → `outputs/drafts/tagame_video_*.txt` → **douyin-caption**（猛男日语教学）→ **no GenerateImage on the video/copy steps**
 
 cover-collage (系列成图 + 拼接/封面/九宫格) → **3 layout+copy schemes, wait** → `python3 scripts/make_cover.py` → `outputs/approved/series/<task_id>/cover_<layout>.png` → **no GenerateImage**
 

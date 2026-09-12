@@ -1,4 +1,4 @@
-执行流水线：`.cursor/skills/tagame-anime/SKILL.md`（场景卡 → 动漫静帧 → **3–5 组台词选项，等选择** → 10s 图生视频提示词 → `douyin-caption` 抖音文案）。角色圣经：`characters/Tagame/bible.md`。
+执行流水线：`.cursor/skills/tagame-anime/SKILL.md`（场景卡 → 动漫静帧 → **先读成图 → 5 组不同风格台词，等选择** → 10s 图生视频提示词 → `douyin-caption` 抖音文案）。角色圣经：`characters/Tagame/bible.md`。
 
 下面这篇拆的是 **一条验证过的爆款**（邀请 → 热度 → 占有）。它仍是台词库里的 **备选之一**，**不是**每条视频的默认定稿。出视频词前必须给多组不同情绪弧让用户选。
 

@@ -31,21 +31,22 @@ Always ひらがな / カタカナ in paste quotes. No 漢字.
 
 ---
 
-## Turn C1 — pick 3–5 options (mandatory)
+## Turn C1 — read the still first, then 5 options (mandatory)
 
-**Before** writing the i2v prompt, post **3–5 numbered dialogue sets**. Then **STOP**.
+**Before any Japanese lines:** open the source still + scene card + bible. Write a short 【读图】block (place, time, pose, clothes, wet/dry, light, intensity, why he would speak). **Then** post **exactly 5** numbered dialogue sets. Then **STOP**.
 
-Do **not** write the video prompt in the same turn as the options.
+Do **not** invent lines from the catalog without looking at this image. Do **not** write the video prompt in the same turn as the options.
 
 ### How to pick
 
-1. Read the still (place, outfit, wet/dry, intensity from scene card).
-2. Choose **3–5 different arcs** from the catalog below. **Never** five variants of 邀请→热→占有.
-3. Match place: 加班/走廊 → overtime or classic; 更衣室 → locker; 雨 → rain; 车 → car; 酒店 → hotel. Mix in 1–2 that still fit but change mood (温柔 / 命令 / 调戏).
-4. Honor intensity: 温柔 → prefer gentle / overtime-soft; 强势 → command / claim; 调戏 → tease / rain / car; 标准 → mix.
-5. Each option must differ in **arc_zh** (情绪弧). If two sets share the same three-beat labels, rewrite one.
-6. Prefer at least **one 好教** option (clear grammar: `～てみたい` / `だけ` / `んだぞ` / `おいで` / `まだ～ない`) so `douyin-caption` can teach it.
-7. Scene-swap words (更衣室用 `まださめない`, 雨用 `ぬれ`, 加班用 `こんなじかん`) instead of always saying `むね` + `スーツごし` + `おまえだけ`.
+1. **Read the original still first.** Extract: who (Tagame only), place, time, pose, outfit, wet/dry, lighting, camera, intensity. If a scene-card JSON exists, use it; if the user uploaded an older still, trust the pixels over a generic office default.
+2. Lines must fit **this character** (mature office superior, `おまえ`, low voice, clothed tension) **and this scene**. A locker-room still cannot say hotel/rain/overtime; a dry shirt cannot claim sweat; a car still cannot talk about a hallway.
+3. Choose **5 different arcs** from the catalog below — **5 different styles**, not one mood rewritten five times. **Never** five variants of 邀请→热→占有.
+4. Match place first: 加班/走廊 → overtime or classic; 更衣室 → locker; 雨 → rain; 车 → car; 酒店 → hotel. Then mix moods that still make sense on **this** frame (温柔 / 命令 / 调戏 / 教学).
+5. Honor intensity: 温柔 → prefer gentle / overtime-soft; 强势 → command / claim; 调戏 → tease / rain / car; 标准 → mix five styles.
+6. Each option must differ in **arc_zh** (情绪弧) **and** speaking style. If two sets share the same three-beat labels or the same tone, rewrite one.
+7. Prefer at least **one 好教** option (clear grammar: `～てみたい` / `だけ` / `んだぞ` / `おいで` / `まだ～ない`) so `douyin-caption` can teach it.
+8. Scene-swap words (更衣室用 `まださめない`, 雨用 `ぬれ`, 加班用 `こんなじかん`) instead of always saying `むね` + `スーツごし` + `おまえだけ`.
 
 Skip C1 only if the user **already pasted exact 台词** or said「直接用第N套 / 用经典三段」in this conversation.
 
@@ -53,7 +54,7 @@ Skip C1 only if the user **already pasted exact 台词** or said「直接用第N
 
 ## Arc catalog
 
-Use these as **templates**. Change 1–2 words to fit the still. Do not dump the whole catalog into chat — pick 3–5.
+Use these as **templates**. Change words so they fit **this still** (place, wet/dry, pose). Do not dump the whole catalog into chat — pick **5** different styles. Drop any template that contradicts the image.
 
 ### A. 邀请占有（经典，最多选 1 组）
 
@@ -172,7 +173,7 @@ User picks one on the scene card. Default **标准**. Intensity **filters which 
 | 强度 | Prefer arcs | Avoid |
 |------|-------------|--------|
 | 温柔 | D, B-soft, J | C 强命令、E 过嘲 |
-| **标准** | mix A + one non-A + J | repeating A three times |
+| **标准** | mix five styles (one may be A) | repeating A, or five sets in one mood |
 | 强势 | C, I, B | D 过软 |
 | 调戏 | E, G, H | A as the only option |
 
@@ -198,6 +199,8 @@ Same man, same tone, new room **and** new dialogue arc.
 - Third-person 旁白
 - **Every video using A. 邀请占有** (`さわってみたくないか` / `スーツごし` / `おまえだけのものだ`)
 - Writing the i2v prompt before the user picks a numbered option
+- Writing C1 lines without first reading the still / scene card
+- Five sets that share one style (all 邀请, all 命令, or five near-copies)
 
 ## Gemini / i2v refusal
 
