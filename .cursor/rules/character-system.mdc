@@ -38,7 +38,7 @@ Two tracks. **Do not mix.**
 
 1. Bible + `characters/Tagame/references/face_01.jpeg` lock face, beard, hair, extreme muscle
 2. **Anime lock** on every still and every i2v prompt
-3. Scene card → wait → one still → **read still first** → **5 diverse dialogue options, wait** → 10s video prompt for the chosen lines. Do not default every video to invite → heat → possession
+3. No user still: generate one anime still from `characters/Tagame/references/face_01.jpeg`, scene inferred from the dialogue (or office default). Do not wait for a scene photo. Then **read still first** → **5 diverse dialogue options, wait** → 10s video prompt. If the user already pasted Japanese or English lines: skip options; split long copy into independent 10s clips (next clip = last frame of previous). Do not default every video to invite → heat → possession
 4. Direct address to the viewer (`おまえ` / 你). First spoken line at 2.0s
 5. Clothes stay on (suit / wet shirt / undone buttons). No Teo/Kai pipeline skills
 6. **DOUYIN CAPTION:** After the video prompt (or 抖音文案/标题/标签) → `douyin-caption`. Account **猛男日语教学**. Do **not** call GenerateImage.
@@ -51,12 +51,12 @@ When user points at `outputs/approved/` (or similar) and asks for 系列/换姿�
 
 When user describes a scene in text with no photo → **text-scene Turn 1**. Do NOT generate until they confirm the filled card.
 
-When user points at an approved **Teo/Kai** still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Do NOT call GenerateImage. If the still is Tagame / anime → **tagame-anime C1** (dialogue options first).
+When user points at an approved **Teo/Kai** still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Do NOT call GenerateImage. If the still is Tagame / anime → **tagame-anime C1** (dialogue options first) unless they already pasted Japanese/English lines (then C2 / C2-S).
 
 When pose-series finishes, or user asks 文案 / 标题 / 标签 / 小红书发布 → **xiaohongshu-caption**. Copy-paste title + body + tags. Names in copy: Teo / Kai. Do NOT call GenerateImage.
 
 When user has series stills and asks 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面 → **cover-collage Turn 1**. Post 3 schemes + copy and wait. Do NOT run `make_cover.py` or GenerateImage until they pick a scheme.
 
-When user @Tagame / `characters/Tagame` / `docs/anime.md` → **tagame-anime**. Scene card first, wait; then anime still; then read the still, post 5 diverse dialogue options (character + this scene) and wait; then 10s i2v prompt. Do NOT generate the still until they confirm the card. Do NOT write the i2v prompt until they pick lines.
+When user @Tagame / `characters/Tagame` / `docs/anime.md` → **tagame-anime**. If they have **no still** and already pasted lines (or said 生成/出图): GenerateImage from Tagame face ref, scene matching the lines — do not wait for a scene card. If they pasted Japanese/English lines: skip the 5 options, write 10s i2v (split long copy into independent clips). Otherwise read the still, post 5 diverse dialogue options and wait. Only STOP on a scene card when they @Tagame with no lines and no generate request.
 
 When Tagame video lines are locked, or user asks 抖音文案 / 抖音标题 / 抖音标签 / 猛男日语教学 → **douyin-caption**. Copy-paste title + teaching body + tags. Do NOT call GenerateImage.

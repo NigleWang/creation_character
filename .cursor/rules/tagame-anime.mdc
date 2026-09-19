@@ -10,7 +10,7 @@ If the task involves Tagame, **always** follow `.cursor/skills/tagame-anime/SKIL
 
 - Art: high-quality Japanese anime / digital illustration. Never photoreal.
 - Face ref: `characters/Tagame/references/face_01.jpeg`
-- Confirm the scene card before GenerateImage
-- After the still: **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene; STOP. Write the 10s i2v prompt only after the user picks one. Do not default every video to invite → heat → possession
+- Confirm the scene card **only** when the user @Tagame with no lines and no “generate” request. **No user still + (lines or 生成/出图):** GenerateImage immediately from `characters/Tagame/references/face_01.jpeg`; infer place/outfit/pose from the dialogue. Do not ask for a scene photo.
+- After the still: if the user already pasted Japanese or English lines, skip the 5 options — translate/kana, split long copy into **independent** 10s clips (clip 2+ uses last frame of previous as the new reference). i2v prompts follow `docs/modify_prompt.md`: image first, micro-motion, no `Clip 1 of 4` long-take wording, no push-in every clip. Otherwise **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene; STOP. Write the 10s i2v prompt only after the user picks one. Do not default every video to invite → heat → possession
 - After the video prompt: `douyin-caption`（账号：猛男日语教学）unless the user skips copy
 - Do not use virtual-couple / text-scene / gemini-video for this character

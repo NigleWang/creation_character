@@ -10,10 +10,10 @@ Source analysis: `docs/anime.md`. Reusable playbook — **do not** reuse the sam
 2. **Direct address:** `おまえ` / 你. No third-person narrator
 3. **Clothed tension:** heat / damp / closeness through fabric. No nudity
 4. **Visual motif:** suit + tight white shirt (often sweat-damp) + undone buttons. Repeat; only change place and motion
-5. **10s, 3 spoken lines.** First line **at 2.0s**. Dense talk after 2s. The **meaning** of the three beats changes with the chosen arc
+5. **10s clips.** Default: 3 spoken lines, first line **at 2.0s**. Long user script → **N independent 10s clips** (3 lines each). Each clip is generated from its own reference image (clip 1 = still; clip 2+ = last frame of previous). They must **look like consecutive moments**, not like slices of one 40s render. Micro-motion only; do not push-in every clip; do not reset to the original still
 6. **First frame hits:** low angle, imposing, wet/open shirt if chosen
 7. **Anime lock:** never photoreal in prompt or stills
-8. **Bilingual for publish:** Japanese speech in the model; Chinese in chat for captions. Do not ask the model to render subtitles
+8. **Bilingual for publish:** Japanese speech in the model; Chinese (and original English if any) in chat for captions. Do not ask the model to render subtitles. Do not have him speak English in the i2v prompt
 
 ## Timing (structure only — beats are not always 邀请/热/占有)
 
@@ -33,7 +33,9 @@ Always ひらがな / カタカナ in paste quotes. No 漢字.
 
 ## Turn C1 — read the still first, then 5 options (mandatory)
 
-**Before any Japanese lines:** open the source still + scene card + bible. Write a short 【读图】block (place, time, pose, clothes, wet/dry, light, intensity, why he would speak). **Then** post **exactly 5** numbered dialogue sets. Then **STOP**.
+**Before any invented Japanese lines:** open the source still + scene card + bible. Write a short 【读图】block (place, time, pose, clothes, wet/dry, light, intensity, why he would speak). **Then** post **exactly 5** numbered dialogue sets. Then **STOP**.
+
+**Skip this entire turn** if the user already pasted Japanese or English 台词 — go to C2 or C2-S.
 
 Do **not** invent lines from the catalog without looking at this image. Do **not** write the video prompt in the same turn as the options.
 
@@ -48,7 +50,17 @@ Do **not** invent lines from the catalog without looking at this image. Do **not
 7. Prefer at least **one 好教** option (clear grammar: `～てみたい` / `だけ` / `んだぞ` / `おいで` / `まだ～ない`) so `douyin-caption` can teach it.
 8. Scene-swap words (更衣室用 `まださめない`, 雨用 `ぬれ`, 加班用 `こんなじかん`) instead of always saying `むね` + `スーツごし` + `おまえだけ`.
 
-Skip C1 only if the user **already pasted exact 台词** or said「直接用第N套 / 用经典三段」in this conversation.
+Skip C1 only if the user **already pasted exact 台词** (Japanese or English, any length) or said「直接用第N套 / 用经典三段」in this conversation. English → spoken Japanese kana; long copy → C2-S (multiple 10s, continuous).
+
+---
+
+## User-supplied JP / EN script (C2 / C2-S)
+
+1. Read the still first. Keep the user's plot; only wrap it in Tagame's mouth (`おまえ`, low, mature).
+2. Japanese → kana. English → natural spoken Japanese → kana. Chat shows original + kana + 中文. Model speaks Japanese only.
+3. Split into breath-lines of **6–16 mora**. Pack **3 lines per 10s clip**. Line 4+ starts the next clip.
+4. **Continuity (C2-S):** each clip is **independently generated**. Clip 1 uploads the still; clip 2+ uploads the **last frame of the previous video** as the new source of truth. Same location/clothes/light because the **image** says so — if text conflicts, the image wins. Pose stays almost the same (breath, blink, mouth). Camera matches the current reference; only a tiny micro push-in; character stays the same size. Last 1s is an **intermediate frame**, not an ending (no fade, no freeze). Never write `Clip 1 of 4 in one continuous take` or `slow push-in toward chest` on every clip.
+5. Each clip still opens the first spoken line at **2.0s**. Speak **only this clip's lines**. Do not improvise. Do not repeat previous clips.
 
 ---
 
@@ -179,9 +191,11 @@ User picks one on the scene card. Default **标准**. Intensity **filters which 
 
 ## Motion upgrades (clothed)
 
-Low angle → a gesture that matches the arc → closer to camera.
+For **stills**, low angle + imposing pose is fine.
 
-Optional if user asks and still supports it: undo one more button, camera as POV. Shirt stays on.
+For **i2v**, convert any arc beat into **micro-motion only**: blink, breath, mouth, tiny head/eye. Do **not** write walk, step closer, hand-to-chest, big lean, or a push-in on every clip — those drift the face, clothes, and background when stitching 10s clips.
+
+Optional if user asks and the still already supports it: undo one more button. Shirt stays on. Still no large arm motion in the video prompt.
 
 ## Places to rotate
 
@@ -198,9 +212,14 @@ Same man, same tone, new room **and** new dialogue arc.
 - Chinese-only speech in the model (JP speech + CN caption in chat)
 - Third-person 旁白
 - **Every video using A. 邀请占有** (`さわってみたくないか` / `スーツごし` / `おまえだけのものだ`)
-- Writing the i2v prompt before the user picks a numbered option
+- Writing the i2v prompt before the user picks a numbered option (unless they already pasted JP/EN lines)
 - Writing C1 lines without first reading the still / scene card
 - Five sets that share one style (all 邀请, all 命令, or five near-copies)
+- Stuffing a long user script into one 10s clip
+- Starting every clip from the original still pose (breaks continuity)
+- Writing `Clip N of M in one continuous take` (model thinks it is slicing a longer video)
+- Writing a slow push-in on every clip (gets closer and closer)
+- Large story gestures in i2v (face/clothes/background drift)
 
 ## Gemini / i2v refusal
 

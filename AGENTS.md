@@ -69,7 +69,7 @@ User's **first message** already includes explicit style choices, e.g.:
 `.cursor/skills/xiaohongshu-caption/SKILL.md` — 成图/系列 → 小红书发布文案（Teo/Kai，只出文案不出图）  
 `.cursor/skills/text-scene/SKILL.md` — 文字场景：按人设补全场景卡，确认后生成一张  
 `.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）  
-`.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：场景卡 → 静帧 → **先读成图 → 5 组不同风格台词（等选择）** → 10s 图生视频提示词  
+`.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：无用户图则用脸图直接出符合台词场景的静帧 → **5 组台词或用户自带日/英（长则拆独立 10s）** → 图生视频提示词  
 `.cursor/skills/douyin-caption/SKILL.md` — Tagame 视频 → 抖音文案（账号：猛男日语教学，标题+教学正文+标签）  
 `.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）
 
@@ -141,17 +141,17 @@ When user has a **Teo/Kai** still (usually `outputs/approved/`) and asks 图生�
 3. Deliver one copy-paste English prompt; spoken lines in Japanese kana only
 4. Sanitize for Gemini: fictional adults, G-rated. Kneeling/shoes = tying laces / picking up keys — never ankle-grip or "won't let go" (that refusal is "real people in situations like that")
 
-If the still is **Tagame** / anime: use `tagame-anime` Turn C1 (read the still first, then 5 diverse dialogue options, wait) then C2 (i2v prompt). Do not default to invite/heat/possession.
+If the still is **Tagame** / anime: use `tagame-anime`. If the user already pasted Japanese/English lines → C2 or C2-S (split long copy, keep continuity). Otherwise Turn C1 (read the still first, then 5 diverse dialogue options, wait) then C2. Do not default to invite/heat/possession.
 
 ## Tagame anime (separate track)
 
 When user @Tagame / `characters/Tagame` / `docs/anime.md` / 办公室肌肉上司 / 动漫画风:
 
 1. Follow `.cursor/skills/tagame-anime/SKILL.md`
-2. Turn 1: load Tagame bible → fill scene card → **STOP** for confirmation
-3. Turn 2: one GenerateImage, **Japanese anime** (never photoreal), face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
-4. After the still: **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene, and **STOP**. Do **not** default to invite → body-heat → possession
-5. After the user picks a set: write 10s i2v prompt (kana; first line at 2.0s). Do **not** call GenerateImage for the video step
+2. No user still + (lines or 生成/出图): **GenerateImage now** from Tagame face ref; infer scene from the lines. Scene-card STOP only if they @Tagame with no lines and no generate request
+3. One GenerateImage, **Japanese anime** (never photoreal), face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
+4. After the still: if the user already pasted Japanese or English lines, skip options — kana (translate English first), split long scripts into multiple 10s clips with visual continuity. Otherwise **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene, and **STOP**. Do **not** default to invite → body-heat → possession
+5. After the user picks a set (or supplied lines): write 10s i2v prompt(s) (kana; first line at 2.0s). Long copy = N **independent** paste blocks with the same BASE; clip 2+ uses the previous last frame as the reference image. Micro-motion only. Do **not** call GenerateImage for the video step
 6. Then run `douyin-caption` for 抖音 title + teaching caption + tags (account **猛男日语教学**), unless the user skips copy
 7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration
 

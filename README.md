@@ -105,7 +105,7 @@ agent id 会写到 gitignored 的 `outputs/drafts/cloud_agent.json`。指定分�
 - **已有成图换姿态** → `@pose-series`：先选编号姿态，组图进 `outputs/approved/series/`，出图后自动给小红书文案（Teo / Kai）
 - **成图转动画** → `@gemini-video`：写出可复制进 Gemini 的 10 秒图生视频提示词（台词日语假名）
 - **只要文案** → `@xiaohongshu-caption`：对着成图/系列写标题+正文+标签
-- **Tagame 动漫** → `@tagame-anime`：场景卡 → 静帧 → 先读成图再选 5 组不同风格日语台词 → 再写 10s 图生视频提示词
+- **Tagame 动漫** → `@tagame-anime`：没有参考图就用 Tagame 脸图直接出符合台词场景的静帧；有台词则跳过 5 组选项（长则拆多条独立 10s）
 - **抖音发布（猛男日语教学）** → `@douyin-caption`：标题 + 教学文案 + 标签
 
 ---

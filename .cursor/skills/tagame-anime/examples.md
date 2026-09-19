@@ -89,44 +89,14 @@
 ## 4) Turn C2 — 用户回 `1`（加班责问）
 
 【情绪弧】加班责问  
-动作：对上镜头 → 靠近 → 下巴压向镜头，**不要**写成手摸胸口公式。
+微动：姿态锁成图；只呼吸/眨眼/口型。**不要**写走近、摸胸、猛推镜头。
 
 **台词：**  
-Tagame「こんなじかんまで、のこってたのか」@2.0s  
-Tagame「おまえのせいだ、かえれなくなる」@4.5s  
-Tagame「ほら、こっちをみろ」@7.0s
+「こんなじかんまで、のこってたのか」@2.0s  
+「おまえのせいだ、かえれなくなる」@4.5s  
+「ほら、こっちをみろ」@7.0s
 
-**复制到模型：**（MOTION 跟弧走）
-
-```text
-Animate the uploaded image into a 10-second ANIME video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 9:16 vertical. Single continuous shot, no cuts, no new locations, no costume change, no nudity.
-
-ART STYLE LOCK: Keep high-quality Japanese anime / digital illustration look of the still. Do NOT restyle into photorealistic live action. Do NOT turn him into a real person.
-
-FICTION: Original fictional adult anime character only (Tagame, about 40). Not a real person. Not based on any living person. Suggestive but clothed. No explicit nudity.
-
-IDENTITY LOCK: Keep the exact anime face, dark-brown short spiked hair, brown beard, extreme musculature, sweat-damp white shirt, black trousers, corridor, and lighting from the uploaded image. Do not add people. Do not slim him.
-
-CAST: The muscular anime man is Tagame. He speaks directly to the viewer. Voice: low, slightly breathy mature Japanese male.
-
-MOTION (10s, continue this pose, do not freeze):
-0.0-2.0s: chest rises with breath, blink, fingers stay on hips, inhale to speak. Low angle unchanged.
-2.0-4.5s: first line at 2.0s; he glances as if catching someone still in the building, then locks eyes with the camera.
-4.5-7.0s: second line; he leans a little closer; shirt stays on.
-7.0-9.5s: third line; chin dips toward camera, “look here” beat; small smirk.
-9.5-10.0s: short end hold on face and chest.
-
-CAMERA: low-angle slow push-in toward chest and face. Do not whip-pan. Do not cut.
-
-AUDIO: Japanese speech only. Lip-sync the quoted lines. Hiragana/katakana only. No English. No Chinese. No on-screen text, subtitles, captions, logos, or watermarks. No background music. Room tone: quiet office corridor, distant HVAC. Foley: shirt cotton, one soft footstep, breath.
-
-DIALOGUE (spoken in Japanese, written in kana; he is talking to YOU):
-Tagame says: "こんなじかんまで、のこってたのか"
-Tagame says: "おまえのせいだ、かえれなくなる"
-Tagame says: "ほら、こっちをみろ"
-
-CONSTRAINTS: Anime, not photoreal. Clothes stay on. First spoken line at 2.0s. Dense talk after 2s. Direct address only.
-```
+复制块用 SKILL 里的 **10 层结构**（REFERENCE IMAGE PRIORITY → CHARACTER/SCENE LOCK → 微动 TIMELINE → DIALOGUE → END STATE）。DIALOGUE 只写三句假名，不要 `Tagame says:`。镜头：匹配参考图，只允许极慢微推。
 
 同一回合再出抖音文案（见 `douyin-caption` examples）。
 
@@ -147,12 +117,36 @@ C1 应多给 D 温柔允许、B 加班软化、J 教学向；少给命令/调戏
 
 ---
 
-## 7) 用户直接贴台词
+## 7) 用户直接贴短台词
 
-跳过 C1。转成假名后走 C2 + `douyin-caption`。
+跳过 C1。日语转假名 / 英语先译成口语日语再转假名，走 **C2** + `douyin-caption`。
 
 ---
 
-## 8) 拒稿后改写
+## 8) 用户贴较长日语或英语 → 多条 10s（连贯）
+
+**User:** 成图 + 一段英语（或日语）超过 3 句
+
+跳过 C1。走 **C2-S**：
+
+1. 英→日口语→假名（或日→假名）
+2. 每 3 句一条 **独立** 10s；同一套 BASE，每段只改 CLIP STATE / 台词 / 片尾
+3. 第 1 段上传原静帧；第 2 段起上传 **上一段最后一帧**（新的视觉真相）
+4. **不要**写 `Clip 1 of 4 in one continuous take`；**不要**每段 `slow push-in toward chest`
+5. 动作只呼吸/眨眼/口型；最后 1 秒是中间帧，方便截去当下一段参考图
+
+例：6 句 → 2 个完整复制块。第 2 块的 CLIP STATE：`uploaded image is the last frame of the previous independently generated clip`。
+
+---
+
+## 9) 无用户参考图 + 已给台词 → 直接出图
+
+**User:** 贴了一段日语，没有上传场景图
+
+跳过 Turn A。用 `characters/Tagame/references/face_01.jpeg` 出一张 **符合台词场景** 的静帧（暗記/学校 → 办公室西装说教，不要无脑湿衬衫走廊）。QC 后同一回合 C2 / C2-S。不要向用户再要一张参考照。
+
+---
+
+## 10) 拒稿后改写
 
 若模型拒「触摸/占有」过强：改用目录 D 或 J，整段重新贴复制块，不要只发 diff。保留 ART STYLE LOCK + FICTION + 衣服不脱。

@@ -15,7 +15,7 @@ description: >-
 
 本 skill **只写提示词**。不要调用 `GenerateImage`。不要走 virtual-couple / pose-series / text-scene。
 
-**Route out:** Tagame / 动漫画风 / `docs/anime.md` → `tagame-anime` Turn C1（先读成图，再给 5 组不同风格台词，等选择）再 C2。本 skill 是 Teo/Kai **写实** 10s，不要把 Tagame 写成 photoreal。
+**Route out:** Tagame / 动漫画风 / `docs/anime.md` → `tagame-anime`（没台词：C1 先读成图再给 5 组；已给日/英台词：C2 / 长则 C2-S）。本 skill 是 Teo/Kai **写实** 10s，不要把 Tagame 写成 photoreal。
 
 | Pipeline | Input | Output |
 |----------|--------|--------|
