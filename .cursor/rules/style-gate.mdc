@@ -15,8 +15,6 @@ Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new sce
 
 **Exception — cover-collage:** 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面 → follow `.cursor/skills/cover-collage/SKILL.md`. Post 3 layout+copy schemes and STOP. Do **not** call GenerateImage (Pillow composite only).
 
-**Exception — wallpaper:** 壁纸 / wallpaper / /wallpaper / iPhone壁纸 / iPad壁纸 / 桌面壁纸 → follow `.cursor/skills/wallpaper/SKILL.md`. Do **not** post clothing options and do **not** wait. One photo in; master + three device files out. Not for @Tagame.
-
 **Exception — wallpaper-demo:** 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 → follow `.cursor/skills/wallpaper-demo/SKILL.md`. Do **not** post clothing options and do **not** wait. One still in; one iPhone lock-screen product shot out. Brand text only if the user supplied it.
 
 ## Turn 1: ASK ONLY — never generate

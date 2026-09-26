@@ -6,7 +6,7 @@ compose — key the flat field off a subject cutout and paste it onto a
           background at a given scale and position. Never upscales.
 place   — pad a master onto a wider or taller canvas at native pixels.
 
-See .cursor/skills/wallpaper/SKILL.md.
+The cutout wallpaper skill was removed. This script is not an agent entry point.
 """
 from __future__ import annotations
 

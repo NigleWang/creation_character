@@ -5,15 +5,14 @@ description: >-
   is a product shot; the screen wallpaper is the reference image. Brand lines
   汉克壁纸 and MR.HUNK WALLPAPER are omitted unless the user supplies them.
   Use when the user asks for 壁纸演示图, 锁屏展示, 锁屏效果图, 手机锁屏壁纸展示,
-  lock screen mockup, or wallpaper demo. Do not use for actual iPhone/iPad/Desktop
-  wallpaper files (that is wallpaper).
+  lock screen mockup, or wallpaper demo. The cutout wallpaper skill is removed.
 ---
 
 # Wallpaper Demo — 手机锁屏展示图
 
 把一张已有成图做成 **iPhone 锁屏产品展示图**：浅灰棚拍、深色 iPhone 15 Pro、屏幕里是原图、iOS 锁屏界面叠在上面。
 
-**不要等待。** 不走换装确认，不走 `wallpaper` 的抠图三端流程。一次 `GenerateImage`。
+**不要等待。** 不走换装确认。一次 `GenerateImage`。
 
 | 给了什么 | 手机下方 |
 |----------|----------|
@@ -32,7 +31,6 @@ description: >-
 
 **Out:**
 
-- 真壁纸文件（iPhone 9:16、iPad、桌面）→ `wallpaper`
 - 换脸 → `virtual-couple`
 - Tagame 静帧 / 视频词 → `tagame-anime`
 
