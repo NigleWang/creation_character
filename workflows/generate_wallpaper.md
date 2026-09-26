@@ -1,16 +1,14 @@
 # Generate Wallpaper
 
-**Trigger:** `@virtual-couple` + scene + `壁纸` or `wallpaper`
+**Trigger:** 上传一张照片 + `壁纸` / `wallpaper` / `/wallpaper`
 
-## Config
+**Skill:** `.cursor/skills/wallpaper/SKILL.md`
 
-- `aspect_ratio`: `9:16`
-- Template: `templates/wallpaper.yaml`
+不走 virtual-couple 换装确认。抠出人物并锁定，单独简化背景，用 `scripts/make_wallpaper.py compose` 定位置，融合后适配 iPhone / iPad / Desktop。不要整张重画人物。
 
 ## Example
 
 ```text
-@virtual-couple @Teo @Kai
-[上传场景图]
-手机壁纸 9:16
+[上传一张照片]
+壁纸
 ```

@@ -28,7 +28,9 @@
 
 身份 + 动漫锁定 + 仰拍第一帧。参考图只有 Tagame 脸。
 
-关键句必须出现：`High-quality Japanese anime`、`NOT photorealistic`、`Match the attached character reference`、`LOW-ANGLE`。
+默认画风关键句必须出现：`High-quality Japanese anime`、`NOT photorealistic`、`Match the attached character reference`、`LOW-ANGLE`。
+
+用户点名 CuteGuysArt 时，提示词从 `.cursor/skills/cuteguysart/SKILL.md` 原样贴。关键句必须出现：`CuteGuysArt style`、`glossy`、`warm skin gradients`、`cheek blush`、`catchlights`、`NOT photorealistic`。不要出现 `High-quality Japanese anime`、`colored pencil`。不要把 `docs/STYLE` 里的网球场、白背心、彩虹袜、温泉或截图界面画进别的场景。
 
 出图通过后 **进入 C1**，不要直接写 i2v。
 

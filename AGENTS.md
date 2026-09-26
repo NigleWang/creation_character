@@ -2,12 +2,13 @@
 
 Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 
-## Two tracks (do not mix)
+## Tracks (do not mix character tracks)
 
 | Track | Characters | Style | Skills |
 |-------|------------|-------|--------|
 | **Couple** | Teo（受, left）+ Kai（攻, right） | Photoreal Xiaohongshu | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `cover-collage` |
-| **Tagame** | Tagame only | **Japanese anime** | `tagame-anime` / `douyin-caption` |
+| **Tagame** | Tagame only | **Japanese anime**；点名才用 CuteGuysArt | `tagame-anime` / `cuteguysart` / `douyin-caption` |
+| **Wallpaper** | The person in the uploaded photo | Subject locked, simplified background, scripted layout | `wallpaper` |
 
 @Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai faces. Never `gemini-video` photoreal paste.
 
@@ -61,6 +62,8 @@ User's **first message** already includes explicit style choices, e.g.:
 - `全部保持原场景`
 - `角色默认，上衣藏青，下装灰`
 
+Wallpaper（壁纸 / `/wallpaper`）不走这段确认。见下方 Wallpaper。
+
 ## Skills location
 
 `.cursor/skills/virtual-couple/SKILL.md` — 换脸：场景图定姿态，角色圣经定身份  
@@ -71,7 +74,8 @@ User's **first message** already includes explicit style choices, e.g.:
 `.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）  
 `.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：无用户图则用脸图直接出符合台词场景的静帧 → **5 组台词或用户自带日/英（长则拆独立 10s）** → 图生视频提示词  
 `.cursor/skills/douyin-caption/SKILL.md` — Tagame 视频 → 抖音文案（账号：猛男日语教学，标题+教学正文+标签）  
-`.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）
+`.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）  
+`.cursor/skills/wallpaper/SKILL.md` — 抠主体、简化背景、脚本构图，再融合并适配三端
 
 ## Text scene (no photo)
 
@@ -103,6 +107,18 @@ When user has **2+ stills** (usually `outputs/approved/series/<task_id>/`) and a
 4. **Do not** call GenerateImage — this is Pillow pixel composite, not a redraw
 
 Do **not** run virtual-couple 换脸 or pose-series 生图 for this case.
+
+## Wallpaper
+
+When the user uploads a photo and asks 壁纸 / wallpaper / /wallpaper / iPhone壁纸 / iPad壁纸 / 桌面壁纸:
+
+1. Follow `.cursor/skills/wallpaper/SKILL.md`
+2. Do **not** post clothing options and do **not** wait
+3. Cut the person out as a locked asset, generate a simplified background, then `python3 scripts/make_wallpaper.py compose` for scale and position. Fuse lighting into a `3:4` master.
+4. Adapt that master to iPhone `9:16`, iPad `4:3`, and Desktop `16:9` by extending the environment. Do not redraw the person.
+5. Save `outputs/approved/wallpaper/<task_id>/`
+
+Not for @Tagame. Not a substitute for Xiaohongshu 3:4.
 
 ## GenerateImage
 
@@ -149,10 +165,10 @@ When user @Tagame / `characters/Tagame` / `docs/anime.md` / 办公室肌肉上�
 
 1. Follow `.cursor/skills/tagame-anime/SKILL.md`
 2. No user still + (lines or 生成/出图): **GenerateImage now** from Tagame face ref; infer scene from the lines. Scene-card STOP only if they @Tagame with no lines and no generate request
-3. One GenerateImage, **Japanese anime** (never photoreal), face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
+3. One GenerateImage, **Japanese anime** by default (never photoreal). If the user names **CuteGuysArt**, paste the style block from `.cursor/skills/cuteguysart/SKILL.md`. Face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
 4. After the still: if the user already pasted Japanese or English lines, skip options — kana (translate English first), split long scripts into multiple 10s clips with visual continuity. Otherwise **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene, and **STOP**. Do **not** default to invite → body-heat → possession
 5. After the user picks a set (or supplied lines): write 10s i2v prompt(s) (kana; first line at 2.0s). Long copy = N **independent** paste blocks with the same BASE; clip 2+ uses the previous last frame as the reference image. Micro-motion only. Do **not** call GenerateImage for the video step
 6. Then run `douyin-caption` for 抖音 title + teaching caption + tags (account **猛男日语教学**), unless the user skips copy
-7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration
+7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration, unless that still was made as **CuteGuysArt** — then keep the glossy CuteGuysArt rendering, do not repaint it as the default anime
 
 Do **not** run virtual-couple, text-scene, pose-series, or gemini-video for Tagame.

@@ -88,4 +88,4 @@ character_bundle:
 - Do not merge Teo and Kai features
 - Preserve glasses on Teo always
 - Preserve Kai's mature muscular look always
-- Tagame: always Japanese anime (never photoreal); keep beard, dark-brown spiked hair, extreme muscle; never slim or pretty-boy
+- Tagame: default Japanese anime (never photoreal). If the user names CuteGuysArt, follow `.cursor/skills/cuteguysart/SKILL.md` and change only the rendering (glossy warm skin, blush, catchlight eyes, extreme V-taper). Keep the beard, dark-brown spiked hair, and extreme muscle. Never slim or pretty-boy

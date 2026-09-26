@@ -7,13 +7,14 @@ description: >-
   user-supplied Japanese/English lines. Long scripts split into multiple 10s
   i2v clips. After the video prompt, run douyin-caption (账号：猛男日语教学).
   Use when the user mentions Tagame, @Tagame, characters/Tagame, docs/anime.md,
-  动漫画风, 办公室肌肉上司, or asks for Tagame 场景图 / 图生视频 / 10秒视频.
-  Never photoreal; never Teo/Kai couple pipeline.
+  动漫画风, 办公室肌肉上司, CuteGuysArt, or asks for Tagame 场景图 / 图生视频 / 10秒视频.
+  Never photoreal; never Teo/Kai couple pipeline. Default art is Japanese anime.
+  CuteGuysArt only when the user names that style.
 ---
 
 # Tagame Anime — Bible Still → 台词选项 → 10s i2v
 
-固定角色 **Tagame**（办公室肌肉上司）。画风 **永远是高品质日系动漫**，禁止写实。
+固定角色 **Tagame**（办公室肌肉上司）。默认画风是 **高品质日系动漫**。用户点名 **CuteGuysArt** 时，改用该风格出图和锁视频画风。两种都禁止写实。
 
 先按 Character Bible 补全场景。静帧通过后：
 
@@ -46,11 +47,31 @@ description: >-
 
 ## Art style lock（任何 Tagame 步骤）
 
-- 高品质日系动漫 / 现代数字插画 / 干净线稿 + 细腻光影
-- 匹配 `characters/Tagame/references/face_01.jpeg` 的 bara 肌肉男动漫脸
+先判定本轮画风，再写静帧和 i2v。没点名就用默认，不要把 CuteGuysArt 套进普通 Tagame。
+
+| 用户怎么说 | `art_style` | 用哪一块 |
+|------------|-------------|----------|
+| 没提画风，或只说动漫 / 日系 | `japanese_anime` | 默认日系块 |
+| **CuteGuysArt**、Cute Guys Art、风格 CuteGuysArt、限定 CuteGuysArt | `cuteguysart` | `.cursor/skills/cuteguysart/SKILL.md` 的静帧段。说明：`docs/tagame_style.md` |
+
+两种画风共用这些锁：
+
+- 匹配 `characters/Tagame/references/face_01.jpeg`：深棕短刺发、棕色胡茬、方颌、约 40 岁、极度肌肉
 - **禁止：** photorealistic、真人摄影、3D CGI、美颜写实、HDR 真人光
 - **禁止：** 清俊少年、削瘦、换脸、混入 Teo/Kai
-- 服装可按场景变，**脸+体型+胡茬+深棕短发**锁定参考图
+- 服装按场景走（衬衫留在身上）。CuteGuysArt **不要**照搬风格参考里的白背心、牛仔短裤、彩虹袜、网球场，除非用户自己要那个场景
+
+### 默认：`japanese_anime`
+
+```text
+High-quality Japanese anime / modern digital illustration. Clean linework, refined cel-shaded lighting, bara muscular aesthetic. NOT photorealistic. NOT live-action. NOT 3D CGI. NOT a real photograph. Match the attached anime character reference.
+```
+
+### 点名才用：`cuteguysart`
+
+先读 `.cursor/skills/cuteguysart/SKILL.md`，把其中的静帧段原样贴进 `[ART STYLE]`。人仍是 Tagame。参考图在 `docs/STYLE/`，只借光泽暖色画法，不借网球场、背心、彩虹袜、温泉和截图界面。
+
+i2v 用该 skill 的 `ART STYLE LOCK`：锁光泽皮肤渐变、腮红、高光和大眼睛。不要写回彩铅硬边，也不要写回默认日系细腻光影。
 
 ---
 
@@ -67,13 +88,15 @@ Identity prompt（**出静帧**用。图生视频不要靠这段点名，用上�
 Tagame: mature East Asian man ~40, square jaw, dark-brown short slightly wavy spiked hair swept up, neat brown stubble/beard, thick angled brows, confident half-smile, extremely muscular (broad shoulders, full chest, thick arms, narrow waist). High-quality Japanese anime / digital illustration, clean linework, not photorealistic. Match the attached character reference exactly.
 ```
 
+CuteGuysArt 出图时，不要再写 `High-quality Japanese anime`。身份句用 `cuteguysart` skill 里的 Tagame 句：同一张脸，改成光泽眼睛、高光和暖笑。发色、胡茬、方颌仍锁脸图。
+
 ---
 
 ## Turn A — 场景卡（仅「只点名、还不出图」）
 
 **无用户参考图且（已给台词 或 已说生成/出图）→ 跳过本回合，直接 Turn B。**
 
-只 @Tagame / 要新场景、还没台词、也没说出图时：用 Bible 填缺口。用户原文覆盖默认值；**不能**改画风、削肌肉、换脸。
+只 @Tagame / 要新场景、还没台词、也没说出图时：用 Bible 填缺口。用户原文覆盖默认值。**不能**削肌肉、换脸、改成写实。画风只有用户点名 CuteGuysArt 才离开默认日系。
 
 写 `outputs/drafts/tagame_scene_<task_id>.json`，`"user_confirmed": false`。
 
@@ -96,9 +119,10 @@ Tagame: mature East Asian man ~40, square jaw, dark-brown short slightly wavy sp
 ### 回复模板（必须用，然后 STOP）
 
 ```text
-✅ Tagame 场景已按人设补全（动漫画风锁定，可改）
+✅ Tagame 场景已按人设补全（画风：{默认日系动漫 / CuteGuysArt}）
 
 【谁】仅 Tagame，对镜头里的「你」
+【画风】{默认日系动漫 / CuteGuysArt}
 【时间地点】{...}
 【构图】3:4 {中近景}，仰拍
 【第一帧】{插腰/摸胸口前的静止姿态，要抓人}
@@ -163,7 +187,7 @@ arguments: {
 
 ```text
 [ART STYLE — highest priority]
-High-quality Japanese anime / modern digital illustration. Clean linework, refined cel-shaded lighting, bara muscular aesthetic. NOT photorealistic. NOT live-action. NOT 3D CGI. NOT a real photograph. Match the attached anime character reference.
+{粘贴本轮画风块：默认日系，或用户点名后的 CuteGuysArt 整段}
 
 [CHARACTER IDENTITY]
 Only one person: Tagame. {identity prompt}
@@ -183,17 +207,18 @@ Vertical 3:4. {framing}. LOW-ANGLE shot looking up at him. Face in the upper two
 {filled}. Shirt stays on. Tasteful tension (open collar / optional sweat-damp fabric). No nudity.
 
 [LIGHTING]
-{lighting}. Match a real indoor brightness — do not over-brighten into cheap AI glow. Keep contrast.
+{默认日系：} {lighting}. Match a real indoor brightness — do not over-brighten into cheap AI glow. Keep contrast.
+{CuteGuysArt：} Glossy warm peach-to-orange skin, cheek blush, specular highlights. The place stays the requested scene. Do not repaint it as a photograph, and do not replace it with the tennis court, rainbow socks, or hot spring from docs/STYLE.
 
 [CONSTRAINTS]
-Anime still, one adult man, correct anatomy, no extra limbs. No text, watermark, logo, or subtitles on the image. No Teo, no Kai, no photoreal skin pores.
+One adult man, correct anatomy, no extra limbs. No text, watermark, logo, or subtitles on the image. No Teo, no Kai, no photoreal skin pores. CuteGuysArt stills must literally include the words CuteGuysArt style.
 ```
 
 ### QC（Tagame）
 
 | Check | Fail if |
 |-------|---------|
-| Style | 看起来像照片/真人 |
+| Style | 看起来像照片/真人。点了 CuteGuysArt 却画成细腻日系，或没点名却画成 CuteGuysArt。CuteGuysArt 成图照搬了网球场、白背心、彩虹袜 |
 | Face | 不像参考：没胡茬、发色错、脸嫩 |
 | Body | 被画瘦、肩窄 |
 | Frame | 不是 3:4、第一帧没有压迫感/抓人 |
@@ -331,7 +356,8 @@ Do not redesign, reinterpret, beautify, or regenerate these elements.
 If any textual instruction conflicts with the reference image, PRIORITIZE THE REFERENCE IMAGE.
 
 ART STYLE LOCK:
-Preserve the exact high-quality Japanese anime / digital illustration style of the reference image.
+{默认日系：} Preserve the exact high-quality Japanese anime / digital illustration style of the reference image.
+{CuteGuysArt：} Preserve the exact CuteGuysArt rendering of the reference image: glossy digital anime, warm peach-to-orange skin gradients, cheek blush, specular highlights on skin and hair, large catchlight eyes, clean dark outlines, extreme V-taper. Do not redraw him as flat hard-cel, colored pencil, or the default refined Japanese office illustration.
 Do not convert him into photorealistic live action. Do not make him look like a real person.
 
 CHARACTER LOCK:
@@ -629,7 +655,8 @@ The final frame must be easy to use as the reference image of the next 10-second
 
 | 用户说了 | 走 |
 |----------|-----|
-| @Tagame / 田龟式肌肉上司 / docs/anime.md | **本 skill**。无用户图 + 已给台词 → **直接 B 出图** 再 C2/C2-S |
+| @Tagame / 田龟式肌肉上司 / docs/anime.md | **本 skill**。无用户图 + 已给台词 → **直接 B 出图** 再 C2/C2-S。画风默认日系 |
+| 限定风格 CuteGuysArt / 风格 CuteGuysArt | **本 skill**，`art_style: cuteguysart`。静帧和 i2v 都用 CuteGuysArt 块。人、胡茬、深棕短发、衣服不脱仍锁 Tagame |
 | 无成图、无台词、只点名 | 本 skill **A**（场景卡 STOP） |
 | 已有 Tagame 成图 + 图生视频 | 本 skill **C1**（先选项） |
 | 已选台词编号 / 已贴 **短** 日语或英语（≤3 句） | 本 skill **C2** + `douyin-caption` |

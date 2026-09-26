@@ -14,7 +14,7 @@ Do not identify original people in reference images.
 ## Generation
 
 - Tool: `CallDynamicTool` → `cursor` / `GenerateImage`
-- `aspect_ratio`: `3:4` (小红书), `9:16` (壁纸)
+- `aspect_ratio`: `3:4` (小红书, wallpaper master), wallpaper devices `9:16` / `4:3` / `16:9`
 - `reference_image_paths`: [scene, teo ref, kai ref] as applicable
 - Single still → `outputs/approved/xiaohongshu_<task_id>.png`
 - pose-series set → `outputs/approved/series/<task_id>/01_<pose_id>.png` (new folder per set)
@@ -35,6 +35,8 @@ tagame-anime (@Tagame / docs/anime.md) → load `characters/Tagame/` → **无�
 
 cover-collage (系列成图 + 拼接/封面/九宫格) → **3 layout+copy schemes, wait** → `python3 scripts/make_cover.py` → `outputs/approved/series/<task_id>/cover_<layout>.png` → **no GenerateImage**
 
+wallpaper (上传照片 + 壁纸) → `.cursor/skills/wallpaper/SKILL.md` → spec JSON → subject cutout → simplified background → `scripts/make_wallpaper.py compose` → fuse master `3:4` → adapt iPhone `9:16` / iPad `4:3` / Desktop `16:9` → `outputs/approved/wallpaper/<task_id>/`
+
 ## Style differentiation
 
-Before GenerateImage: post numbered text options for accessories/clothing/patterns. On mobile/cloud, AskQuestion may not work — text inquiry is mandatory. Pose/composition must not change.
+Before GenerateImage: post numbered text options for accessories/clothing/patterns. On mobile/cloud, AskQuestion may not work — text inquiry is mandatory. Pose/composition must not change. Wallpaper does not use this step.

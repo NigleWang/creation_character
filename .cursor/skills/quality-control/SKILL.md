@@ -8,7 +8,7 @@ description: >-
 
 # Quality Controller
 
-**Tagame / anime stills:** use the QC table in `tagame-anime` (style must stay Japanese anime). This skill is Teo/Kai photoreal.
+**Tagame / anime stills:** use the QC table in `tagame-anime` (default Japanese anime; CuteGuysArt only when that style was requested). This skill is Teo/Kai photoreal.
 
 ## Input
 

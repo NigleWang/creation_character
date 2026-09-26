@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Character System
 
-Two tracks. **Do not mix.**
+Two character tracks. **Do not mix.** Wallpaper is a third path (`wallpaper` skill): lock the person as a cutout, reconstruct a simplified background, place them with `scripts/make_wallpaper.py compose`, then fuse and adapt to iPhone / iPad / Desktop. It does not use the couple style gate or the Tagame anime pipeline.
 
 ## Track A — Teo / Kai (photoreal)
 
@@ -16,7 +16,7 @@ Two tracks. **Do not mix.**
 
 - **Tagame** — 办公室肌肉上司, solo, `characters/Tagame/`
 - Skill: `tagame-anime`（台词多样，先选项再视频词）+ `douyin-caption`（抖音 / 猛男日语教学）
-- Style: high-quality Japanese anime / digital illustration **always**
+- Style: high-quality Japanese anime / digital illustration by default. **CuteGuysArt** only when the user names that style (`.cursor/skills/cuteguysart/SKILL.md`)
 - Never photoreal, never Teo/Kai, never `gemini-video` photoreal paste
 
 ## Hard rules (Teo/Kai)
@@ -37,13 +37,15 @@ Two tracks. **Do not mix.**
 ## Hard rules (Tagame)
 
 1. Bible + `characters/Tagame/references/face_01.jpeg` lock face, beard, hair, extreme muscle
-2. **Anime lock** on every still and every i2v prompt
+2. **Anime lock** on every still and every i2v prompt. Default is Japanese anime. **CuteGuysArt** only when the user names that style; keep the same face, beard, hair, and clothes-on rule
 3. No user still: generate one anime still from `characters/Tagame/references/face_01.jpeg`, scene inferred from the dialogue (or office default). Do not wait for a scene photo. Then **read still first** → **5 diverse dialogue options, wait** → 10s video prompt. If the user already pasted Japanese or English lines: skip options; split long copy into independent 10s clips (next clip = last frame of previous). Do not default every video to invite → heat → possession
 4. Direct address to the viewer (`おまえ` / 你). First spoken line at 2.0s
 5. Clothes stay on (suit / wet shirt / undone buttons). No Teo/Kai pipeline skills
 6. **DOUYIN CAPTION:** After the video prompt (or 抖音文案/标题/标签) → `douyin-caption`. Account **猛男日语教学**. Do **not** call GenerateImage.
 
 ## User triggers
+
+When user uploads a photo and asks 壁纸 / wallpaper / /wallpaper / iPhone壁纸 / iPad壁纸 / 桌面壁纸 → **`wallpaper`**. Do not post clothing options. Do not wait. Not for @Tagame.
 
 When user uploads scene + @Teo/@Kai/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
 

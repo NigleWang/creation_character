@@ -46,8 +46,20 @@ visual_signature:
   - looking straight at camera as if speaking to お前 / 你
 
 art_style:
+  default: japanese_anime
   lock: high-quality Japanese anime / modern digital illustration
   notes: clean linework, refined lighting, bara muscular aesthetic matching the face ref
+  variants:
+    cuteguysart:
+      trigger: CuteGuysArt
+      spec: .cursor/skills/cuteguysart/SKILL.md
+      notes: docs/tagame_style.md
+      refs: docs/STYLE
+      lock: >-
+        CuteGuysArt. Glossy digital anime, warm peach-to-orange skin gradients,
+        cheek blush, specular highlights, large catchlight eyes, extreme V-taper.
+        Same Tagame face, beard, and dark-brown hair. Do not copy the sample
+        scenes (tennis, tank top, rainbow socks, hot spring) unless the user asks.
   forbidden:
     - photorealistic
     - 3D CGI
