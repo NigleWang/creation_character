@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Character System
 
-Two character tracks. **Do not mix.** Wallpaper is a third path (`wallpaper` skill): lock the person as a cutout, reconstruct a simplified background, place them with `scripts/make_wallpaper.py compose`, then fuse and adapt to iPhone / iPad / Desktop. It does not use the couple style gate or the Tagame anime pipeline.
+Two character tracks. **Do not mix.** Wallpaper is a third path (`wallpaper` skill): lock the person as a cutout, reconstruct a simplified background, place them with `scripts/make_wallpaper.py compose`, then fuse and adapt to iPhone / iPad / Desktop. A lock-screen product shot of an existing still is a fourth path (`wallpaper-demo`): photoreal iPhone, screen shows the still, brand text only if the user supplied it. Neither path uses the couple style gate or the Tagame anime pipeline.
 
 ## Track A — Teo / Kai (photoreal)
 
@@ -46,6 +46,8 @@ Two character tracks. **Do not mix.** Wallpaper is a third path (`wallpaper` ski
 ## User triggers
 
 When user uploads a photo and asks 壁纸 / wallpaper / /wallpaper / iPhone壁纸 / iPad壁纸 / 桌面壁纸 → **`wallpaper`**. Do not post clothing options. Do not wait. Not for @Tagame.
+
+When user points at an existing still and asks 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 → **`wallpaper-demo`**. Generate one iPhone lock-screen product shot. Do not wait. Do **not** write `汉克壁纸` or `MR.HUNK WALLPAPER` unless the user supplied them.
 
 When user uploads scene + @Teo/@Kai/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
 

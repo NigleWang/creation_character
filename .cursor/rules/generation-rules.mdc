@@ -37,6 +37,8 @@ cover-collage (系列成图 + 拼接/封面/九宫格) → **3 layout+copy schem
 
 wallpaper (上传照片 + 壁纸) → `.cursor/skills/wallpaper/SKILL.md` → spec JSON → subject cutout → simplified background → `scripts/make_wallpaper.py compose` → fuse master `3:4` → adapt iPhone `9:16` / iPad `4:3` / Desktop `16:9` → `outputs/approved/wallpaper/<task_id>/`
 
+wallpaper-demo (已有成图 + 壁纸演示图 / 锁屏展示) → `.cursor/skills/wallpaper-demo/SKILL.md` → one GenerateImage `3:4` → `outputs/approved/<source>_lockscreen_demo.png`. Brand lines only when the user supplied them.
+
 ## Style differentiation
 
 Before GenerateImage: post numbered text options for accessories/clothing/patterns. On mobile/cloud, AskQuestion may not work — text inquiry is mandatory. Pose/composition must not change. Wallpaper does not use this step.

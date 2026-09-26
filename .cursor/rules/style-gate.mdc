@@ -17,6 +17,8 @@ Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new sce
 
 **Exception — wallpaper:** 壁纸 / wallpaper / /wallpaper / iPhone壁纸 / iPad壁纸 / 桌面壁纸 → follow `.cursor/skills/wallpaper/SKILL.md`. Do **not** post clothing options and do **not** wait. One photo in; master + three device files out. Not for @Tagame.
 
+**Exception — wallpaper-demo:** 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 → follow `.cursor/skills/wallpaper-demo/SKILL.md`. Do **not** post clothing options and do **not** wait. One still in; one iPhone lock-screen product shot out. Brand text only if the user supplied it.
+
 ## Turn 1: ASK ONLY — never generate
 
 If the user has **not** replied with customization choices in this conversation:

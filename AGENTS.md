@@ -9,6 +9,7 @@ Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 | **Couple** | Teo（受, left）+ Kai（攻, right） | Photoreal Xiaohongshu | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `cover-collage` |
 | **Tagame** | Tagame only | **Japanese anime**；点名才用 CuteGuysArt | `tagame-anime` / `cuteguysart` / `douyin-caption` |
 | **Wallpaper** | The person in the uploaded photo | Subject locked, simplified background, scripted layout | `wallpaper` |
+| **Wallpaper demo** | An existing still on a phone | Photoreal iPhone lock-screen product shot | `wallpaper-demo` |
 
 @Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai faces. Never `gemini-video` photoreal paste.
 
@@ -75,7 +76,8 @@ Wallpaper（壁纸 / `/wallpaper`）不走这段确认。见下方 Wallpaper。
 `.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：无用户图则用脸图直接出符合台词场景的静帧 → **5 组台词或用户自带日/英（长则拆独立 10s）** → 图生视频提示词  
 `.cursor/skills/douyin-caption/SKILL.md` — Tagame 视频 → 抖音文案（账号：猛男日语教学，标题+教学正文+标签）  
 `.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）  
-`.cursor/skills/wallpaper/SKILL.md` — 抠主体、简化背景、脚本构图，再融合并适配三端
+`.cursor/skills/wallpaper/SKILL.md` — 抠主体、简化背景、脚本构图，再融合并适配三端  
+`.cursor/skills/wallpaper-demo/SKILL.md` — 已有成图 → iPhone 锁屏展示图；品牌字默认不写
 
 ## Text scene (no photo)
 
@@ -119,6 +121,18 @@ When the user uploads a photo and asks 壁纸 / wallpaper / /wallpaper / iPhone�
 5. Save `outputs/approved/wallpaper/<task_id>/`
 
 Not for @Tagame. Not a substitute for Xiaohongshu 3:4.
+
+## Wallpaper demo（锁屏展示图）
+
+When the user points at an existing still and asks 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 / lock screen mockup / wallpaper demo:
+
+1. Follow `.cursor/skills/wallpaper-demo/SKILL.md`
+2. Do **not** post clothing options and do **not** wait
+3. One `GenerateImage`, `3:4`. The phone is a photoreal product shot. The screen wallpaper is the reference still.
+4. **Do not** write `汉克壁纸` or `MR.HUNK WALLPAPER` unless the user supplied those strings. No `4K高清壁纸` badge unless they asked for a badge.
+5. Save `outputs/approved/<source>_lockscreen_demo.png`
+
+This is not the `wallpaper` cutout pipeline.
 
 ## GenerateImage
 
