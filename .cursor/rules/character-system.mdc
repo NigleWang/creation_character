@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Character System
 
-Two character tracks. **Do not mix.** A lock-screen product shot of an existing still is a separate path (`wallpaper-demo`): photoreal iPhone, screen shows the still, brand text only if the user supplied it. It does not use the couple style gate or the Tagame anime pipeline. The old cutout `wallpaper` skill is removed.
+Two character tracks. **Do not mix.** A device wallpaper showcase of an existing still is a separate path (`wallpaper-demo`): photoreal iPhone lock screen of the still, or a portrait still expanded to a 16:9 MacBook wallpaper and a 4:3 iPad wallpaper, then a product shot of that device. Brand text only if the user supplied it. It does not use the couple style gate or the Tagame anime pipeline. The old cutout `wallpaper` skill is removed.
 
 ## Track A — Teo / Kai (photoreal)
 
@@ -45,7 +45,7 @@ Two character tracks. **Do not mix.** A lock-screen product shot of an existing 
 
 ## User triggers
 
-When user points at an existing still and asks 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 → **`wallpaper-demo`**. Generate one iPhone lock-screen product shot. Do not wait. Do **not** write `汉克壁纸` or `MR.HUNK WALLPAPER` unless the user supplied them.
+When user points at an existing still and asks 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 / 电脑壁纸 / 电脑演示 / iPad壁纸 / iPad演示 → **`wallpaper-demo`**. Phone: one iPhone lock-screen product shot. Computer or iPad: expand the portrait still to 16:9 and/or 4:3, then the device demo. Do not wait. Do **not** write `汉克壁纸` or `MR.HUNK WALLPAPER` unless the user supplied them.
 
 When user uploads scene + @Teo/@Kai/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
 

@@ -24,6 +24,9 @@ TestResults.xml
 
 .DS_Store
 
+# Cloud client previews. The committed copies live under outputs/approved/series/.
+/artifacts/
+
 ### Virtual Couple Studio ###
 outputs/drafts/*
 outputs/approved/*

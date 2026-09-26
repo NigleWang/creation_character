@@ -35,7 +35,7 @@ tagame-anime (@Tagame / docs/anime.md) → load `characters/Tagame/` → **无�
 
 cover-collage (系列成图 + 拼接/封面/九宫格) → **3 layout+copy schemes, wait** → `python3 scripts/make_cover.py` → `outputs/approved/series/<task_id>/cover_<layout>.png` → **no GenerateImage**
 
-wallpaper-demo (已有成图 + 壁纸演示图 / 锁屏展示) → `.cursor/skills/wallpaper-demo/SKILL.md` → one GenerateImage `3:4` → `outputs/approved/<source>_lockscreen_demo.png`. Brand lines only when the user supplied them. The cutout `wallpaper` skill is removed.
+wallpaper-demo (已有成图 + 壁纸演示图 / 锁屏展示 / 电脑壁纸 / iPad壁纸) → `.cursor/skills/wallpaper-demo/SKILL.md`. Phone: one GenerateImage `3:4` → `outputs/approved/<source>_lockscreen_demo.png`. Computer / iPad: expand the portrait still to `16:9` and/or `4:3`, then a device demo of that wallpaper. Brand lines only when the user supplied them. After each saved PNG on Cloud, embed `![label](absolute path)` in the final reply and copy the file to `artifacts/`. The cutout `wallpaper` skill is removed.
 
 ## Style differentiation
 

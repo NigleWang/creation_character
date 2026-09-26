@@ -257,6 +257,15 @@ Do NOT post numbered style/pose options and stop. Do NOT wait for a second turn.
 - 3:4 vertical. One pose per image, never a collage.
 - Follow AGENTS.md, .cursor/skills/pose-series/SKILL.md, character bibles. Never swap Teo/Kai.
 
+## Show images to the client (hard)
+Remote Cloud does not auto-attach GenerateImage output.
+After each PNG is saved, copy it to \`artifacts/\` with the same filename (do not git-add \`artifacts/\`).
+In the final reply, embed every delivered PNG on its own line using the absolute path:
+
+![短标题](/absolute/path/to/file.png)
+
+Do not only mention the path in prose.
+
 ## Task
 ${operatorText}`.trim();
 }
