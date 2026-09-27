@@ -168,6 +168,6 @@ When user @Tagame / `characters/Tagame` / `docs/anime.md` / 办公室肌肉上�
 4. After the still: if the user already pasted Japanese or English lines, skip options — kana (translate English first), split long scripts into multiple 10s clips with visual continuity. Otherwise **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene, and **STOP**. Do **not** default to invite → body-heat → possession
 5. After the user picks a set (or supplied lines): write 10s i2v prompt(s) (kana; first line at 2.0s). Long copy = N **independent** paste blocks with the same BASE; clip 2+ uses the previous last frame as the reference image. Micro-motion only. Do **not** call GenerateImage for the video step
 6. Then run `douyin-caption` for 抖音 title + teaching caption + tags (account **猛男日语教学**), unless the user skips copy
-7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration, unless that still was made as **CuteGuysArt** — then keep the glossy CuteGuysArt rendering, do not repaint it as the default anime
+7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration, unless that still was made as **CuteGuysArt** — then keep that wholesome muscular cartoon rendering, do not repaint it as the default anime
 
 Do **not** run virtual-couple, text-scene, pose-series, or gemini-video for Tagame.

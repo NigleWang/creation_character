@@ -69,9 +69,9 @@ High-quality Japanese anime / modern digital illustration. Clean linework, refin
 
 ### 点名才用：`cuteguysart`
 
-先读 `.cursor/skills/cuteguysart/SKILL.md`，把其中的静帧段原样贴进 `[ART STYLE]`。人仍是 Tagame。参考图在 `docs/STYLE/`，只借光泽暖色画法，不借网球场、背心、彩虹袜、温泉和截图界面。
+先读 `.cursor/skills/cuteguysart/SKILL.md`，把其中的静帧段原样贴进 `[ART STYLE]`。人仍是 Tagame。参考图在 `docs/STYLE/`，只借粗线卡通、暖肤和明亮生活场景的画法，不借网球场、背心、彩虹袜、温泉和截图界面。
 
-i2v 用该 skill 的 `ART STYLE LOCK`：锁光泽皮肤渐变、腮红、高光和大眼睛。不要写回彩铅硬边，也不要写回默认日系细腻光影。
+i2v 用该 skill 的 `ART STYLE LOCK`：锁粗手绘轮廓线、赛璐璐加柔和皮肤、中等有神的眼睛、自然大型肌肉和明亮高饱和。不要写成大眼睛光泽倒三角，也不要写回默认日系细线暗调。
 
 ---
 
@@ -88,7 +88,7 @@ Identity prompt（**出静帧**用。图生视频不要靠这段点名，用上�
 Tagame: mature East Asian man ~40, square jaw, dark-brown short slightly wavy spiked hair swept up, neat brown stubble/beard, thick angled brows, confident half-smile, extremely muscular (broad shoulders, full chest, thick arms, narrow waist). High-quality Japanese anime / digital illustration, clean linework, not photorealistic. Match the attached character reference exactly.
 ```
 
-CuteGuysArt 出图时，不要再写 `High-quality Japanese anime`。身份句用 `cuteguysart` skill 里的 Tagame 句：同一张脸，改成光泽眼睛、高光和暖笑。发色、胡茬、方颌仍锁脸图。
+CuteGuysArt 出图时，不要再写 `High-quality Japanese anime`。身份句用 `cuteguysart` skill 里的 Tagame 句：同一张脸，改成中等有神的眼睛和温暖自信的笑。发色、胡茬、方颌仍锁脸图。不要写成美少年或过大的二次元眼睛。
 
 ---
 
@@ -208,7 +208,7 @@ Vertical 3:4. {framing}. LOW-ANGLE shot looking up at him. Face in the upper two
 
 [LIGHTING]
 {默认日系：} {lighting}. Match a real indoor brightness — do not over-brighten into cheap AI glow. Keep contrast.
-{CuteGuysArt：} Glossy warm peach-to-orange skin, cheek blush, specular highlights. The place stays the requested scene. Do not repaint it as a photograph, and do not replace it with the tennis court, rainbow socks, or hot spring from docs/STYLE.
+{CuteGuysArt：} Bright cheerful light, warm skin, high saturation. The place stays the requested scene and stays a drawn lifestyle setting. Do not repaint it as a photograph, and do not replace it with the tennis court, rainbow socks, or hot spring from docs/STYLE.
 
 [CONSTRAINTS]
 One adult man, correct anatomy, no extra limbs. No text, watermark, logo, or subtitles on the image. No Teo, no Kai, no photoreal skin pores. CuteGuysArt stills must literally include the words CuteGuysArt style.
@@ -357,7 +357,7 @@ If any textual instruction conflicts with the reference image, PRIORITIZE THE RE
 
 ART STYLE LOCK:
 {默认日系：} Preserve the exact high-quality Japanese anime / digital illustration style of the reference image.
-{CuteGuysArt：} Preserve the exact CuteGuysArt rendering of the reference image: glossy digital anime, warm peach-to-orange skin gradients, cheek blush, specular highlights on skin and hair, large catchlight eyes, clean dark outlines, extreme V-taper. Do not redraw him as flat hard-cel, colored pencil, or the default refined Japanese office illustration.
+{CuteGuysArt：} Preserve the exact CuteGuysArt rendering of the reference image: modern cartoon illustration, bold clean hand-drawn contour lines, cel shading mixed with soft painterly skin, warm skin with soft highlights, medium expressive eyes, bright saturated color, powerful natural muscle including thick thighs. Do not redraw him with oversized anime eyes, thin manga linework, or the default refined Japanese office illustration.
 Do not convert him into photorealistic live action. Do not make him look like a real person.
 
 CHARACTER LOCK:
