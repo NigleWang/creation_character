@@ -3,8 +3,9 @@ name: character-registry
 description: >-
   Loads character bibles and reference paths. Teo/Kai are the photoreal couple
   pipeline; Tagame is the separate Japanese-anime office-superior pipeline.
-  Use when resolving @Teo, @Kai, @Tagame, character identity, or face
-  consistency in creation_character.
+  Ohno Kenichi (大野健一) is the night bus-depot patrol track in
+  characters/Tagame-patrol. Use when resolving @Teo, @Kai, @Tagame,
+  @Tagame-patrol, character identity, or face consistency in creation_character.
 ---
 
 # Character Registry
@@ -16,10 +17,11 @@ description: >-
 | `teo` | Teo | virtual-couple / text-scene | 受 | `characters/teo/bible.md` | `characters/teo/character.yaml` | `characters/teo/references/face_01.jpeg` |
 | `kai` | Kai | virtual-couple / text-scene | 攻 | `characters/kai/bible.md` | `characters/kai/character.yaml` | `characters/kai/references/face_01.jpeg` |
 | `tagame` | Tagame | **tagame-anime** | 办公室肌肉上司 | `characters/Tagame/bible.md` | `characters/Tagame/character.yaml` | `characters/Tagame/references/face_01.jpeg` |
+| `ohno` | 大野健一 | **tagame-patrol** | 深夜场站调度 / 夜班巡逻 | `docs/patorl-tagame.md` | `.cursor/skills/tagame-patrol/storyline.md` | `characters/Tagame-patrol/full_body_char.jpeg` |
 
 Teo+Kai relationship: `relationship/relationship.yaml`
 
-**Do not mix pipelines.** Tagame is never photoreal and never paired with Teo/Kai. Teo/Kai are never restyled as anime Tagame.
+**Do not mix pipelines.** Tagame is never photoreal and never paired with Teo/Kai. Teo/Kai are never restyled as anime Tagame. 大野健一 is not the office Tagame: do not swap their face references.
 
 ## Load procedure
 
@@ -37,6 +39,7 @@ For each requested character ID:
 | 受 | `teo` |
 | 攻 | `kai` |
 | Tagame, tagame, @Tagame, characters/Tagame | `tagame` |
+| Tagame-patrol, @Tagame-patrol, characters/Tagame-patrol, 大野健一, Ohno Kenichi, docs/patorl-tagame.md | `ohno` |
 
 Do **not** use Tom / James. Those names are retired.
 
@@ -80,6 +83,18 @@ character_bundle:
       broad shoulders, full chest, thick arms. High-quality Japanese
       anime / digital illustration, clean linework, not photorealistic.
       Office superior speaking to the viewer. Match the face reference.
+
+  ohno:
+    role: depot_patrol
+    pipeline: tagame-patrol
+    art_style: japanese_anime
+    reference: characters/Tagame-patrol/full_body_char.jpeg
+    sheet_read_only: characters/Tagame-patrol/detail_char.jpeg
+    identity_prompt: |
+      Ohno Kenichi, 32, night bus-depot dispatcher and security patrol.
+      Match the full-body reference: square jaw, short dark-brown spiky hair,
+      neat stubble, navy leather bomber, tight white shirt, burgundy tie,
+      black trousers. Japanese anime, not photorealistic, not the office Tagame.
 ```
 
 ## Consistency rules
@@ -89,3 +104,4 @@ character_bundle:
 - Preserve glasses on Teo always
 - Preserve Kai's mature muscular look always
 - Tagame: default Japanese anime (never photoreal). If the user names CuteGuysArt, follow `.cursor/skills/cuteguysart/SKILL.md` and change only the rendering (bold contour lines, warm painterly skin, medium kind eyes, bright saturated lifestyle illustration). Keep the beard, dark-brown spiked hair, and his large natural muscle. Never slim, pretty-boy, or oversized anime eyes
+- 大野健一: face and uniform from `characters/Tagame-patrol/full_body_char.jpeg`. Do not substitute the office Tagame reference. Scenes stay at the night bus depot

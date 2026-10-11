@@ -106,7 +106,8 @@ agent id 会写到 gitignored 的 `outputs/drafts/cloud_agent.json`。指定分�
 - **成图转动画** → `@gemini-video`：写出可复制进 Gemini 的 10 秒图生视频提示词（台词日语假名）
 - **只要文案** → `@xiaohongshu-caption`：对着成图/系列写标题+正文+标签
 - **Tagame 动漫** → `@tagame-anime`：没有参考图就用 Tagame 脸图直接出符合台词场景的静帧；有台词则跳过 5 组选项（长则拆多条独立 10s）
-- **抖音发布（猛男日语教学）** → `@douyin-caption`：标题 + 教学文案 + 标签
+- **场站巡逻系列** → `@tagame-patrol`：大野健一，场景和台词锁深夜巴士场站职业线；10 秒视频词仍用 tagame-anime 的规则
+- **抖音发布（猛男日语教学）** → `@douyin-caption`：标题 + 教学文案 + 标签。巡逻线账号写成「二次元猛男说日语」
 
 ---
 
@@ -127,6 +128,7 @@ creation_character/
 │   │   ├── text-scene/          ← 文字场景按人设补全后再出一张
 │   │   ├── gemini-video/        ← 成图 → Gemini 10s 视频提示词（假名台词）
 │   │   ├── tagame-anime/        ← Tagame 动漫：场景卡 → 静帧 → 台词选项 → 10s 视频词
+│   │   ├── tagame-patrol/       ← 大野健一场站职业系列：台词/场景锁职业；视频词同 tagame-anime
 │   │   ├── douyin-caption/      ← Tagame 视频 → 抖音文案（猛男日语教学）
 │   │   ├── quality-control/
 │   │   └── xiaohongshu-post/
@@ -164,6 +166,7 @@ creation_character/
 | `xiaohongshu-post` | 3:4 规格 / 封面构图 / 交付格式 |
 | `gemini-video` | 成图 → Gemini 10s 图生视频提示词（台词假名，复制即用） |
 | `tagame-anime` | Tagame 动漫静帧 + 多样台词选项 + 10s 图生视频提示词 |
+| `tagame-patrol` | 大野健一场站职业系列：职业场景和台词；10s 视频词与 tagame-anime 相同 |
 | `douyin-caption` | Tagame 视频 → 抖音标题+教学文案+标签（账号：猛男日语教学） |
 
 ---
@@ -178,6 +181,29 @@ Scene 决定「在哪、做什么、怎么构图」
 
 ---
 
+## 图片放大 4 倍
+
+`scripts/upscale.py` 用动漫超分，把一张图或一个目录里的全部图片统一放大 4 倍。用 conda 里的 `python`（需要 torch）。
+
+默认写到图片旁边（或该目录下）的 `upscaled_4x/`，文件名加 `_4x.png`，不覆盖原图。`--out` 只改输出目录，文件名仍带 `_4x`。`--is-replace` 覆盖原文件，扩展名不变，不能和 `--out` 一起用。
+
+```bash
+# 一张图 → 旁边的 upscaled_4x/
+python scripts/upscale.py data/iPhone/IMG_1810.PNG
+
+# 整个目录，覆盖原文件
+python scripts/upscale.py outputs/approved/series/20260930_pride_wallpaper_demo/ --is-replace
+
+# 一张图，写到指定目录（文件名为 tagame_style_street_4x.png）
+python scripts/upscale.py outputs/approved/tagame_style_street.png --out outputs/approved/series/20260930_pride_wallpaper_demo/
+```
+
+---
+
 ## 技术文档
 
 详细架构设计见 [`docs/code_task/swap_face.md`](docs/code_task/swap_face.md)
+
+
+
+

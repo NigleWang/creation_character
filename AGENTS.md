@@ -8,9 +8,12 @@ Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 |-------|------------|-------|--------|
 | **Couple** | Teo（受, left）+ Kai（攻, right） | Photoreal Xiaohongshu | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `cover-collage` |
 | **Tagame** | Tagame only | **Japanese anime**；点名才用 CuteGuysArt | `tagame-anime` / `cuteguysart` / `douyin-caption` |
+| **Patrol** | 大野健一 only | **Japanese anime**；职业线场站 | `tagame-patrol`；视频词仍用 `tagame-anime` C2 / C2-S |
 | **Wallpaper demo** | An existing still on a device | iPhone lock screen; or expand a portrait still to 16:9 / 4:3, then a MacBook or iPad product shot | `wallpaper-demo` |
 
 @Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai faces. Never `gemini-video` photoreal paste.
+
+`characters/Tagame-patrol` / `docs/patorl-tagame.md` / 大野健一 → **always** `tagame-patrol`. Do not use the office face. Video prompts stay the Tagame 10s blocks.
 
 ## Project purpose
 
@@ -73,6 +76,7 @@ User's **first message** already includes explicit style choices, e.g.:
 `.cursor/skills/text-scene/SKILL.md` — 文字场景：按人设补全场景卡，确认后生成一张  
 `.cursor/skills/gemini-video/SKILL.md` — 成图 → Gemini 10s 图生视频提示词（台词假名，只出文案不出视频）  
 `.cursor/skills/tagame-anime/SKILL.md` — Tagame 动漫：无用户图则用脸图直接出符合台词场景的静帧 → **5 组台词或用户自带日/英（长则拆独立 10s）** → 图生视频提示词  
+`.cursor/skills/tagame-patrol/SKILL.md` — 大野健一场站职业系列：场景和台词锁职业线；10 秒视频词原样用 `tagame-anime` C2 / C2-S  
 `.cursor/skills/douyin-caption/SKILL.md` — Tagame 视频 → 抖音文案（账号：猛男日语教学，标题+教学正文+标签）  
 `.cursor/skills/cover-collage/SKILL.md` — 系列成图 → 小红书首页拼接封面（Pillow，禁止 GenerateImage）  
 `.cursor/skills/wallpaper-demo/SKILL.md` — 已有成图 → iPhone 锁屏；或竖图扩成电脑 16:9 / iPad 4:3 壁纸后再出设备展示图。品牌字默认不写
@@ -156,7 +160,7 @@ When user has a **Teo/Kai** still (usually `outputs/approved/`) and asks 图生�
 3. Deliver one copy-paste English prompt; spoken lines in Japanese kana only
 4. Sanitize for Gemini: fictional adults, G-rated. Kneeling/shoes = tying laces / picking up keys — never ankle-grip or "won't let go" (that refusal is "real people in situations like that")
 
-If the still is **Tagame** / anime: use `tagame-anime`. If the user already pasted Japanese/English lines → C2 or C2-S (split long copy, keep continuity). Otherwise Turn C1 (read the still first, then 5 diverse dialogue options, wait) then C2. Do not default to invite/heat/possession.
+If the still is **office Tagame** / anime: use `tagame-anime`. If the still is **大野健一 / 场站巡逻**: use `tagame-patrol` (occupation lines, then the same C2 / C2-S). If the user already pasted Japanese/English lines → C2 or C2-S (split long copy, keep continuity). Otherwise Turn C1 (read the still first, then 5 diverse dialogue options, wait) then C2. Do not default to invite/heat/possession.
 
 ## Tagame anime (separate track)
 
@@ -166,8 +170,21 @@ When user @Tagame / `characters/Tagame` / `docs/anime.md` / 办公室肌肉上�
 2. No user still + (lines or 生成/出图): **GenerateImage now** from Tagame face ref; infer scene from the lines. Scene-card STOP only if they @Tagame with no lines and no generate request
 3. One GenerateImage, **Japanese anime** by default (never photoreal). If the user names **CuteGuysArt**, paste the style block from `.cursor/skills/cuteguysart/SKILL.md`. Face ref `characters/Tagame/references/face_01.jpeg`, save `outputs/approved/tagame_<task_id>.png`
 4. After the still: if the user already pasted Japanese or English lines, skip options — kana (translate English first), split long scripts into multiple 10s clips with visual continuity. Otherwise **read the still/scene card first**, then post **5** Japanese dialogue options in **different styles** that fit this character + this scene, and **STOP**. Do **not** default to invite → body-heat → possession
-5. After the user picks a set (or supplied lines): write 10s i2v prompt(s) (kana; first line at 2.0s). Long copy = N **independent** paste blocks with the same BASE; clip 2+ uses the previous last frame as the reference image. Micro-motion only. Do **not** call GenerateImage for the video step
+5. After the user picks a set (or supplied lines): write 10s i2v prompt(s) (kana; first line at 2.0s). Long copy = N **independent** paste blocks with the same BASE; clip 2+ uses the previous last frame as the reference image. Each clip performs one specified primary action and holds that final pose. The still locks identity and the start pose, not a frozen performance. Do **not** call GenerateImage for the video step
 6. Then run `douyin-caption` for 抖音 title + teaching caption + tags (account **猛男日语教学**), unless the user skips copy
 7. Art style lock on every later Tagame request: high-quality Japanese anime / digital illustration, unless that still was made as **CuteGuysArt** — then keep that wholesome muscular cartoon rendering, do not repaint it as the default anime
 
 Do **not** run virtual-couple, text-scene, pose-series, or gemini-video for Tagame.
+
+## Patrol series（大野健一，职业线）
+
+When user @Tagame-patrol / `characters/Tagame-patrol` / `docs/patorl-tagame.md` / 大野健一 / 场站巡逻:
+
+1. Follow `.cursor/skills/tagame-patrol/SKILL.md` and `storyline.md`
+2. Face and uniform: `characters/Tagame-patrol/full_body_char.jpeg` only. Do not use the office face
+3. No episode picked: post the 8-episode menu and STOP
+4. Episode picked: one depot still per episode. Dialogue stays on that job beat. 「用设定台词」skips the 5 options
+5. 10s i2v: `tagame-anime` Turn C2 / C2-S, including its action plan (one primary action, held final pose). Do not revert to breath-and-blink only. Each episode is its own video; only an over-long script inside one episode uses last-frame continuity
+6. Caption uses the `douyin-caption` structure with account **二次元猛男说日语**
+
+Do **not** run the office scene card, Teo/Kai skills, or `gemini-video` for this character.

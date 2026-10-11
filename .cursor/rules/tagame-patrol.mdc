@@ -1,0 +1,16 @@
+---
+description: Ohno Kenichi night-depot patrol series — job scenes and lines, tagame-anime i2v unchanged
+globs: characters/Tagame-patrol/**,docs/patorl-tagame.md,.cursor/skills/tagame-patrol/**,outputs/approved/patrol*,outputs/approved/series/patrol*/**
+alwaysApply: false
+---
+
+# Tagame Patrol Lock
+
+If the task is 大野健一 / Tagame-patrol / `docs/patorl-tagame.md` / 场站巡逻职业线, follow `.cursor/skills/tagame-patrol/SKILL.md`. Do not use the office Tagame face or office scenes.
+
+- Identity and uniform: `characters/Tagame-patrol/full_body_char.jpeg`. Read `detail_char.jpeg` only to check the design. Do not upload the sheet.
+- Scenes and dialogue stay on the night bus-depot job (dispatch, patrol, shift change).
+- No episode picked yet: post the 8-episode menu and STOP.
+- After a still, 5 occupation dialogue options unless the user said 用设定台词 or already pasted lines.
+- 10s i2v: use `tagame-anime` Turn C2 / C2-S (one primary action per clip, kana, first line at 2.0s, long copy = independent clips). Do not revert to breath-and-blink only.
+- Caption account: 二次元猛男说日语. Structure stays `douyin-caption`.

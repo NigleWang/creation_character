@@ -193,9 +193,11 @@ User picks one on the scene card. Default **标准**. Intensity **filters which 
 
 For **stills**, low angle + imposing pose is fine.
 
-For **i2v**, convert any arc beat into **micro-motion only**: blink, breath, mouth, tiny head/eye. Do **not** write walk, step closer, hand-to-chest, big lean, or a push-in on every clip — those drift the face, clothes, and background when stitching 10s clips.
+For **i2v**, do **not** turn the arc into breathing and blinking only. Pick one action from the library in `tagame-anime` SKILL (A01–A08) that matches this arc's emotion. The reference still is the start pose. The clip must perform that primary action and hold the final pose. Camera stays locked. Do **not** write walk-away, full turn, step closer, hand-to-chest, grip, or a push-in — those drift the face, clothes, and background.
 
-Optional if user asks and the still already supports it: undo one more button. Shirt stays on. Still no large arm motion in the video prompt.
+Arc motion notes above (lean in, point, shift in seat) are emotion hints. Map them onto A01 / A08 / a visible hand gesture only when the hands are already in frame. Do not literalize "step closer" or "hand on chest".
+
+Optional if user asks and the still already supports it: undo one more button. Shirt stays on.
 
 ## Places to rotate
 
@@ -219,7 +221,8 @@ Same man, same tone, new room **and** new dialogue arc.
 - Starting every clip from the original still pose (breaks continuity)
 - Writing `Clip N of M in one continuous take` (model thinks it is slicing a longer video)
 - Writing a slow push-in on every clip (gets closer and closer)
-- Large story gestures in i2v (face/clothes/background drift)
+- A timeline that is only breath, blink, and mouth, with the pose frozen for all 10 seconds
+- Walk-away, full turn, hand-on-chest, or grip written as the "primary action" (identity drift and refusals)
 
 ## Gemini / i2v refusal
 

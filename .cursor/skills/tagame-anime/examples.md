@@ -91,14 +91,16 @@
 ## 4) Turn C2 — 用户回 `1`（加班责问）
 
 【情绪弧】加班责问  
-微动：姿态锁成图；只呼吸/眨眼/口型。**不要**写走近、摸胸、猛推镜头。
+【主动作】A01 低头再抬眼（责问，不要改成伸手）  
+【辅助】第二句轻皱眉  
+【收势】抬眼盯着观众
 
 **台词：**  
 「こんなじかんまで、のこってたのか」@2.0s  
 「おまえのせいだ、かえれなくなる」@4.5s  
-「ほら、こっちをみろ」@7.0s
+「ほら、こっちをみろ」@7.0s — 这一句把抬眼做完
 
-复制块用 SKILL 里的 **10 层结构**（REFERENCE IMAGE PRIORITY → CHARACTER/SCENE LOCK → 微动 TIMELINE → DIALOGUE → END STATE）。DIALOGUE 只写三句假名，不要 `Tagame says:`。镜头：匹配参考图，只允许极慢微推。
+复制块用 SKILL 里的结构（REFERENCE IMAGE PRIORITY 只锁身份和起始状态 → 机位锁定 → MOTION PRIORITY 要求主动作发生 → ACTION PLAN → ACTION TIMELINE → DIALOGUE → 停在收势）。DIALOGUE 只写三句假名，不要 `Tagame says:`。不要写 `Maintain the original body pose`。
 
 同一回合再出抖音文案（见 `douyin-caption` examples）。
 
@@ -134,8 +136,8 @@ C1 应多给 D 温柔允许、B 加班软化、J 教学向；少给命令/调戏
 1. 英→日口语→假名（或日→假名）
 2. 每 3 句一条 **独立** 10s；同一套 BASE，每段只改 CLIP STATE / 台词 / 片尾
 3. 第 1 段上传原静帧；第 2 段起上传 **上一段最后一帧**（新的视觉真相）
-4. **不要**写 `Clip 1 of 4 in one continuous take`；**不要**每段 `slow push-in toward chest`
-5. 动作只呼吸/眨眼/口型；最后 1 秒是中间帧，方便截去当下一段参考图
+4. **不要**写 `Clip 1 of 4 in one continuous take`；**不要**每段推镜头
+5. 每段一个不同的主动作，停在该段收势；最后一帧就是下一段的起始图。不要每段都只呼吸眨眼
 
 例：6 句 → 2 个完整复制块。第 2 块的 CLIP STATE：`uploaded image is the last frame of the previous independently generated clip`。
 

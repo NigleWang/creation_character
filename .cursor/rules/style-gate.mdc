@@ -13,6 +13,8 @@ Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new sce
 
 **Exception — tagame-anime:** @Tagame / `characters/Tagame` / `docs/anime.md` → follow `.cursor/skills/tagame-anime/SKILL.md`. If the user gave Japanese/English lines or said 生成/出图 and has **no scene still**, GenerateImage from the Tagame face ref (scene matches the lines) — do **not** STOP on a scene card. Only post the scene card and STOP when they @Tagame with no lines and no generate request. After the still: if lines exist, skip options and write 10s i2v. Otherwise read the still, post 5 diverse dialogue options, STOP. Never photoreal. Never Teo/Kai clothing template.
 
+**Exception — tagame-patrol:** `characters/Tagame-patrol` / `docs/patorl-tagame.md` / 大野健一 / 场站巡逻 → follow `.cursor/skills/tagame-patrol/SKILL.md`. Do not post the Teo/Kai clothing template. No episode picked: post the 8-episode menu and STOP. Episode picked: generate the depot still, then occupation dialogue (or 用设定台词). 10s video text stays `tagame-anime` C2 / C2-S. Never the office face. Never photoreal.
+
 **Exception — cover-collage:** 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面 → follow `.cursor/skills/cover-collage/SKILL.md`. Post 3 layout+copy schemes and STOP. Do **not** call GenerateImage (Pillow composite only).
 
 **Exception — wallpaper-demo:** 壁纸演示图 / 锁屏展示 / 锁屏效果图 / 手机锁屏壁纸展示 / 电脑壁纸 / 电脑演示 / iPad壁纸 / iPad演示 → follow `.cursor/skills/wallpaper-demo/SKILL.md`. Do **not** post clothing options and do **not** wait. Phone: one iPhone lock-screen product shot. Computer or iPad: expand the portrait still, then the device product shot. Brand text only if the user supplied it.

@@ -1,3 +1,7 @@
+> 动作模块已由 `docs/update_img2video.md` 取代，并写进 `.cursor/skills/tagame-anime/SKILL.md`。
+> 下文里把 pose / hand position / facial expression 整段冻住、以及 `MOTION PRIORITY` 只允许呼吸眨眼的段落，不要再抄进视频词。
+> 独立片段、禁止 `Clip N of M`、禁止每段推镜头，仍然有效。
+
 如果你的核心目标是：
 
 > **把同一组图片分别生成多个 10s clip，最后拼成一个完整视频，而且每个 clip 都严格继承图片中的人物、服装、场景、光线和姿态。**

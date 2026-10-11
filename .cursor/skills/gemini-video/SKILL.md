@@ -49,7 +49,7 @@ If they also asked to 换脸 or 出图: finish that pipeline first, then run thi
 | two men | Teo left / Kai right unless user says otherwise |
 | user @Teo / @Kai | honor @mention |
 
-5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Write **dense 假名** lines that fit occupation + 受/攻. **Douyin hook:** first spoken line starts at **2.0s** — never open with silent eye contact.
+5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Name **one primary action** with a start, a development, and a held final pose. Write **dense 假名** lines that fit occupation + 受/攻. **Douyin hook:** first spoken line starts at **2.0s** — never open with silent eye contact, and do not fill the clip with breath and blink only.
 6. **Sanitize for Gemini** (see Safety below). If the still is kneeling / floor / shoes / close body contact, recast motion + 台词 as an everyday task before writing the paste block.
 7. Save:
    - `outputs/drafts/video_prompt_<task_id>.json`
@@ -76,7 +76,8 @@ Header:
 【用法】打开 Gemini → 上传这张成图 → 粘贴下面英文块 → 生成视频（时长选 10s / 竖屏）
 
 【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右}
-【从静止到动作】{一句}
+【主动作】{一句：必须发生，最后 1.5 秒停在收势}
+【收势】{停住的姿态}
 【台词（假名）】第一条 @2.0s
 {Name}：「{kana}」
 {Name}：「{kana}」
@@ -98,19 +99,29 @@ Animate the uploaded image into a photorealistic 10-second video. Image-to-video
 
 FICTION: Original fictional adult characters only (Teo late 20s, Kai late 30s). Not real people. Not based on any living person. G-rated lifestyle short. Non-sexual. No fetish. No restraint.
 
-IDENTITY LOCK: Keep the exact faces, hair, glasses, bodies, clothing, props, lighting, and room from the uploaded image. Do not restyle. Do not add or remove people. Do not swap the two men.
+IDENTITY LOCK: The uploaded image is frame 0 and the initial state, not a pose frozen for all 10 seconds.
+Keep the exact faces, hair, glasses, bodies, clothing design, props, lighting, and room. Do not restyle. Do not add or remove people. Do not swap the two men.
+Hands, head angle, gaze, expression, and upper-body posture may change to perform the specified action.
 
 CAST:
 {If Teo:} The slimmer East Asian man with buzz-cut black hair and browline glasses is Teo. Soft reserved energy. Voice: quiet gentle Japanese male, late 20s.
 {If Kai:} The broader East Asian man with short spiky black hair, no glasses, mature smile lines, is Kai. Warm protective energy. Voice: lower warm Japanese male, late 30s.
 {If couple:} Teo is on the left. Kai is on the right. Do not swap.
 
-MOTION (10s, continue this pose, do not freeze):
-0.0-2.0s: tiny living motion from the still — breath, blink, micro weight shift, inhale as if about to speak. No teleport. Do not linger on silent eye contact.
-2.0-4.5s: first spoken line STARTS here (at 2.0s) + matching motion.
-4.5-7.0s: second line (partner reply, or solo follow-up).
-7.0-9.0s: third line (couple: back to first speaker; solo: last short line or react).
-9.0-10.0s: optional fourth short line, then natural end hold. Do not close on a long silent stare.
+ACTION PLAN:
+PRIMARY ACTION: {one readable action that changes the picture and matches the lines}
+SECONDARY ACTION: {one head, gaze, or expression change}
+FINAL POSE: {what the last 1.5 seconds hold}
+
+ACTION TIMELINE:
+0.0-2.0s: begin from the exact still, then a visible attention change (gaze or head). Breathing continues, but do not stay on breath and blink alone. First spoken line starts at 2.0s. No silent eye contact.
+2.0-4.5s: first spoken line STARTS at 2.0s, plus a visible change in expression, gaze, posture, or hands.
+4.5-7.0s: second line (partner reply, or solo follow-up) plus a different visible change.
+7.0-8.5s: third line, or the primary action becoming clearly readable.
+8.5-10.0s: hold FINAL POSE. One blink, natural breath. No new action. Do not freeze. Do not fade. Do not close on a long silent stare.
+
+Do not replace the primary action with breathing, blinking, or lip movement only.
+Stay in the same spot in the room. No walking out, no costume change, no extra people.
 
 CAMERA: {slow push-in / slight handheld / static with breathing room}. Eye level unless the still is clearly high/low. Do not whip-pan. Do not cut.
 
@@ -122,7 +133,7 @@ DIALOGUE (spoken in Japanese, written in kana):
 {Name} says: "{kana line 3}"
 {optional fourth short line}
 
-CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. G-rated everyday couple moment, non-sexual, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact.
+CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Perform the specified primary action and hold FINAL POSE. G-rated everyday couple moment, non-sexual, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact. Do not replace the action with breathing and blinking only.
 ```
 
 ---
@@ -131,7 +142,7 @@ CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. G-rated every
 
 目标平台是 **抖音竖屏小视频**。开头只有眼神/微笑不对口，观众会划走。
 
-**硬规则：** 第一条台词在 **2.0s** 开口（可到 2.2s，不得晚于 2.5s）。0–2s 只做呼吸、眨眼、准备说话，**禁止**对视、对笑、对望而不说话。
+**硬规则：** 第一条台词在 **2.0s** 开口（可到 2.2s，不得晚于 2.5s）。0–2s 做一次看得见的注意力变化（转头、抬眼、看向道具），同时准备开口。**禁止**这 2 秒只有对视、对笑、对望而不说话，也禁止整段只有呼吸和眨眼。
 
 台词要密。2s 之后几乎一直在说话，句与句之间只留半拍换气，不要留 1s+ 的沉默对视。
 
@@ -167,14 +178,16 @@ Voice tags in the English prompt (not spoken):
 
 ## Motion from the still
 
-Continue **this** pose. Do not invent a new room.
+The still is the start. Pick **one primary action** from the table that this pose can actually perform, plus one smaller secondary change. Name both in ACTION PLAN, then give the primary action a start, a development, and a hold on FINAL POSE. Do not invent a new room. Do not write a timeline that is only breath, blink, and mouth.
+
+If the crop hides the hands, do not ask for a hand gesture. Use a head or gaze action instead.
 
 | Still looks like | Good 10s continuation |
 |------------------|------------------------|
-| sitting at desk / laptop | 2s inhale, look camera, line @2s, type/reply, second line, sit back |
-| on a call | nod, first reply @2s, listen half-beat, second short line, lower phone |
-| coffee / cup in hand | sip 0–2s, look aside, first line @2s, small smile, second line |
-| standing at window | shift weight, inhale, first line @2s, look out, second line |
+| sitting at desk / laptop | primary: look up from the screen and hold eye contact; secondary: a small nod |
+| on a call | primary: nod, then lower the phone and hold; secondary: a glance off the screen |
+| coffee / cup in hand | primary: lift the cup once and hold; secondary: look aside, then back |
+| standing at window | primary: look outside, then bring the gaze back and hold; secondary: a small weight shift |
 | couple, one cooking | 0–2s stir, first line @2s (Kai), Teo reply, Kai follow-up — no silent stare |
 | couple, looking at each other | 0–2s blink/inhale only, then 3–4 short lines; do not lean-in in silence |
 | looking at camera | hold gaze, first line @2s, second line, glance to work/prop |
