@@ -27,6 +27,9 @@ TestResults.xml
 # Cloud client previews. The committed copies live under outputs/approved/series/.
 /artifacts/
 
+# Local staging for user-provided scene uploads (not part of repo content)
+references/uploads/
+
 ### Virtual Couple Studio ###
 outputs/drafts/*
 outputs/approved/*
