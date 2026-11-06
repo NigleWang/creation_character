@@ -37,6 +37,9 @@ scenes/*
 !outputs/rejected/.gitkeep
 !scenes/.gitkeep
 
+# Single approved stills (e.g. xiaohongshu_*.png) can be committed; series folder rules below
+!outputs/approved/*.png
+
 # pose-series PNGs must be trackable so Cloud generations can be committed and synced
 !outputs/approved/series/
 !outputs/approved/series/.gitkeep
