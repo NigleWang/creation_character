@@ -15,21 +15,22 @@ Do not identify original people in reference images.
 
 - Tool: `CallDynamicTool` → `cursor` / `GenerateImage`
 - `aspect_ratio`: `3:4` (小红书, wallpaper master), wallpaper devices `9:16` / `4:3` / `16:9`
-- `reference_image_paths`: [scene, teo ref, kai ref] as applicable
+- `reference_image_paths`: [scene, then the active cast refs]. Teo/Kai use their face jpegs. 小川/大海 use `characters/小川/小川.png` and `characters/大海/大海.png`. Those sheets are identity only — prompts must forbid the gray studio, labels, and printed text.
 - Single still → `outputs/approved/xiaohongshu_<task_id>.png`
 - pose-series set → `outputs/approved/series/<task_id>/01_<pose_id>.png` (new folder per set)
 - Rejects → `outputs/rejected/`
 - **Lighting:** copy the scene/source still — same direction, color, **exposure**. Do not brighten, lift shadows, add HDR/beauty/rim glow. Over-bright looks AI-generated.
+- **Cloud display:** Mobile / remote Cloud does not show the GenerateImage card. Embed one Markdown image per file, one path only: prefer `/opt/cursor/artifacts/assets/<file>` (real extension, usually `.jpg`). If that directory does not exist, embed `/workspace/artifacts/<file>`. Do not embed `outputs/` or `/home/ubuntu/.cursor/projects/…/assets/`. Do not rename JPEG to `.png` without a Pillow convert. Pillow / collage output must also be copied into `/opt/cursor/artifacts/assets/` before the embed. Full steps: `AGENTS.md`「Cloud 客户端显示」.
 
 ## Pipeline order
 
 virtual-couple → character-registry → scene-analyzer → **scene-customizer (text options in chat, wait)** → character-composer → prompt-builder → GenerateImage → quality-control → xiaohongshu-caption
 
-pose-series (approved still + 换姿态) → character-registry → look-lock JSON → **pose options in chat, wait** → GenerateImage per pose → quality-control (environment lock, new pose) → **xiaohongshu-caption** (Teo/Kai 发布文案)
+pose-series (approved still + 换姿态) → character-registry → look-lock JSON → **pose options in chat, wait** → GenerateImage per pose → quality-control (environment lock, new pose) → **xiaohongshu-caption**（Teo/Kai，或小川/大海，跟成图的 cast）
 
 text-scene (文字场景，无照片) → character-registry → **fill scene card, wait** → GenerateImage once (face refs only) → quality-control → xiaohongshu-caption
 
-gemini-video (Teo/Kai 成图 + 图生视频/10秒) → character-registry → **write Gemini 10s i2v prompt, kana dialogue** → save `outputs/drafts/video_prompt_*.txt` → **no GenerateImage**
+gemini-video (Teo/Kai 或 小川/大海成图 + 图生视频/10秒) → character-registry → **write Gemini 10s i2v prompt, kana dialogue** → save `outputs/drafts/video_prompt_*.txt` → **no GenerateImage**
 
 tagame-anime (@Tagame / docs/anime.md) → load `characters/Tagame/` → **无用户图则直接 GenerateImage**（脸图 only，场景跟台词走；仅「只点名不出图」才填场景卡等待）→ `outputs/approved/tagame_<task_id>.png` → **read still first** → **post 5 diverse dialogue options, wait**（用户已贴日/英台词则跳过，长台词拆成多条独立 10s）→ **write 10s i2v prompt(s)** → `outputs/drafts/tagame_video_*.txt` → **douyin-caption**（猛男日语教学）→ **no GenerateImage on the video/copy steps**
 
@@ -37,7 +38,7 @@ tagame-patrol（大野健一 / `characters/Tagame-patrol` / `docs/patorl-tagame.
 
 cover-collage (系列成图 + 拼接/封面/九宫格) → **3 layout+copy schemes, wait** → `python3 scripts/make_cover.py` → `outputs/approved/series/<task_id>/cover_<layout>.png` → **no GenerateImage**
 
-wallpaper-demo (已有成图 + 壁纸演示图 / 锁屏展示 / 电脑壁纸 / iPad壁纸) → `.cursor/skills/wallpaper-demo/SKILL.md`. Phone: one GenerateImage `3:4` → `outputs/approved/<source>_lockscreen_demo.png`. Computer / iPad: expand the portrait still to `16:9` and/or `4:3`, then a device demo of that wallpaper. Brand lines only when the user supplied them. After each saved PNG on Cloud, embed `![label](absolute path)` in the final reply and copy the file to `artifacts/`. The cutout `wallpaper` skill is removed.
+wallpaper-demo (已有成图 + 壁纸演示图 / 锁屏展示 / 电脑壁纸 / iPad壁纸) → `.cursor/skills/wallpaper-demo/SKILL.md`. Phone: one GenerateImage `3:4` → `outputs/approved/<source>_lockscreen_demo.png`. Computer / iPad: expand the portrait still to `16:9` and/or `4:3`, then a device demo of that wallpaper. Brand lines only when the user supplied them. Cloud embed follows the Cloud display bullet above, not `outputs/`. The cutout `wallpaper` skill is removed.
 
 ## Style differentiation
 

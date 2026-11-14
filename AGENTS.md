@@ -7,23 +7,26 @@ Cloud / mobile agents: read this file. Two-turn protocol is **mandatory**.
 | Track | Characters | Style | Skills |
 |-------|------------|-------|--------|
 | **Couple** | Teo（受, left）+ Kai（攻, right） | Photoreal Xiaohongshu | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `cover-collage` |
+| **Swap** | 小川（left）+ 大海（right） | Photoreal. Same skills as Couple. Not 受/攻 | `virtual-couple` / `text-scene` / `pose-series` / `gemini-video` / `xiaohongshu-caption` |
 | **Tagame** | Tagame only | **Japanese anime**；点名才用 CuteGuysArt | `tagame-anime` / `cuteguysart` / `douyin-caption` |
 | **Patrol** | 大野健一 only | **Japanese anime**；职业线场站 | `tagame-patrol`；视频词仍用 `tagame-anime` C2 / C2-S |
 | **Wallpaper demo** | An existing still on a device | iPhone lock screen; or expand a portrait still to 16:9 / 4:3, then a MacBook or iPad product shot | `wallpaper-demo` |
 
-@Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai faces. Never `gemini-video` photoreal paste.
+@Tagame / `characters/Tagame` / `docs/anime.md` → **always** `tagame-anime`. Never photoreal. Never Teo/Kai or 小川/大海 faces. Never `gemini-video` photoreal paste.
+
+@小川 / @大海 / `characters/小川` / `characters/大海` → photoreal swap on the Couple skills. Left 小川, right 大海. Sheets are identity only. Never mix with Teo/Kai. Never anime.
 
 `characters/Tagame-patrol` / `docs/patorl-tagame.md` / 大野健一 → **always** `tagame-patrol`. Do not use the office face. Video prompts stay the Tagame 10s blocks.
 
 ## Project purpose
 
-Generate Xiaohongshu photoreal images of **Teo（受, left）** and **Kai（攻, right）** from scene photos — **or** Tagame Japanese-anime stills + 10s i2v prompts (separate track).
+Generate Xiaohongshu photoreal images of **Teo（受, left）** and **Kai（攻, right）** from scene photos — **or** the same pipeline with **小川（left）** and **大海（right）** — **or** Tagame Japanese-anime stills + 10s i2v prompts (separate track).
 
 ## TWO-TURN PROTOCOL (non-negotiable)
 
 ### Turn 1 — Analyze + ask only
 
-When user uploads a scene + mentions Teo/Kai/virtual-couple/换脸:
+When user uploads a scene + mentions Teo/Kai/小川/大海/virtual-couple/换脸:
 
 1. Analyze scene (composition, pose, environment)
 2. Post **numbered text options** for accessories / clothing / patterns (see template below)
@@ -57,7 +60,7 @@ When user replies with numbers or text choices (or said「全部保持原场景�
 ⏸️ 请回复后我再生成图片。
 ```
 
-Character defaults: Teo → browline glasses; Kai → no glasses.
+Character defaults: Teo → browline glasses. Kai、小川、大海 → no glasses. 小川/大海「角色默认服装」：小川深灰圆领 T；大海橄榄绿工装衬衫、黑工装裤、棕色工装靴。没说默认服装就跟场景。
 
 ## Skip Turn 1 only if
 
@@ -97,7 +100,7 @@ When user has `outputs/approved/...` and asks for 系列 / 换姿态 / 其他 po
 1. Turn 1: lock look + post numbered **pose** options + STOP
 2. Turn 2: GenerateImage per selected pose (`aspect_ratio` 3:4, refs = [approved still, face ref])
 3. Save the set to `outputs/approved/series/<task_id>/` as `01_<pose_id>.png`, `02_...` — never as loose files in `outputs/approved/`
-4. Run `xiaohongshu-caption`: one 标题+正文+标签 for the set. Names **Teo**（受）/ **Kai**（攻）.
+4. Run `xiaohongshu-caption`: one 标题+正文+标签 for the set. Teo/Kai 用 **Teo** / **Kai**。小川/大海用 **小川** / **大海**，标签走热门词（`#肌肉男`），不要 `#小川大海` `#双人设` `#固定角色`。
 
 Single stills stay at `outputs/approved/xiaohongshu_<task_id>.png`.
 
@@ -127,9 +130,37 @@ When the user points at an existing still and asks 壁纸演示图 / 锁屏展�
 - Tool: `cursor` / `GenerateImage`
 - aspect_ratio: `3:4`
 - Teo/Kai: `reference_image_paths` = [scene if any, character face refs]; photoreal; match exposure
+- 小川/大海: `reference_image_paths` = [scene if any, `characters/小川/小川.png`, `characters/大海/大海.png`]; photoreal; sheets are identity only (no gray studio, labels, or printed text)
 - Tagame: `reference_image_paths` = [Tagame face ref only]; **Japanese anime**, never photoreal
 - Lighting: match the scene/source still exactly (direction, color, **exposure**). Do not brighten. Over-bright / glow / HDR looks AI-generated.
-- **Cloud display:** after each saved PNG, the final reply must embed it as `![label](absolute path)`. Copy the same file to `artifacts/<filename>` (do not commit `artifacts/`). Remote Cloud does not auto-show the GenerateImage card.
+
+## Cloud 客户端显示（手机 / 远程 Cloud）
+
+生成成功不会自动出现在对话里。远程 Cloud 不贴 GenerateImage 工具卡片。客户端只渲染 **Markdown 图片**，而且只拉取下面两类绝对路径。一张图一行，只用一个路径。不要只写「路径在 xxx」。不要用 HTML `<img>`。不要同一张图再嵌一条备用路径。
+
+优先嵌 GenerateImage 已写入的文件（扩展名按磁盘上的真实格式，多为 `.jpg`）：
+
+```markdown
+![说明](/opt/cursor/artifacts/assets/文件名.jpg)
+```
+
+该目录不存在时（或这张图不是工具自动落盘的），改嵌仓库预览副本：
+
+```markdown
+![说明](/workspace/artifacts/文件名.png)
+```
+
+不要 embed：
+
+- `outputs/approved/…`，包括 `/workspace/outputs/approved/…`（在 `.gitignore` 里，不是对话预览路径）
+- `/home/ubuntu/.cursor/projects/…/assets/…`（用户上传目录，客户端拉不到）
+- 扩展名和二进制不符的文件（把 `.jpg` 改名为 `.png` 但没有转码）
+
+每张图按这个顺序落盘。`artifacts/` 不提交。
+
+1. 归档到 `outputs/approved/` 或 `outputs/approved/series/<task_id>/`。这是仓库副本，不拿来嵌图。系列目录只跟踪真 PNG：要存 `.png` 就用 Pillow 转码，禁止 `cp` 改后缀。
+2. 复制一份到 `/workspace/artifacts/`（本地是仓库根 `artifacts/`）。JPEG 用 `.jpg`，真 PNG 用 `.png`。文件头 `FF D8` 是 JPEG，`89 50 4E 47` 是 PNG。
+3. GenerateImage 已经在 `/opt/cursor/artifacts/assets/` 的，回复嵌那条路径。拼图、Pillow、脚本，以及任何没有自动进该目录的文件，再复制一份进去（目录没有就创建），然后嵌那条路径。
 
 ## Xiaohongshu caption (发布文案)
 
@@ -137,8 +168,8 @@ When pose-series Turn 2 finishes, **or** the user asks 文案 / 标题 / 标签 
 
 1. Follow `.cursor/skills/xiaohongshu-caption/SKILL.md`
 2. **Do not** call GenerateImage
-3. Names in copy: **Teo**（受）/ **Kai**（攻）— never Tom/James
-4. One title + 30–80字 body + 6–10 tags：自建词 + 大池子各一半（`#TeoKai` `#TeoKaiDaily` 必带，按画面加 `#氛围感男生` `#男生拍照` `#健身` `#人夫感` `#日常碎片`；不要只打自建词）
+3. Names in copy follow the cast: **Teo** / **Kai**, or **小川** / **大海**. Never Tom/James
+4. One title + 30–80字 body + 6–10 tags。Teo/Kai：自建词 + 大池子各一半，必带 `#TeoKai` `#TeoKaiDaily`。小川/大海：不要 `#小川大海` `#小川大海日常` `#双人设` `#固定角色`；身材结实就用 `#肌肉男` `#肌肉男日常` `#型男` `#壮男`，再加 `#氛围感男生` `#男生拍照` `#人夫感` `#日常碎片`
 
 ## Douyin caption（猛男日语教学）
 
@@ -153,7 +184,7 @@ Teo/Kai 小红书笔记不要走本段。
 
 ## Image-to-video prompt (Gemini)
 
-When user has a **Teo/Kai** still (usually `outputs/approved/`) and asks 图生视频 / Gemini视频 / 10秒视频:
+When user has a **Teo/Kai or 小川/大海** still (usually `outputs/approved/`) and asks 图生视频 / Gemini视频 / 10秒视频:
 
 1. Follow `.cursor/skills/gemini-video/SKILL.md`
 2. **Do not** call GenerateImage

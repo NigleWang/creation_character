@@ -1,11 +1,12 @@
 ---
 name: pose-series
 description: >-
-  From an approved Teo/Kai image, lock face, body, outfit, and environment,
-  then generate a Xiaohongshu pose series. Two-turn: analyze look + post
+  From an approved photoreal still, lock face, body, outfit, and environment,
+  then generate a Xiaohongshu pose series. Cast is Teo/Kai, or 小川/大海 when
+  the still or the user names that pair. Two-turn: analyze look + post
   numbered pose options and STOP; generate only after user picks poses.
-  After the set is saved, run xiaohongshu-caption (Teo/Kai copy). Use when
-  user has outputs/approved Teo/Kai stills (or similar) and asks for 系列, 换姿态, 其他pose,
+  After the set is saved, run xiaohongshu-caption with that cast's names.
+  Use when the user has an approved still and asks for 系列, 换姿态, 其他pose,
   同一形象, 锁定形象, pose series, or look-lock variants. Do not use for Tagame.
 ---
 
@@ -36,7 +37,7 @@ Skip Turn 1 only if the first message already lists poses, e.g. `1,3,5` or `伏�
 ## Turn 1 — Analyze + ask (mandatory)
 
 1. Identify source image (user @path, `outputs/approved/*.png`, or latest approved).
-2. Resolve character: `@Kai` / `@Teo` / filename / visual match. Load bible via `character-registry`.
+2. Resolve character via `character-registry`. `@小川` / `@大海` / a still made from those sheets stays 小川/大海. Do not relabel a neat crop as Teo or a bearded stocky man as Kai. Load that bible only.
 3. Extract **look-lock** (do not identify random people; this source is already our character):
    - **face, hairstyle, glasses** — must stay identical across every frame in the series
    - body build
@@ -87,14 +88,14 @@ arguments: {
   "aspect_ratio": "3:4",
   "reference_image_paths": [
     "<source approved image>",
-    "<character face ref>"
+    "<character face ref or 小川/大海 sheet>"
   ]
 }
 ```
 
 3. QC (pose-series mode) → **mkdir a series folder**, copy accepted files in pick order
-4. Run `xiaohongshu-caption` on the folder → **one** Teo/Kai 发布文案（标题+正文+标签）
-5. Deliver: images + brief QC + **复制发布文案** + **folder path**
+4. Run `xiaohongshu-caption` on the folder → **one** 发布文案（标题+正文+标签）。名字跟锁定的人：Teo/Kai，或小川/大海。
+5. Deliver: 按「Cloud 客户端显示」逐张嵌图 + brief QC + **复制发布文案**。文件夹路径可以写在文字里，不要拿 `outputs/` 当预览图。
 
 ### Save paths (mandatory)
 
@@ -161,8 +162,9 @@ Same continuous `description` every pose; only the `[NEW POSE]` block changes.
 ```text
 [IDENTITY LOCK — highest priority]
 
-Single recurring virtual character: {Teo or Kai}.
+Single recurring virtual character: {Teo, Kai, 小川, or 大海 — the locked one only}.
 {identity_prompt from character-registry}
+If the lock is 小川 or 大海, do not drift toward Teo glasses, a buzz cut, or Kai's spiky hair. Do not copy a character-sheet studio.
 
 The FIRST reference image is the locked look: copy this exact face, **hairstyle**,
 skin, body build, clothing, and accessories. Do not restyle hair or outfit.
@@ -234,6 +236,20 @@ Run `quality-control` **pre-publish gate** before copying into the series folder
 `accept` → `outputs/approved/series/<task_id>/` (numbered files)  
 `regenerate` → tighten pose/outfit/**lighting-exposure** lock, max 1 retry  
 `reject` → `outputs/rejected/`
+
+## Cloud 客户端显示
+
+手机端 / 远程 Cloud 不会自动贴出 `GenerateImage` 卡片。每张图单独一行 Markdown，只用一个路径。不要只写文件夹路径，不要用 HTML `<img>`，不要同一张图再嵌一条备用路径。一次回复里图很多时仍是一行一张，不要把同一张重复嵌。
+
+不要 embed `outputs/`（含 `/workspace/outputs/approved/series/…`）或 `/home/ubuntu/.cursor/projects/…/assets/…`。
+
+1. 归档到 `outputs/approved/series/<task_id>/01_<pose_id>.png`。系列目录只跟踪真 PNG：磁盘上是 JPEG 时用 Pillow 转成 PNG，禁止 `cp` 改后缀。
+2. 再复制到 `/workspace/artifacts/`（本地是仓库根 `artifacts/`，不提交）。扩展名跟二进制走：文件头 `FF D8` 用 `.jpg`，`89 50 4E 47` 用 `.png`。
+3. 回复嵌每张图在 `/opt/cursor/artifacts/assets/` 里的那条路径（通常是 `.jpg`）。该目录不存在时，改嵌第 2 步的绝对路径。
+
+```markdown
+![01](/opt/cursor/artifacts/assets/xiaohongshu_<task_id>_look_camera.jpg)
+```
 
 ---
 

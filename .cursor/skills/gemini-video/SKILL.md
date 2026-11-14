@@ -1,21 +1,21 @@
 ---
 name: gemini-video
 description: >-
-  From a Teo/Kai still (solo or couple), writes a 10-second Gemini
-  image-to-video prompt with dense Japanese kana dialogue (first line at 2s,
-  Douyin hook), copy-paste ready for Gemini. Use when the user asks for
-  图生视频, 视频提示词, Gemini视频, 10秒视频, i2v, Veo, Omni, image-to-video,
-  or to animate an approved Teo/Kai still. Do not use for Tagame — that is
-  tagame-anime (Japanese anime style).
+  From a photoreal still, writes a 10-second Gemini image-to-video prompt
+  with dense Japanese kana dialogue (first line at 2s, Douyin hook),
+  copy-paste ready for Gemini. Default cast is Teo/Kai. If the still or the
+  user names 小川 or 大海, lock that cast instead and do not call them Teo
+  or Kai. Use for 图生视频, 视频提示词, Gemini视频, 10秒视频, i2v, Veo, Omni,
+  or image-to-video. Do not use for Tagame — that is tagame-anime.
 ---
 
 # Gemini Video — Still → 10s Copy-Paste Prompt
 
-从一张 **Teo / Kai / 两人** 的场景成图，写出可直接粘贴进 **Gemini** 的 **10 秒图生视频**提示词。台词必须是 **日语假名**（ひらがな / カタカナ，不用汉字）。
+从一张写实成图（**Teo / Kai**，或 **小川 / 大海**）写出可直接粘贴进 **Gemini** 的 **10 秒图生视频**提示词。台词必须是 **日语假名**（ひらがな / カタカナ，不用汉字）。
 
 本 skill **只写提示词**。不要调用 `GenerateImage`。不要走 virtual-couple / pose-series / text-scene。
 
-**Route out:** Tagame / 动漫画风 / `docs/anime.md` → `tagame-anime`（没台词：C1 先读成图再给 5 组；已给日/英台词：C2 / 长则 C2-S）。本 skill 是 Teo/Kai **写实** 10s，不要把 Tagame 写成 photoreal。
+**Route out:** Tagame / 动漫画风 / `docs/anime.md` → `tagame-anime`（没台词：C1 先读成图再给 5 组；已给日/英台词：C2 / 长则 C2-S）。本 skill 是写实 10s。Tagame 不要写成 photoreal。小川/大海不要写成 Teo/Kai。
 
 | Pipeline | Input | Output |
 |----------|--------|--------|
@@ -23,7 +23,7 @@ description: >-
 | `pose-series` | 成图换姿态 | 系列静帧 |
 | **`gemini-video`** | **成图（静帧）** | **Gemini 10s 视频提示词** |
 
-优先用 `outputs/approved/` 里已经是 Teo/Kai 的成图。原场景未换脸图会把原图人物动起来，身份会漂。
+优先用 `outputs/approved/` 里已经换成角色的成图。原场景未换脸图会把原图人物动起来，身份会漂。
 
 ---
 
@@ -44,12 +44,16 @@ If they also asked to 换脸 or 出图: finish that pipeline first, then run thi
 
 | In frame | Cast |
 |----------|------|
+| user @小川 / @大海，或成图来自这两张设定表 | 小川 / 大海。不要改判成 Teo/Kai |
+| one man, neat crop, light stubble, no glasses | 小川 only |
+| one man, short beard, stocky, dry short hair | 大海 only |
 | one man, glasses + buzz | Teo only |
-| one man, spiky + muscular, no glasses | Kai only |
-| two men | Teo left / Kai right unless user says otherwise |
+| one man, spiky + muscular, no beard like 大海 | Kai only |
+| two men, this cast | 小川 left / 大海 right unless user says otherwise |
+| two men, Teo/Kai cast | Teo left / Kai right unless user says otherwise |
 | user @Teo / @Kai | honor @mention |
 
-5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Name **one primary action** with a start, a development, and a held final pose. Write **dense 假名** lines that fit occupation + 受/攻. **Douyin hook:** first spoken line starts at **2.0s** — never open with silent eye contact, and do not fill the clip with breath and blink only.
+5. Invent a **10s continuation** of this exact still (same room, clothes, faces). Name **one primary action** with a start, a development, and a held final pose. Teo/Kai lines follow occupation + 受/攻. 小川/大海 lines stay everyday and practical（收工、路上、吃饭），大海句子稍完整，小川更短；不要套受攻，也不要每句「だいすき」。**Douyin hook:** first spoken line starts at **2.0s** — never open with silent eye contact, and do not fill the clip with breath and blink only.
 6. **Sanitize for Gemini** (see Safety below). If the still is kneeling / floor / shoes / close body contact, recast motion + 台词 as an everyday task before writing the paste block.
 7. Save:
    - `outputs/drafts/video_prompt_<task_id>.json`
@@ -75,7 +79,7 @@ Header:
 
 【用法】打开 Gemini → 上传这张成图 → 粘贴下面英文块 → 生成视频（时长选 10s / 竖屏）
 
-【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右}
+【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右 / 仅小川 / 仅大海 / 双人 小川左 大海右}
 【主动作】{一句：必须发生，最后 1.5 秒停在收势}
 【收势】{停住的姿态}
 【台词（假名）】第一条 @2.0s
@@ -97,7 +101,7 @@ Write the paste block in **English** (motion/camera/audio). Spoken lines stay **
 ```text
 Animate the uploaded image into a photorealistic 10-second video. Image-to-video. Use the uploaded image as frame 0 / first frame. Duration: 10 seconds. Aspect ratio: 3:4 vertical. Single continuous shot, no cuts, no new locations, no costume change.
 
-FICTION: Original fictional adult characters only (Teo late 20s, Kai late 30s). Not real people. Not based on any living person. G-rated lifestyle short. Non-sexual. No fetish. No restraint.
+FICTION: Original fictional adult characters only ({Teo late 20s, Kai late 30s | 小川 early 30s, 大海 around 40}). Not real people. Not based on any living person. G-rated lifestyle short. Non-sexual. No fetish. No restraint.
 
 IDENTITY LOCK: The uploaded image is frame 0 and the initial state, not a pose frozen for all 10 seconds.
 Keep the exact faces, hair, glasses, bodies, clothing design, props, lighting, and room. Do not restyle. Do not add or remove people. Do not swap the two men.
@@ -106,7 +110,8 @@ Hands, head angle, gaze, expression, and upper-body posture may change to perfor
 CAST:
 {If Teo:} The slimmer East Asian man with buzz-cut black hair and browline glasses is Teo. Soft reserved energy. Voice: quiet gentle Japanese male, late 20s.
 {If Kai:} The broader East Asian man with short spiky black hair, no glasses, mature smile lines, is Kai. Warm protective energy. Voice: lower warm Japanese male, late 30s.
-{If couple:} Teo is on the left. Kai is on the right. Do not swap.
+{If Teo/Kai couple:} Teo is on the left. Kai is on the right. Do not swap.
+{If 小川/大海:} The leaner man with the neat short crop and light stubble is 小川. Quiet, few expressions. Voice: steady quiet Japanese male, early 30s. The stockier man with the short beard and dry short hair is 大海. Grounded. Voice: lower warm Japanese male, around 40. 小川 left, 大海 right, unless the still shows otherwise. Do not swap. Do not describe them as Teo or Kai. FICTION ages: 小川 early 30s, 大海 around 40. Both fictional adults, not real people.
 
 ACTION PLAN:
 PRIMARY ACTION: {one readable action that changes the picture and matches the lines}
@@ -133,7 +138,7 @@ DIALOGUE (spoken in Japanese, written in kana):
 {Name} says: "{kana line 3}"
 {optional fourth short line}
 
-CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Perform the specified primary action and hold FINAL POSE. G-rated everyday couple moment, non-sexual, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact. Do not replace the action with breathing and blinking only.
+CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Perform the specified primary action and hold FINAL POSE. G-rated everyday moment, non-sexual, not explicit. First spoken line at 2.0s. After 2s keep dialogue dense — short breath between lines, never a long silent gaze. Do not open with silent eye contact. Do not replace the action with breathing and blinking only.
 ```
 
 ---
@@ -149,19 +154,19 @@ CONSTRAINTS: Photorealistic. Faces stay sharp and match the still. Perform the s
 | Cast | Lines | Mora (音) / 条 | When |
 |------|-------|----------------|------|
 | Solo | **2–3** lines | 6–12 each | 1st @ **2.0s**, 2nd ~4.5s, 3rd ~7.0s |
-| Couple | **3–4** lines, Kai/Teo 交替 | 4–12 each | 1st @ **2.0s**, then ~every 2s |
+| Couple | **3–4** lines, 两人交替 | 4–12 each | 1st @ **2.0s**, then ~every 2s |
 | User asked 不要台词 | 0 | — | breathe + foley only（仅用户明确要求时） |
 
 禁止：整段独白、一条超长句占满 10 秒、0–5s 只有对视。一条一句、一口气说完。
 
-Kai（攻）先开口、句子稍完整。Teo（受）更短、更轻。ため口。不要每条都「だいすき」。
+Teo/Kai：Kai（攻）先开口、句子稍完整。Teo（受）更短、更轻。小川/大海：大海先开口、句子稍完整，小川更短。ため口。不要每条都「だいすき」。
 
 ---
 
 ## 假名 rules (mandatory)
 
 - Spoken lines: **only ひらがな and カタカナ**. No 漢字.
-- Names in speech: `テオ` / `カイ` if needed; usually skip names.
+- Names in speech: Teo/Kai 用 `テオ` / `カイ`；小川/大海用 `おがわ` / `たいかい`。通常不必叫名字。
 - Loanwords: カタカナ (`コーヒー`, `メール`).
 - Convert user Chinese/English lines into kana. Put the kana in the paste quotes.
 - Natural casual Japanese, not textbook ですます (unless office-call / client).
@@ -173,6 +178,8 @@ Voice tags in the English prompt (not spoken):
 |-----|--------|
 | Teo | quiet, gentle, slightly breathy Japanese male, late 20s |
 | Kai | lower, warm, unhurried Japanese male, late 30s |
+| 小川 | steady, quiet Japanese male, early 30s |
+| 大海 | lower, warm, unhurried Japanese male, around 40 |
 
 ---
 
@@ -193,7 +200,7 @@ If the crop hides the hands, do not ask for a hand gesture. Use a head or gaze a
 | looking at camera | hold gaze, first line @2s, second line, glance to work/prop |
 | kneeling by shoes / high-angle | tying a lace or picking up keys, talk about leaving; hands on **laces/shoe**, not ankle |
 
-Forbidden motion: teleport, outfit change, extra people, Teo loses glasses, Kai becomes slim, swapping sides, dance/music-video blocking, on-screen karaoke subtitles, **opening with silent eye contact / long mute stare**.
+Forbidden motion: teleport, outfit change, extra people, swapping sides, dance/music-video blocking, on-screen karaoke subtitles, **opening with silent eye contact / long mute stare**. Also forbidden for the locked cast: Teo loses glasses, Kai becomes slim, 小川 grows a full beard or becomes stocky, 大海 loses the beard or becomes slim.
 
 ---
 

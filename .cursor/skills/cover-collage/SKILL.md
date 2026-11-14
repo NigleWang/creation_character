@@ -58,7 +58,7 @@ Skip Turn 1 only if the first message already picks a layout, e.g. `用主图+�
 ## Turn 1 — 三套方案 + 笔记文案（不出图）
 
 1. 收齐有序路径（用户 @ 的图，或系列目录里 `01_*.png`…）。角标 `{N}图` **不要默认画上**；N 只用于笔记里说明系列张数。
-2. 读 1–3 张（建议主图 + 一张中景 + 末张）。辨认 cast：仅 Kai / 仅 Teo / 双人。
+2. 读 1–3 张（建议主图 + 一张中景 + 末张）。辨认 cast：Teo/Kai，或小川/大海。不要把这一对写成 Teo/Kai。
 3. 选主图：脸在画面上三分之二、情绪最清楚的那张。
 4. 写 `outputs/drafts/cover_plan_<task_id>.json`（`user_confirmed: false`；各方案 `title`/`subtitle`/`badge` 留空）。
 5. 按张数组三套方案：**布局 + 用图顺序 + 笔记文案**。不要在方案里写封面叠字，除非用户已经说要加字。
@@ -85,9 +85,9 @@ Skip Turn 1 only if the first message already picks a layout, e.g. `用主图+�
 | 叠字 | **无** | 标题 ≤20 字 |
 | 角标 | **无** | — |
 | 正文 | 不要写在封面上 | 30–80 字：小场景 + 细节 + 一点情绪 |
-| 标签 | 不要写在封面上 | 6–10 个，自建词 + 大池子各一半；`#TeoKai` `#TeoKaiDaily` 必带 |
+| 标签 | 不要写在封面上 | 6–10 个。Teo/Kai 必带 `#TeoKai` `#TeoKaiDaily`。小川/大海用 `#肌肉男` 这类热门词，不要 `#小川大海` `#双人设` `#固定角色` |
 
-人名 **Teo / Kai**。不要虚拟、AI、换脸。三套笔记标题不要撞题。
+人名跟 cast：Teo / Kai，或小川 / 大海。不要虚拟、AI、换脸。三套笔记标题不要撞题。
 
 **仅当用户说「加字 / 加角标 / 叠字」时：** 封面钩子 ≤10 字、可加副标题、角标 `{N}图`（N = 系列总张数）；封面钩子 ≠ 笔记标题；JSON 才填 `title`/`subtitle`/`badge`/`accent`。
 
@@ -96,7 +96,7 @@ Skip Turn 1 only if the first message already picks a layout, e.g. `用主图+�
 ```text
 ✅ 素材已读（原图像素拼接，不会重画人物；默认不叠字、不加角标）
 
-【素材】{N} 张 · {仅Kai / 仅Teo / 双人} · {场景一句} · 主图建议：第 {k} 张（{原因}）
+【素材】{N} 张 · {仅Kai / 仅Teo / 双人 / 仅小川 / 仅大海 / 小川与大海} · {场景一句} · 主图建议：第 {k} 张（{原因}）
 
 请选封面方案（回复 1 / 2 / 3，可换主图）：
 
@@ -140,7 +140,7 @@ python3 scripts/make_cover.py --config outputs/drafts/cover_<task_id>.json
 ```
 
 5. `Read` 成品图做目视 QC（见下）。失败则改 `crop_bias` / 换主图后重跑脚本，**不要** GenerateImage。
-6. 回复：成品图 + 一句 QC + **选用的那条**笔记复制块 + 文件路径。不要把另外两套文案再贴一遍。
+6. 按下面「Cloud 客户端显示」复制预览副本，再回复。回复里是嵌好的封面 + 一句 QC + **选用的那条**笔记复制块。不要把另外两套文案再贴一遍。不要把 `outputs/` 路径当成预览图。
 
 ### JSON（脚本可读字段 + 计划元数据）
 
@@ -191,6 +191,21 @@ python3 scripts/make_cover.py --config outputs/drafts/cover_<task_id>.json
 用户要求加字时额外查：文字叠在所属图底边；B 版没盖住底栏；角标 N = 系列总张数。
 
 `fail` → 调 bias / 换主图后重跑脚本。
+
+---
+
+## Cloud 客户端显示
+
+`make_cover.py` 不会把图写进 GenerateImage 的目录。手机端只嵌 `outputs/` 或用户上传目录时会空白。拼图是真 PNG，预览副本保持 `.png`，不要改成 `.jpg`。
+
+1. 脚本落盘 `outputs/approved/series/<task_id>/cover_<layout>.png`。这是仓库副本，不拿来嵌图。
+2. 复制到 `/workspace/artifacts/cover_<layout>.png`（本地是仓库根 `artifacts/`，不提交）。
+3. 再复制到 `/opt/cursor/artifacts/assets/cover_<layout>.png`。目录没有就创建。文件头必须是 `89 50 4E 47`。
+4. 回复只嵌第 3 步那一行。该目录不存在时（本地桌面），改嵌第 2 步的绝对路径。不要再嵌一条备用路径，不要用 HTML `<img>`。
+
+```markdown
+![封面](/opt/cursor/artifacts/assets/cover_hero_3.png)
+```
 
 ---
 

@@ -1,10 +1,11 @@
 ---
 name: scene-customizer
 description: >-
-  Turn 1 style gate for virtual couple pipeline. Posts numbered text options
-  for accessories, clothing colors, patterns in chat and STOPS — never generates
-  in same turn. Use with virtual-couple when user uploads scene on mobile or
-  cloud. GenerateImage forbidden until user replies.
+  Turn 1 style gate for the photoreal swap pipeline. Posts numbered text
+  options for accessories, clothing colors, patterns in chat and STOPS —
+  never generates in the same turn. Cast is Teo/Kai, or 小川/大海 when the
+  user named those references. Use with virtual-couple when the user uploads
+  a scene on mobile or cloud. GenerateImage forbidden until the user replies.
 ---
 
 # Scene Customizer — Turn 1 Style Gate
@@ -33,10 +34,14 @@ Fill `{value}` from detected scene. One block per character.
 
 ## Character defaults
 
-| Character | Default accessory |
-|-----------|-------------------|
-| Teo | browline glasses |
-| Kai | no glasses |
+| Character | Default accessory | 角色默认服装（只有用户这么说才用） |
+|-----------|-------------------|--------------------------------------|
+| Teo | browline glasses | 不在这里改职业装 |
+| Kai | no glasses | 不在这里改职业装 |
+| 小川 | no glasses | 深灰圆领 T |
+| 大海 | no glasses | 橄榄绿工装衬衫、黑工装裤、棕色工装靴 |
+
+区块标题用当前 cast 的名字。双人两块都写。不要在小川/大海的选项里出现 Teo/Kai。
 
 ## After user replies
 
@@ -52,6 +57,8 @@ Write `outputs/drafts/customization_<task_id>.json`:
   }
 }
 ```
+
+JSON 的角色键用当前 cast：`teo` / `kai`，或 `ogawa` / `dahai`。不要把小川写成 `kai`。
 
 Then hand off to prompt-builder → GenerateImage (Turn 2 only).
 

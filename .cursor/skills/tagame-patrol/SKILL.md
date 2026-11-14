@@ -96,7 +96,21 @@ arguments: {
 系列目录：`outputs/approved/series/patrol_<YYYYMMDD>/0N_<episode_id>.png`  
 只出一集、用户没说系列：`outputs/approved/patrol_<episode_id>.png`
 
-一次点了多集：按集数顺序各出一张。用户没锁台词就先别写 i2v。
+一次点了多集：按集数顺序各出一张，每张按下面「Cloud 客户端显示」嵌一行。用户没锁台词就先别写 i2v。
+
+### Cloud 客户端显示
+
+手机端 / 远程 Cloud 不会自动贴出 `GenerateImage` 卡片。每张静帧单独一行 Markdown，只用一个路径。不要只写文件夹路径，不要用 HTML `<img>`，不要同一张图再嵌一条备用路径。
+
+不要 embed `outputs/`（含 `/workspace/outputs/approved/series/…`）或 `/home/ubuntu/.cursor/projects/…/assets/…`。不要嵌办公室 Tagame 的脸图。
+
+1. 归档到上面的系列路径或单集路径。系列目录只跟踪真 PNG：磁盘上是 JPEG 时用 Pillow 转成 PNG，禁止 `cp` 改后缀。
+2. 再复制到 `/workspace/artifacts/`（本地是仓库根 `artifacts/`，不提交）。扩展名跟二进制走：文件头 `FF D8` 用 `.jpg`，`89 50 4E 47` 用 `.png`。
+3. 回复嵌每张图在 `/opt/cursor/artifacts/assets/` 里的那条路径（通常是 `.jpg`）。该目录不存在时，改嵌第 2 步的绝对路径。
+
+```markdown
+![末班](/opt/cursor/artifacts/assets/patrol_last_train.jpg)
+```
 
 ### 静帧 prompt
 

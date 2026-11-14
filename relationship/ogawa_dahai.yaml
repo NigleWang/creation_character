@@ -1,0 +1,37 @@
+pair_id: ogawa_dahai
+display_name: 小川 & 大海
+
+characters:
+  left: ogawa    # 小川
+  right: dahai   # 大海
+
+dynamic:
+  type: two recurring photoreal men
+  tone: everyday, grounded, natural
+  note: 不是 Teo/Kai 的受攻关系。场景里有互动就继承场景，不要另加搂抱或主导剧本。
+
+character_roles:
+  ogawa:
+    display_name: 小川
+    keywords: [calm, reserved, steady, quiet]
+    default_scene_side: left
+    reference: characters/小川/小川.png
+
+  dahai:
+    display_name: 大海
+    keywords: [mature, reliable, grounded, warm]
+    default_scene_side: right
+    reference: characters/大海/大海.png
+
+binding_rules:
+  - 双人且用户没指定左右：左边是小川，右边是大海
+  - 用户写了「左边大海」或「右边小川」时，以用户指定为准，并且整张图都按这个指定，不要再翻回来
+  - 永远不要把两张脸对调，也不要融成一张脸
+  - 不要和 Teo、Kai、Tagame、大野健一出现在同一张图
+  - 场景只有一个人：用用户点名的那一个；两个名字都点了但只有一个人，先问要哪一张脸
+  - 双人场景只点了一个名字：Turn 1 写明「另一人也换成这一对里的另一个，左小川右大海」；用户回「只换小川」或「只换大海」时，另一个人不要换成 Teo/Kai，改为只出被点名的那一个（不要留原场景路人）
+
+emotion_rules:
+  - 自然，像随手拍到
+  - 写实，不把曝光提亮
+  - 适合小红书，不写受攻文案

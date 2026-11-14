@@ -167,7 +167,22 @@ arguments: {
 用户 **给了** 构图参考 → 构图图放列表最前，并写明：只借构图/机位，人物必须是动漫 Tagame，不要参考图里的真人脸。
 
 4. QC → 通过则复制到 `outputs/approved/tagame_<task_id>.png`
-5. **用户已贴日语/英语台词 → 跳过 C1，同一回合进 C2 或 C2-S**（静帧当第 1 段参考图）。没台词则进 C1（用户说只要图除外）
+5. 按下面「Cloud 客户端显示」嵌这张静帧。`outputs/` 不拿来当预览图。
+6. **用户已贴日语/英语台词 → 跳过 C1，同一回合进 C2 或 C2-S**（静帧当第 1 段参考图）。没台词则进 C1（用户说只要图除外）
+
+### Cloud 客户端显示
+
+手机端 / 远程 Cloud 不会自动贴出 `GenerateImage` 卡片。静帧在最终回复里单独一行 Markdown，只用一个路径。不要只写「路径在 xxx」，不要用 HTML `<img>`，不要再嵌一条备用路径。台词选项和视频词回合不要嵌用户上传目录里的原图。
+
+不要 embed `outputs/`（含 `/workspace/outputs/approved/…`）或 `/home/ubuntu/.cursor/projects/…/assets/…`。
+
+1. 归档到 `outputs/approved/tagame_<task_id>.png`。磁盘上是 JPEG 时用 Pillow 转成真 PNG，禁止 `cp` 改后缀。
+2. 再复制到 `/workspace/artifacts/`（本地是仓库根 `artifacts/`，不提交）。扩展名跟二进制走：文件头 `FF D8` 用 `.jpg`，`89 50 4E 47` 用 `.png`。
+3. 回复嵌工具已经写入的 `/opt/cursor/artifacts/assets/` 路径（通常是 `.jpg`）。该目录不存在时，改嵌第 2 步的绝对路径。
+
+```markdown
+![静帧](/opt/cursor/artifacts/assets/tagame_<task_id>.jpg)
+```
 
 ### 台词 → 场景（无用户图时必填，不要一律走廊湿衬衫）
 

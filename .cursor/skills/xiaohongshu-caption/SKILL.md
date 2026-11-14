@@ -1,12 +1,14 @@
 ---
 name: xiaohongshu-caption
 description: >-
-  Writes Xiaohongshu (小红书) posting copy for Teo/Kai stills and pose-series —
-  short scene + detail + emotion, title, 30–80字 body, 6–10 hashtags. Tag mix:
-  half self-built (#TeoKai #TeoKaiDaily) + half discovery pool (#氛围感男生
-  #男生拍照 #健身 #人夫感 #日常碎片). Names are Teo (受) and Kai (攻). Use
-  after pose-series generates a set, or when the user asks for 文案, 标题, 标签,
-  小红书发布, caption, or copy for approved images.
+  Writes Xiaohongshu (小红书) posting copy for photoreal stills and pose-series —
+  short scene + detail + emotion, title, 30–80字 body, 6–10 hashtags. Teo/Kai
+  copy uses Teo (受) and Kai (攻), with #TeoKai #TeoKaiDaily. 小川/大海 copy
+  uses those names. Do not add #小川大海 #小川大海日常 #双人设 #固定角色.
+  Prefer hot discovery tags such as #肌肉男 when the body reads muscular.
+  Do not write 受/攻.
+  Teo/Kai still mixes self-built tags with the discovery pool. Use after
+  pose-series, or when the user asks for 文案, 标题, 标签, 小红书发布, caption.
 ---
 
 # Xiaohongshu Caption — 发布文案
@@ -21,7 +23,7 @@ description: >-
 | `virtual-couple` / `text-scene` | 单张成图 | 一张文案（用户要文案时跑） |
 | **本 skill 单独** | 已有成图 + 文案/标题/标签 | 复制即发的笔记 |
 
-源文档：`docs/code_task/文案.md`。角色名只用 **Teo / Kai**，不要写 Tom / James。
+源文档：`docs/code_task/文案.md`。先定 cast。Teo/Kai 文案只用 **Teo / Kai**，不要写 Tom / James。小川/大海文案只用 **小川 / 大海**，不要写成 Teo/Kai，也不要写受/攻。
 
 ---
 
@@ -32,9 +34,24 @@ description: >-
 | `teo` | **Teo** | 受 | 软感 / 表情 + 小心思 |
 | `kai` | **Kai** | 攻 | 气场 / 动作 + 小情绪 |
 
-正文、标题、标签、prompt、新文件名里 **只出现 Teo / Kai**（`teo` / `kai`）。Tom / James 已废弃。
+正文、标题、标签里，Teo/Kai 稿只出现 Teo / Kai。Tom / James 已废弃。
 
-标签策略：**自建词 + 大池子各一半**。每条必带 `#TeoKai` `#TeoKaiDaily`，同时按画面加大池子；不必写 AI/虚拟，但别只用自建标签。
+标签策略：**自建词 + 大池子各一半**。Teo/Kai 每条必带 `#TeoKai` `#TeoKaiDaily`。不必写 AI/虚拟，但别只用自建标签。
+
+### 小川 / 大海
+
+成图或用户点名是这一对时，不要用上面的受/攻表。
+
+| ID | 显示名 | 文案气质 |
+|----|--------|----------|
+| `ogawa` | **小川** | 安静、表情少、干净 |
+| `dahai` | **大海** | 厚实、可靠、生活感 |
+
+标签不要用 `#小川大海` `#小川大海日常` `#双人设` `#固定角色`。身材结实或手臂很厚时，优先热门词 `#肌肉男` `#肌肉男日常` `#型男` `#壮男`，再按画面加 `#帅哥` `#氛围感男生` `#男生拍照` `#人夫感` `#日常碎片`。双人可以写一个很小的相处细节，不要披外套、耳尖红、受攻互动。单人就写那一个人正在做的事。
+
+仅小川例：小川今天话很少，杯子放到一半又停住了。  
+仅大海例：大海收工回来，衬衫袖口还卷着，先在门口把灰拍掉。  
+双人例：两个人并排走，小川看着路，大海把袋子换到了另一只手。
 
 ---
 
@@ -52,7 +69,7 @@ description: >-
 
 1. Identify images: user @path, `outputs/approved/series/<task_id>/`, or latest approved still.
 2. Read 1–3 frames (cover + one mid + last if series). Also read `outputs/drafts/look_lock_<task_id>.json` if present.
-3. Resolve cast from look-lock / filename / glasses+buzz = Teo, spiky+muscular = Kai, two men = couple (Teo left / Kai right).
+3. Resolve cast from look-lock / filename / user @. 整齐短发淡胡茬 = 小川，短须结实 = 大海，眉框眼镜圆寸 = Teo，刺发 = Kai。看不清就按文件名和用户点名，不要把小川认成 Teo。双人：Teo 左 Kai 右，或小川左大海右。
 4. Write **one** note using the formula below. Series = one life fragment, **do not** list every pose.
 5. Save:
    - `outputs/drafts/caption_<task_id>.json`
@@ -104,13 +121,13 @@ If the user already gave 标题 / 情绪 / 不要提问, honor that.
 
 ## 标签
 
-每条笔记 **6–10 个**。**自建词 + 大池子各一半**（8 个 = 4+4）。不要堆无关热搜。不要只打自建词。
+每条笔记 **6–10 个**。Teo/Kai 是自建词加大池子各一半。小川/大海不用自建词，改用热门发现词。不要堆无关热搜。
 
 ### 自建词（账号沉淀，约一半）
 
-每条必带：`#TeoKai` `#TeoKaiDaily`
+Teo/Kai 每条必带：`#TeoKai` `#TeoKaiDaily`，再补 `#双人设` `#固定角色`。
 
-再补满一半：`#双人设` `#固定角色`
+小川/大海不要用上面这四个自建词。改用热门发现词，身材明显时先放 `#肌肉男` `#肌肉男日常` `#型男` `#壮男`。
 
 ### 大池子（按画面选，约一半）
 
@@ -131,7 +148,10 @@ If the user already gave 标题 / 情绪 / 不要提问, honor that.
 |------|------|
 | 仅 Kai | `#帅哥` `#侧颜杀` |
 | 仅 Teo | `#帅哥` `#清冷感` |
-| 双人 | `#情侣日常` `#双人照` `#氛围感情侣` `#情侣拍照` |
+| 仅 大海 | `#帅哥` `#人夫感`（画面是居家或收工时） |
+| 仅 小川 | `#帅哥` `#清冷感` |
+| Teo/Kai 双人 | `#情侣日常` `#双人照` `#氛围感情侣` `#情侣拍照` |
+| 小川/大海 双人 | `#双人照` `#日常碎片`。不要 `#情侣日常`，除非用户要求写成情侣 |
 
 氛围（最多再 1 个）：`#氛围感` `#胶片感` `#日系氛围` `#生活感`
 
@@ -156,7 +176,7 @@ Chat order:
 ```
 ✅ 小红书文案已写好（可直接复制发布）
 
-【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右}
+【谁】{仅Teo / 仅Kai / 双人 Teo左 Kai右 / 仅小川 / 仅大海 / 双人 小川左 大海右}
 【封面】系列第 {n} 张（{pose 一句话}）— 脸在画面上三分之二、情绪最清楚的那张
 
 【复制发布】
@@ -191,7 +211,7 @@ Closing: `改法直接说，例如：再甜一点、不要提问、改成只写K
 }
 ```
 
-`cast` 用 `teo` / `kai`（或 both）。新 `task_id` 用 teo/kai，不要用 tom/james。
+`cast` 用 `teo` / `kai`，或 `ogawa` / `dahai`。不要用 tom/james。小川/大海不要填 `#TeoKai`，也不要填 `#小川大海` `#小川大海日常` `#双人设` `#固定角色`。
 
 ---
 

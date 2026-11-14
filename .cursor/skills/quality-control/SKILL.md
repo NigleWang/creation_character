@@ -1,19 +1,20 @@
 ---
 name: quality-control
 description: >-
-  Visual QC for generated Teo/Kai images — character consistency, scene
-  preservation, Xiaohongshu suitability. Use after GenerateImage in
-  creation_character pipeline.
+  Visual QC for generated photoreal images — Teo/Kai or 小川/大海 character
+  consistency, scene preservation, Xiaohongshu suitability. Use after
+  GenerateImage in the creation_character pipeline. Check the cast that was
+  requested; do not pass a frame that mixed the two casts.
 ---
 
 # Quality Controller
 
-**Tagame / anime stills:** use the QC table in `tagame-anime` (default Japanese anime; CuteGuysArt only when that style was requested). This skill is Teo/Kai photoreal.
+**Tagame / anime stills:** use the QC table in `tagame-anime` (default Japanese anime; CuteGuysArt only when that style was requested). This skill is photoreal: Teo/Kai, or 小川/大海.
 
 ## Input
 
 - Generated image (from GenerateImage output)
-- Character references: `characters/teo/references/face_01.jpeg`, `characters/kai/references/face_01.jpeg`
+- Character references for the active cast: Teo/Kai face jpegs, or `characters/小川/小川.png` and `characters/大海/大海.png`
 - Scene reference (if provided)
 - `generation_blueprint`
 
@@ -21,9 +22,19 @@ description: >-
 
 ### 1. Character consistency
 
+Teo/Kai cast:
+
 - Teo looks like Teo? (glasses, buzz cut, slim build)
 - Kai looks like Kai? (spiky hair, muscular, mature face)
 - No face swap between Teo and Kai?
+
+小川/大海 cast:
+
+- 小川 looks like the six-view sheet? (neat crop, light stubble, no glasses, not stocky)
+- 大海 looks like the turnaround? (dry short hair, short beard, thick brows, wide jaw, stocky muscle)
+- No face swap between 小川 and 大海?
+- Sheet bleed is a fail: gray studio, view labels, color swatches, printed bible, panel grid
+- Teo glasses, Teo buzz cut, or Kai spiky hair on either man is a fail
 
 ### 2. Scene consistency
 
@@ -86,7 +97,7 @@ Prompt fixes: `docs/light.md` §6 module + `prompt-builder` anti-AI block.
 
 | decision | Action |
 |----------|--------|
-| accept | Single: `outputs/approved/xiaohongshu_<task_id>.png`. pose-series: `outputs/approved/series/<task_id>/01_<pose_id>.png` |
+| accept | Single: `outputs/approved/xiaohongshu_<task_id>.png`. pose-series: `outputs/approved/series/<task_id>/01_<pose_id>.png`. 归档路径不是手机预览路径；嵌图按该 skill 的「Cloud 客户端显示」 |
 | regenerate | Tighten prompt for failed checks, retry GenerateImage (max 1 retry) |
 | reject | Save to `outputs/rejected/` with issues, explain to user |
 
@@ -95,6 +106,8 @@ Prompt fixes: `docs/light.md` §6 module + `prompt-builder` anti-AI block.
 | Issue | Add to prompt |
 |-------|---------------|
 | Teo/Kai swapped | "CRITICAL: Teo MUST be on LEFT with glasses. Kai MUST be on RIGHT, muscular." |
+| 小川/大海 swapped | "CRITICAL: 小川 MUST be on LEFT, neat crop, light stubble, no glasses, not stocky. 大海 MUST be on RIGHT, short beard, stocky muscle." |
+| Sheet bleed | "Identity only. Remove the gray turnaround studio, labels, swatches, and printed text. Keep the scene." |
 | Face drift | "Match face reference images exactly. Do not alter facial features." |
 | Pose lost | "Strictly copy body positions from scene reference." |
 | Extra limbs | "Exactly two people, two arms each, anatomically correct." |

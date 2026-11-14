@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Style Gate — Mandatory Two-Turn Protocol
 
-Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new scene** for Teo/Kai/virtual-couple/换脸/小红书.
+Applies to **all agents** (desktop, mobile, cloud) when user uploads a **new scene** for Teo/Kai/小川/大海/virtual-couple/换脸/小红书.
 
 **Exception — pose-series:** If the input is an already-approved character still and the user wants 系列/换姿态, follow `.cursor/skills/pose-series/SKILL.md`.
 
@@ -37,8 +37,8 @@ Call GenerateImage **only after** user replies with numbers/text, or if their **
 ```
 ✅ 场景已分析（构图/动作/环境将保持不变）
 
-【Kai】
-1️⃣ 装饰物：1保持原场景 2角色默认(无眼镜) 3墨镜 4耳机 5无
+【{角色名}】
+1️⃣ 装饰物：1保持原场景 2角色默认(无眼镜；Teo 的角色默认是眉框眼镜) 3墨镜 4耳机 5无
 2️⃣ 上衣：1保持 2白 3藏青 4浅蓝 5黑
 3️⃣ 图案：1保持 2纯色 3条纹 4格子
 4️⃣ 下装：1保持 2黑 3灰 4藏青
@@ -46,7 +46,7 @@ Call GenerateImage **only after** user replies with numbers/text, or if their **
 ⏸️ 请回复后我再生成图片。
 ```
 
-(Add Teo block for couple scenes.)
+双人两块都写。Teo/Kai 用 Teo、Kai。用户点了小川/大海就用小川、大海，不要写 Teo/Kai。小川和大海的角色默认都是无眼镜。
 
 ## Forbidden
 

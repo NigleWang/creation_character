@@ -2,12 +2,14 @@
 name: prompt-builder
 description: >-
   Builds the final GenerateImage prompt from character bibles, scene blueprint,
-  and content type. Use before calling Cursor GenerateImage in creation_character.
+  and content type. Teo/Kai and 小川/大海 are both photoreal; pick the cast
+  from character-registry and do not mix them. Use before calling Cursor
+  GenerateImage in creation_character.
 ---
 
 # Prompt Builder
 
-**Route out:** Tagame stills → `.cursor/skills/tagame-anime/SKILL.md` (anime prompt). This builder is Teo/Kai photoreal only.
+**Route out:** Tagame stills → `.cursor/skills/tagame-anime/SKILL.md` (anime prompt). This builder is photoreal only: Teo/Kai, or 小川/大海.
 
 ## Input
 
@@ -24,8 +26,10 @@ For each character, resolve clothing/accessories from `customization_manifest`:
 | `choice` | Prompt behavior |
 |----------|-----------------|
 | `keep_scene` | Use `scene_value` from scene blueprint |
-| `character_default` | Teo → browline glasses; Kai → no glasses |
+| `character_default` | Teo → browline glasses. Kai、小川、大海 → no glasses. 「角色默认服装」才换装：小川深灰圆领 T；大海橄榄绿工装衬衫、黑工装裤、棕色工装靴 |
 | specific value | Use user's color/item/pattern explicitly |
+
+Names in the block are the active cast (Teo/Kai or 小川/大海).
 
 Add block to prompt:
 
@@ -81,13 +85,22 @@ Assemble one continuous `description` string for GenerateImage:
 ```text
 [CHARACTER IDENTITY — highest priority]
 
+{If teo_kai:}
 Two recurring virtual East Asian male characters in a romantic couple.
-
-LEFT person is Teo (受): {teo identity_prompt from character-registry}
-RIGHT person is Kai (攻): {kai identity_prompt from character-registry}
-
+LEFT person is Teo (受): {teo identity_prompt}
+RIGHT person is Kai (攻): {kai identity_prompt}
 Use the attached face reference images to preserve exact facial identity.
 Teo must keep browline glasses and buzz cut. Kai must keep spiky hair and muscular build.
+
+{If ogawa_dahai:}
+Two recurring photoreal East Asian men. Not a 受/攻 couple script.
+LEFT person is 小川: {ogawa identity_prompt}
+RIGHT person is 大海: {dahai identity_prompt}
+Use the attached character sheets only for identity.
+小川: neat short crop, light stubble, no glasses, lean-to-average build.
+大海: dry short hair, short beard, thick brows, stocky muscular build, no glasses.
+Do not copy the gray studio, view labels, color swatches, panel grid, or printed bible text.
+Do not give either man Teo's glasses or Kai's spiky hair.
 
 [SCENE — from scene_blueprint]
 
@@ -97,13 +110,13 @@ Teo must keep browline glasses and buzz cut. Kai must keep spiky hair and muscul
 
 Preserve the exact composition from the scene reference image.
 {composition.framing}, {composition.camera_angle}.
-Teo on the left, Kai on the right.
+Active cast on its locked sides: Teo left / Kai right, or 小川 left / 大海 right.
 {aspect_ratio} vertical frame.
 
 [POSE — inherit from scene]
 
-{pose details for subject_1 → Teo}
-{pose details for subject_2 → Kai}
+{pose details for subject_1 → left character of the active cast}
+{pose details for subject_2 → right character of the active cast}
 {interaction.type}, {interaction.emotional_tone}.
 
 [LIGHTING — match scene reference exactly]
@@ -117,7 +130,8 @@ If the reference is dim, indoor, overcast, or mixed, keep that exact brightness.
 [VISUAL STYLE]
 
 {visual_style from scene}. Realistic skin texture. Natural documentary photography, not cinematic glow.
-Natural intimate couple moment. Photorealistic, same grain and contrast as the scene reference.
+{teo_kai: natural intimate couple moment.} {ogawa_dahai: natural everyday photograph, pose from the scene only.}
+Photorealistic, same grain and contrast as the scene reference.
 Keep background clutter, surface reflections, and uneven shadow patches — do not sanitize the scene.
 
 [REALISM — reduce AI look]
@@ -130,20 +144,22 @@ not overly sharp, not overly polished, not airbrushed. See docs/light.md.
 
 Vertical 3:4 portrait suitable for Xiaohongshu cover.
 Attractive composition, clear faces, natural emotional tone.
-Tasteful romantic BL couple content, not explicit.
+{teo_kai: tasteful romantic BL couple content, not explicit.}
+{ogawa_dahai: everyday photoreal life photo, not explicit. Do not add romance that is not in the scene.}
 
 [CONSTRAINTS]
 
 Character identity overrides original people in scene reference.
 Preserve: composition, body positions, interaction, camera angle, lighting, brightness, color grade.
-Do not: swap Teo/Kai, change faces, merge faces, extra limbs, missing people.
+Do not: swap the two locked people, mix Teo/Kai with 小川/大海, change faces, merge faces, extra limbs, missing people.
+Do not: reproduce a character-sheet studio inside the scene.
 Do not: overexpose, add glow, or make the scene look brighter than the reference.
 No text, no watermark, no logo.
 ```
 
 ## Single character variant
 
-Replace couple block with one character + "single person portrait, same pose, environment, and lighting/exposure as reference." Keep the lighting lock block.
+Replace the pair block with one character from the active cast + "single person portrait, same pose, environment, and lighting/exposure as reference." Keep the lighting lock block. For 小川/大海, still forbid the character-sheet backdrop.
 
 ## Wallpaper variant (`9:16`)
 

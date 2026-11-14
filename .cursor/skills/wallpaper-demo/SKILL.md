@@ -151,12 +151,17 @@ A high-resolution photorealistic product photograph of a centered silver iPad Pr
 
 ---
 
-## 显示到客户端（远程 Cloud）
+## Cloud 客户端显示
 
-远程 Cloud 不会把 `GenerateImage` 的工具卡片贴进对话。每张已落盘的 PNG，在最终回复里用**绝对路径**再嵌一行，客户端才会显示。一张图一行，不要只写路径文字。
+手机端 / 远程 Cloud 不会自动贴出 `GenerateImage` 卡片。最终回复里每张图单独一行 Markdown，只用一个可拉取的绝对路径。不要只写「路径在 xxx」，不要用 HTML `<img>`，不要同一张图再嵌一条备用路径。
+
+不要 embed `outputs/`（含 `/workspace/outputs/approved/…`）或 `/home/ubuntu/.cursor/projects/…/assets/…`。用户上传的原图也不能当 embed 源。
+
+1. 归档到 `outputs/approved/`，文件名见上表。这是仓库副本，不拿来嵌图。
+2. 再复制到 `/workspace/artifacts/`（本地是仓库根 `artifacts/`，不提交）。扩展名必须和二进制一致：JPEG 用 `.jpg`，真 PNG 用 `.png`。禁止把 `.jpg` 改名成 `.png` 而不转码；要 PNG 时用 Pillow 保存。文件头 `FF D8` 是 JPEG，`89 50 4E 47` 是 PNG。
+3. 回复嵌 GenerateImage 已经写入的 `/opt/cursor/artifacts/assets/` 路径（通常是 `.jpg`）。扩图若是脚本或 Pillow 写出、没有自动进该目录，再复制一份进去后再嵌。
+4. `/opt/cursor/artifacts/assets/` 不存在时（本地桌面），改嵌第 2 步的绝对路径。
 
 ```markdown
-![电脑壁纸](/absolute/path/to/<源文件名>_desktop_wallpaper.png)
+![电脑壁纸](/opt/cursor/artifacts/assets/<源文件名>_desktop_wallpaper.jpg)
 ```
-
-同时把同一份文件复制到仓库 `artifacts/` 下（同名），供 Cloud artifacts 接口拉取。`artifacts/` 不提交。

@@ -12,8 +12,22 @@
 |------|------|----------|--------|
 | **Teo** | 受 | 左 | `characters/teo/references/face_01.jpeg` |
 | **Kai** | 攻 | 右 | `characters/kai/references/face_01.jpeg` |
+| **小川** | 写实换脸，默认左 | 左 | `characters/小川/小川.png` |
+| **大海** | 写实换脸，默认右 | 右 | `characters/大海/大海.png` |
+
+Teo/Kai 是一对。小川/大海是另一对，走同一套换脸流程，不和 Teo/Kai 同时出现，也不是受/攻。设定表只锁脸和身材，不锁灰底棚拍。
 
 原始参考图备份：`data/imgs/Teo.jpeg`、`data/imgs/Kai.jpeg`
+
+换上小川和大海时，场景图后点名即可：
+
+```text
+@virtual-couple @小川 @大海
+[上传场景图]
+换成这两个形象
+```
+
+第一轮仍只给服装选项。回复之后才出图。只换其中一个就只点那一个名字。
 
 ---
 
@@ -34,7 +48,7 @@ Agent 应回复编号选项并 **停止**，不会生图。
 ```
 或 `角色默认，上衣藏青，下装灰`
 
-Agent 才调用 GenerateImage。
+Agent 才调用 GenerateImage。出图后手机端不会自动出现工具卡片。回复里必须用 Markdown 嵌一张可拉取的图：优先 `/opt/cursor/artifacts/assets/…`（后缀跟真实格式，多为 `.jpg`）。不要嵌 `outputs/` 或用户上传目录。拼图还要先复制到那个目录。细则在 `AGENTS.md`「Cloud 客户端显示」。
 
 **第 1 轮（只发文字，不传图）：**
 ```text

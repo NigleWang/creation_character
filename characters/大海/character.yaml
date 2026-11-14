@@ -1,0 +1,71 @@
+id: dahai
+display_name: 大海
+cast: ogawa_dahai
+role_in_pair: right  # 双人默认右侧。不是受/攻
+
+identity:
+  gender: male
+  age_appearance: 40
+  age_range: 35-45
+  ethnicity: East Asian Chinese
+  height_cm: 175-180
+
+face:
+  shape: slightly wide, square jaw, full cheeks
+  eyes: steady, dark
+  brows: thick
+  skin: natural, lived-in
+  distinctive:
+    - short beard and mustache
+    - warm smile with laugh lines when the scene is smiling
+    - no glasses
+
+hair:
+  color: black
+  style: short, slightly messy and dry, natural, a little recession at the temples
+
+body:
+  height_ratio: average-tall
+  build: stocky muscular, broad back, thick arms, not competition bodybuilder
+
+wardrobe_default:
+  when: 用户说「角色默认」或「角色默认服装」
+  top: olive-green work shirt
+  bottom: black cargo pants
+  shoes: brown work boots
+  also_wears:
+    - casual shirt or t-shirt
+    - work pants or jeans
+    - outdoor shoes or sneakers
+
+personality:
+  keywords:
+    - mature
+    - reliable
+    - grounded
+    - warm
+
+visual_signature:
+  - steady gaze
+  - short beard
+  - solid stance
+
+sheet_notes:
+  - 成熟稳重，略带世故感
+  - 专业可靠，生活化
+  - 偏爱休闲、实用
+  - 保持与参考图一致的面部特征
+  - 服装和面容保持写实
+
+negative_identity:
+  - do not slim the body
+  - do not remove the short beard
+  - do not replace the hair with a neat faded crop, a buzz cut, or spiky styled hair
+  - do not add glasses
+  - do not copy the gray studio, turnaround labels, color swatches, or printed bible text
+  - do not merge with Teo, Kai, or 小川
+
+reference_images:
+  primary: characters/大海/大海.png
+  kind: face and full-body turnaround sheet
+  use_for: face, hair, beard, and body only

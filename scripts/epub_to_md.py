@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Convert EPUB books to clean Markdown with ebooklib + BeautifulSoup.
 
-  python3 scripts/epub_to_md.py cache/book/book.epub
-  python3 scripts/epub_to_md.py cache/book/book.epub --split
-  python3 scripts/epub_to_md.py cache/book --out outputs/books
-  python3 scripts/epub_to_md.py cache/book/book.epub --no-images
-  python3 scripts/epub_to_md.py cache/book/book.epub --code-class class_s45V
+B="cache/book/AI-Optimized Creator How to Use AI to Create Videos, Images, and Content That Grows Your YouTube  Instagram (Svekis, Laurence Lars) (z-library.sk, 1lib.sk, z-lib.sk).epub"
+
+python3 scripts/epub_to_md.py "$B"                               # 合并成一个 .md
+python3 scripts/epub_to_md.py "$B" --split                       # 每章一个 .md，外加 index.md
+python3 scripts/epub_to_md.py "$B" --code-class class_s45V       # 本书的提示词转成代码块
+python3 scripts/epub_to_md.py cache/book --split --out 某目录     # 整个目录批量转换
+python3 scripts/epub_to_md.py "$B" --no-images                   # 不导出图片
 
 A book is written to <epub folder>/markdown/<title>/: one <title>.md by
 default, or index.md plus one NN_<chapter>.md per TOC entry with --split.

@@ -1,5 +1,5 @@
 ---
-description: Character system — Teo/Kai photoreal couple vs Tagame Japanese anime
+description: Character system — Teo/Kai couple, 小川/大海 photoreal swap, Tagame anime
 alwaysApply: true
 ---
 
@@ -11,6 +11,17 @@ Two character tracks. **Do not mix.** A device wallpaper showcase of an existing
 
 - **Teo** — 受, default LEFT, `characters/teo/`
 - **Kai** — 攻, default RIGHT, `characters/kai/`
+
+## Track A2 — 小川 / 大海 (photoreal swap)
+
+Same skills as Track A (`virtual-couple`, `text-scene`, `pose-series`, `gemini-video`, `xiaohongshu-caption`). Different faces. **Do not mix with Teo/Kai in one image.**
+
+- **小川** — default LEFT, `characters/小川/小川.png`（六视图，只锁脸和头发）
+- **大海** — default RIGHT, `characters/大海/大海.png`（设定表，锁脸、短须、结实体型）
+- 不是受/攻。双人默认左小川、右大海。用户指定左右时以用户为准
+- 设定表不是场景：不要灰底、分格、标签、色卡、印刷文字
+- 装饰物默认都无眼镜。「角色默认服装」：小川深灰圆领 T；大海橄榄绿工装衬衫、黑工装裤、棕色工装靴
+- 文案名字用小川 / 大海。标签用 `#肌肉男` 这类热门词，不要 `#小川大海` `#双人设` `#固定角色`
 
 ## Track B — Tagame (Japanese anime)
 
@@ -56,13 +67,15 @@ When user points at an existing still and asks 壁纸演示图 / 锁屏展示 / 
 
 When user uploads scene + @Teo/@Kai/@virtual-couple → **Turn 1: post options and wait**. Do NOT generate until user confirms choices.
 
+When user uploads a scene and @小川 / @大海 / `characters/小川` / `characters/大海`, or says 换成这两个形象 → same Turn 1, but the cast is 小川/大海. Do NOT load Teo/Kai faces. Do NOT generate until they confirm clothes.
+
 When user points at `outputs/approved/` (or similar) and asks for 系列/换姿态 → **pose-series Turn 1**. Do NOT generate until user picks poses.
 
 When user describes a scene in text with no photo → **text-scene Turn 1**. Do NOT generate until they confirm the filled card.
 
-When user points at an approved **Teo/Kai** still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Do NOT call GenerateImage. If the still is office Tagame / anime → **tagame-anime C1** (dialogue options first) unless they already pasted Japanese/English lines (then C2 / C2-S). If the still is 大野健一 / `Tagame-patrol` → **tagame-patrol** (job lines, then the same C2 / C2-S).
+When user points at an approved **Teo/Kai or 小川/大海** still and asks 图生视频 / Gemini视频 / 10秒视频 → **gemini-video**. Write a copy-paste prompt. Keep the cast that is actually in the still. Do NOT call GenerateImage. If the still is office Tagame / anime → **tagame-anime C1** (dialogue options first) unless they already pasted Japanese/English lines (then C2 / C2-S). If the still is 大野健一 / `Tagame-patrol` → **tagame-patrol** (job lines, then the same C2 / C2-S).
 
-When pose-series finishes, or user asks 文案 / 标题 / 标签 / 小红书发布 → **xiaohongshu-caption**. Copy-paste title + body + tags. Names in copy: Teo / Kai. Do NOT call GenerateImage.
+When pose-series finishes, or user asks 文案 / 标题 / 标签 / 小红书发布 → **xiaohongshu-caption**. Copy-paste title + body + tags. Teo/Kai copy uses Teo / Kai. 小川/大海 copy uses 小川 / 大海 and hot tags such as `#肌肉男`, not `#小川大海` `#双人设` `#固定角色`. Do NOT call GenerateImage.
 
 When user has series stills and asks 拼接 / 封面图 / 九宫格 / 拼图 / 首页封面 → **cover-collage Turn 1**. Post 3 schemes + copy and wait. Do NOT run `make_cover.py` or GenerateImage until they pick a scheme.
 

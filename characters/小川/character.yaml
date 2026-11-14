@@ -1,0 +1,59 @@
+id: ogawa
+display_name: 小川
+cast: ogawa_dahai
+role_in_pair: left  # 双人默认左侧。不是受/攻
+
+identity:
+  gender: male
+  age_appearance: 32
+  ethnicity: East Asian
+
+face:
+  shape: oval-rectangular
+  eyes: almond, dark, calm
+  brows: straight
+  nose: straight
+  mouth: closed, neutral
+  skin: even, natural
+  distinctive:
+    - light even stubble on jaw and upper lip
+    - no glasses
+    - calm closed-mouth expression
+
+hair:
+  color: black
+  style: short textured crop, a little lift on top, shorter faded sides, neat hairline
+
+body:
+  height_ratio: average
+  build: lean-to-average shoulders visible in the sheet; not stocky, not bulky
+  note: sheet is head-and-shoulders only; do not invent muscle
+
+wardrobe_default:
+  when: 用户说「角色默认」或「角色默认服装」
+  top: charcoal / dark gray crew-neck t-shirt
+  accessories: none
+
+personality:
+  keywords:
+    - calm
+    - reserved
+    - steady
+    - quiet
+
+visual_signature:
+  - direct or slightly averted calm gaze
+  - almost no smile
+  - neat short crop
+
+negative_identity:
+  - do not add browline glasses or a buzz cut
+  - do not change the crop into spiky hair or a receding messy cut
+  - do not bulk the body up to 大海
+  - do not copy the gray six-view backdrop or panel grid
+  - do not merge with Teo, Kai, or 大海
+
+reference_images:
+  primary: characters/小川/小川.png
+  kind: six-view head sheet
+  use_for: face and hair only
